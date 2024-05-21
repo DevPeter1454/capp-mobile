@@ -27,11 +27,14 @@ class _SectionTwoSignUpScreenState extends State<SectionTwoSignUpScreen> {
   final phoneController = TextEditingController();
   List<String> states = ['Lagos', 'Oyo'];
   List<String> lgas = ['Surulere', 'Lagos Mainland'];
+  List<CountryCode> countryCode = [CountryCode('+234', 'assets/images/ngn.png')];
   String? selectedState, selectedLGA;
+  CountryCode?   selectedCountryCode;
 
 
   @override
   void initState() {
+    selectedCountryCode = countryCode[0];
     WidgetsBinding.instance.addPostFrameCallback((_) async {
     });
     super.initState();
@@ -81,7 +84,7 @@ class _SectionTwoSignUpScreenState extends State<SectionTwoSignUpScreen> {
                             ),
                           ),
                           const SizedBox(height: 20,),
-                          const Text('Please continue with the last part of your registerarion',
+                          const Text('Please continue with the last part of your registration',
                             style: TextStyle(
                                 fontSize: 14,fontWeight: FontWeight.w400
                             ),),
@@ -128,44 +131,92 @@ class _SectionTwoSignUpScreenState extends State<SectionTwoSignUpScreen> {
                             height: 5,
                           ),
                           InputFieldColumnWidget(
-                            inputFieldTitle: 'Phone',
-                            inputFieldWidget: CappCustomFormField(
-                              hintText: '********',
-                              // onSavedValue: (value) => password = value,
-                              onChanged: (val) {
-                                // setState(() {
-                                //   // password = val;
-                                // });
-                              },
-                              inputFormatter: [
-                                FilteringTextInputFormatter.deny(
-                                    RegExp(r"\s\b|\b\s")
-                                )
-                              ],
+                              inputFieldTitle: 'Phone',
+                              inputFieldWidget: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CappCustomDropDown(
+                                selectedItem: selectedCountryCode,
+                                dropDownList: countryCode,
+                                isValidated: selectedCountryCode != null,
+                                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                                hintText: 'Select',
+                                onValueChanged: (value) {
+                                  setState(() {
+                                    selectedCountryCode = value;
+                                  });
+                                },
+                                valueWidget: (value) {
+                                  final name = value.name;
+                                  return Row(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          child: Image.asset(value.url),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        name,
+                                        style: TextStyle(
+                                           fontSize: 14, fontWeight: FontWeight.w400
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                                width: size.width * .3,
+                              ),
+                              SizedBox(
+                                width: size.width * .57,
+                                child: CappCustomFormField(
+                                    hintText: 'Enter Phone Number',
+                                    // onSavedValue: (value) => password = value,
+                                    onChanged: (val) {
+                                      // setState(() {
+                                      //   // password = val;
+                                      // });
+                                    },
+                                    keyboardType: TextInputType.phone,
+                                    inputFormatter: [
+                                      FilteringTextInputFormatter.deny(
+                                          RegExp(r"\s\b|\b\s")
+                                      )
+                                    ],
 
-                              isTextObscure: _passwordVisible,
-                              isValidated: phoneController.text.length > 6,
-                              suffix: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _passwordVisible = !_passwordVisible;
-                                    });
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 5),
-                                    child: Icon(
-                                      _passwordVisible
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined,
-                                      size: 20,
-                                    ),
-                                  )),
-                              validator: (value) =>
-                              value!.length > 6
-                                  ? null
-                                  : 'Password must be more than 6 chars',
-                              controller: phoneController,
-                            ),
+                                    isTextObscure: _passwordVisible,
+                                    isValidated: phoneController.text.length > 6,
+                                    suffix: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _passwordVisible = !_passwordVisible;
+                                          });
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(right: 5),
+                                          child: Icon(
+                                            _passwordVisible
+                                                ? Icons.visibility_outlined
+                                                : Icons.visibility_off_outlined,
+                                            size: 20,
+                                          ),
+                                        )),
+                                    validator: (value) =>
+                                    value!.length > 6
+                                        ? null
+                                        : 'Password must be more than 6 chars',
+                                    controller: phoneController,
+                                  ),
+                              ),
+
+                            ],
+                          )
                           ),
                           const SizedBox(
                             height: 5,
@@ -246,4 +297,12 @@ class _SectionTwoSignUpScreenState extends State<SectionTwoSignUpScreen> {
       );
     });
   }
+}
+
+
+class CountryCode{
+  final String? name;
+  final String? url;
+
+  CountryCode(this.name, this.url);
 }

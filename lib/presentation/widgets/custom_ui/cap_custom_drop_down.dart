@@ -25,7 +25,7 @@ class CappCustomDropDown extends StatelessWidget {
     this.containerBgColor,
     this.borderRaduis,
     this.isValidated = false,
-    this.hasBorderLine = true, this.isOutlineIcon = false,
+    this.hasBorderLine = true, this.isOutlineIcon = false, this.padding,
   }) : super(key: key);
 
   final dynamic selectedItem;
@@ -39,6 +39,7 @@ class CappCustomDropDown extends StatelessWidget {
   final DropdownButtonBuilder? selectedItemBuilder;
   final Color? iconEnabledColor, containerBgColor;
   final TextStyle? hintStyle, textStyle;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class CappCustomDropDown extends StatelessWidget {
         height: height ?? 60,
         width: width,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 16.0),
           child: Center(
             child: isOutlineIcon
                 ? DropdownButton(
