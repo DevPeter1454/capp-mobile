@@ -11,7 +11,7 @@ class FullNameInitialsWidget extends StatelessWidget {
   }) : super(key: key);
 
   final String fullname;
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

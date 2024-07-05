@@ -87,12 +87,16 @@ class GetBadgeScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const Expanded(
-                                  child: SizedBox(
-                                    width: 5,
-                                  ),
+                                // const Expanded(
+                                //   child: SizedBox(
+                                //     width: 5,
+                                //   ),
+                                // ),
+                                Image.asset(
+                                  'assets/images/tick-circle.png',
+                                  height: 20,
+                                  width: 20,
                                 ),
-                                Image.asset('assets/images/tick-circle.png'),
                               ],
                             ),
                           ),
@@ -119,7 +123,7 @@ class GetBadgeScreen extends StatelessWidget {
                     },
                     child: Container(
                       height: 50,
-                      width: context.widthPercentage(0.46),
+                      width: 175,
                       decoration: BoxDecoration(
                           color: AppColors.primaryLight,
                           borderRadius: BorderRadius.circular(8)),
@@ -141,7 +145,11 @@ class GetBadgeScreen extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Image.asset('assets/images/send_green.png'),
+                          Image.asset(
+                            'assets/images/send_green.png',
+                            height: 24,
+                            width: 24,
+                          ),
                         ],
                       ),
                     ),

@@ -3,12 +3,11 @@ class ApiConstant{
 
 
   //------------  BASE_Url  ------------------------------//
-  static const String baseUrl = 'https://trovexx-laravel-production.up.railway.app/api/';
+  static const String baseUrl = 'https://capp-api-7d8a6573f031.herokuapp.com/';
 
   //------------  Auth  ------------------------------//
-  static const String register = 'auth/register';
-
-  static const String login = 'auth/login';
+  static const String register = 'api/v1/user/auth/register';
+  static const String login = 'api/v1/user/auth/login';
   static const String verifyOtp = 'auth/verify-otp';
   static const String passwordReset = 'password/reset';
   static const String logout = 'auth/logout';

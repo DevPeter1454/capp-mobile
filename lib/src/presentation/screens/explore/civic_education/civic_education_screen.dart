@@ -48,7 +48,11 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                 ),
                 Row(
                   children: [
-                    Image.asset('assets/images/ic_civic_eduction.png'),
+                    Image.asset(
+                      'assets/images/ic_civic_education.png',
+                      height: 32,
+                      width: 32,
+                    ),
                     const SizedBox(
                       width: 10,
                     ),

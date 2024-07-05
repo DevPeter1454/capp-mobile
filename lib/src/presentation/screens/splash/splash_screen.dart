@@ -1,11 +1,9 @@
-import 'package:capp/src/cache.dart';
-import 'package:capp/src/constants/constants.dart';
 import 'package:capp/src/constants/route_constants.dart';
+import 'package:capp/src/data_source/di/injection_container.dart';
+import 'package:capp/src/data_source/network/shared_preference_service.dart';
 import 'package:capp/src/theme/app_colors.dart';
-import 'package:capp/src/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -17,6 +15,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final _prefs = getIt.get<SharedPreferencesService>();
+
   @override
   void initState() {
     super.initState();
@@ -29,67 +29,58 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void getNextRoute() async {
     try {
-      bool hasRun = await Cache.readData(AppConstants.HAS_RUN) ?? false;
-      if (!hasRun) {
-        // Get.toNamed(RouteConstants.onboarding);
-        Get.toNamed(RouteConstants.welcome);
+      if (_prefs.authToken == null) {
+       
+        Get.offNamed(RouteConstants.welcome);
       } else {
-        // bool hasLogin = await Cache.readData(AppConstants.HAS_LOGIN)?? false;
-        // if(hasLogin){
-        //   Get.toNamed(RouteConstants.login);
-        // }else{
-        //   Get.toNamed(RouteConstants.signup);
-        // }
+        Get.toNamed(RouteConstants.home);
       }
     } catch (e) {
-      print('Error $e');
+      // print('Error $e');
       Get.toNamed(RouteConstants.onboarding);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
-      return Scaffold(
-        // backgroundColor: Color(0xFF0D4740),
-        body: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              child: SizedBox(
-                height: 350,
-                width: size.width,
-                child: Image.asset(
-                  'assets/images/welcomebg.png',
-                  fit: BoxFit.fitWidth,
-                ),
+    return Scaffold(
+      // backgroundColor: Color(0xFF0D4740),
+      body: Stack(
+        children: [
+          Positioned(
+            bottom: 0,
+            child: SizedBox(
+              height: 350,
+              width: context.width,
+              child: Image.asset(
+                'assets/images/welcomebg.png',
+                fit: BoxFit.fitWidth,
               ),
             ),
-            Container(
-              height: size.height,
-              width: size.width,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        Colors.white,
-                        Colors.white.withOpacity(.65),
-                        Colors.white.withOpacity(.7),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      stops: const [0.6, 0.8, 1.0],
-                      tileMode: TileMode.clamp)),
+          ),
+          Container(
+            height: context.height,
+            width: context.width,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [
+                      Colors.white,
+                      Colors.white.withOpacity(.65),
+                      Colors.white.withOpacity(.7),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: const [0.6, 0.8, 1.0],
+                    tileMode: TileMode.clamp)),
+          ),
+          const Center(
+            child: LogoWithTextWidget(
+              isHorizontal: false,
+              titleColor: AppColors.primaryDark,
             ),
-            const Center(
-              child: LogoWithTextWidget(
-                isHorizontal: false,
-                titleColor: AppColors.primaryDark,
-              ),
-            ),
-          ],
-        ),
-      );
-    });
+          ),
+        ],
+      ),
+    );
   }
 }

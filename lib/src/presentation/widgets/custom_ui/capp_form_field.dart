@@ -1,7 +1,5 @@
-import 'package:capp/src/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 class CappCustomFormField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
@@ -52,8 +50,9 @@ class CappCustomFormField extends StatefulWidget {
     this.suffixIconConstraints,
     this.prefixIcon,
     this.prefix,
-    this.fillColor, 
-    this.borderColor  =  Colors.transparent, this.onFieldSubmitted,
+    this.fillColor,
+    this.borderColor = Colors.transparent,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -63,238 +62,228 @@ class CappCustomFormField extends StatefulWidget {
 class _CappCustomFormFieldState extends State<CappCustomFormField> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(builder: (context, theme, child) {
-      return widget.maxLines != null
-          ? TextFormField(
-              key: const ValueKey(0),
-              decoration: InputDecoration(
-                enabledBorder: widget.isNotBorder
-                    ?  OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: widget.borderColor!, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: BorderSide(
-                            color: widget.isValidated
-                                ? const Color(0xFF6FBE45)
-                                : theme.isDarkMode
-                                    ? const Color(0xFFCACBCA)
-                                    : const Color(0xFFA1A3A2),
-                            width: 0.7),
-                      ),
-                focusedBorder: widget.isNotBorder
-                    ? const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.transparent, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: BorderSide(
-                            color: Theme.of(context).highlightColor,
-                            width: 0.7),
-                      ),
-                errorBorder: widget.isNotBorder
-                    ? const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.transparent, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: const BorderSide(
-                            color: Colors.redAccent, width: 0.7),
-                      ),
-                focusedErrorBorder: widget.isNotBorder
-                    ? const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.transparent, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: const BorderSide(
-                            color: Colors.redAccent, width: 0.7),
-                      ),
-                disabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-                border: widget.isNotBorder
-                    ? const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.transparent, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: BorderSide(
-                            color: widget.isValidated
-                                ? const Color(0xFF6FBE45)
-                                : Colors.transparent,
-                            width: 0.7),
-                      ),
-                isDense: true,
-                filled: !widget.isNotBorder || widget.fillColor != null,
-                suffixIcon: widget.suffixIcon,
-                prefix: widget.prefix,
-                prefixIcon: widget.prefixIcon,
-                fillColor: widget.isFilledTransparent
-                    ? Colors.transparent
-                    : widget.fillColor,
-                hintText: widget.hintText,
-                hintStyle: widget.hintStyle,
-                errorStyle: const TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 10,
-                  color: Colors.red,
-                ),
-                contentPadding: widget.padding ??
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                suffix: widget.suffix,
-                suffixIconConstraints: widget.suffixIconConstraints ??
-                    const BoxConstraints(
-                      minHeight: 32,
-                      minWidth: 32,
+    return widget.maxLines != null
+        ? TextFormField(
+            key: const ValueKey(0),
+            decoration: InputDecoration(
+              enabledBorder: widget.isNotBorder
+                  ? OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: widget.borderColor!, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide: BorderSide(
+                          color: widget.isValidated
+                              ? const Color(0xFF6FBE45)
+                              : const Color(0xFFA1A3A2),
+                          width: 0.7),
                     ),
-              ),
-              autovalidateMode: widget.hasAutoValidate
-                  ? AutovalidateMode.onUserInteraction
-                  : null,
-              obscureText: widget.isTextObscure,
-              onSaved: widget.onSavedValue,
-              textAlignVertical: TextAlignVertical.center,
-              keyboardType: widget.keyboardType,
-              maxLines: widget.maxLines,
-              maxLength: widget.maxLength,
-              enabled: widget.isEnabled,
-              onFieldSubmitted: widget.onFieldSubmitted,
-              textCapitalization: !widget.isTextObscure
-                  ? TextCapitalization.sentences
-                  : TextCapitalization.none,
-              minLines: widget.minLines,
-              onChanged: widget.onChanged,
-              focusNode: widget.focus,
-              style: widget.textStyle ??
-                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-              controller: widget.controller,
-              inputFormatters: widget.inputFormatter,
-              validator: widget.validator,
-            )
-          : TextFormField(
-              key: const ValueKey(0),
-              decoration: InputDecoration(
-                enabledBorder: widget.isNotBorder
-                    ? const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.transparent, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: BorderSide(
-                            color: widget.isValidated
-                                ? const Color(0xFF6FBE45)
-                                : theme.isDarkMode
-                                    ? const Color(0xFFCACBCA)
-                                    : const Color(0xFFA1A3A2),
-                            width: 0.7),
-                      ),
-                focusedBorder: widget.isNotBorder
-                    ? const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.transparent, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: BorderSide(
-                            color: Theme.of(context).highlightColor,
-                            width: 0.7),
-                      ),
-                errorBorder: widget.isNotBorder
-                    ? const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.transparent, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: const BorderSide(
-                            color: Colors.redAccent, width: 0.7),
-                      ),
-                focusedErrorBorder: widget.isNotBorder
-                    ? const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.transparent, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: const BorderSide(
-                            color: Colors.redAccent, width: 0.7),
-                      ),
-                border: widget.isNotBorder
-                    ? const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.transparent, width: 0.7),
-                      )
-                    : OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(widget.radius)),
-                        borderSide: BorderSide(
-                            color: widget.isValidated
-                                ? const Color(0xFF6FBE45)
-                                : Colors.transparent,
-                            width: 0.7),
-                      ),
-                disabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-                isDense: true,
-                filled: !widget.isNotBorder || widget.fillColor != null,
-                suffixIcon: widget.suffixIcon,
-                prefix: widget.prefix,
-                prefixIcon: widget.prefixIcon,
-                fillColor: widget.isFilledTransparent
-                    ? Colors.transparent
-                    : widget.fillColor,
-                hintText: widget.hintText,
-                hintStyle: widget.hintStyle,
-                contentPadding: widget.padding ??
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                suffix: widget.suffix,
-                suffixIconConstraints: widget.suffixIconConstraints ??
-                    const BoxConstraints(
-                      minHeight: 32,
-                      minWidth: 32,
+              focusedBorder: widget.isNotBorder
+                  ? const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).highlightColor, width: 0.7),
                     ),
-                errorStyle: const TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontSize: 10,
-                    color: Colors.red),
+              errorBorder: widget.isNotBorder
+                  ? const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide:
+                          const BorderSide(color: Colors.redAccent, width: 0.7),
+                    ),
+              focusedErrorBorder: widget.isNotBorder
+                  ? const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide:
+                          const BorderSide(color: Colors.redAccent, width: 0.7),
+                    ),
+              disabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide.none,
               ),
-              obscureText: widget.isTextObscure,
-              onSaved: widget.onSavedValue,
-              onFieldSubmitted: widget.onFieldSubmitted,
-              keyboardType: widget.keyboardType,
-              enabled: widget.isEnabled,
-              textAlignVertical: TextAlignVertical.center,
-              focusNode: widget.focus,
-              textCapitalization: !widget.isTextObscure
-                  ? TextCapitalization.sentences
-                  : TextCapitalization.none,
-              autovalidateMode: widget.hasAutoValidate
-                  ? AutovalidateMode.onUserInteraction
-                  : null,
-              style: widget.textStyle ??
-                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-              onChanged: widget.onChanged,
-              controller: widget.controller,
-              inputFormatters: widget.inputFormatter,
-              validator: widget.validator,
-            );
-    });
+              border: widget.isNotBorder
+                  ? const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide: BorderSide(
+                          color: widget.isValidated
+                              ? const Color(0xFF6FBE45)
+                              : Colors.transparent,
+                          width: 0.7),
+                    ),
+              isDense: true,
+              filled: !widget.isNotBorder || widget.fillColor != null,
+              suffixIcon: widget.suffixIcon,
+              prefix: widget.prefix,
+              prefixIcon: widget.prefixIcon,
+              fillColor: widget.isFilledTransparent
+                  ? Colors.transparent
+                  : widget.fillColor,
+              hintText: widget.hintText,
+              hintStyle: widget.hintStyle,
+              errorStyle: const TextStyle(
+                fontWeight: FontWeight.w300,
+                fontSize: 10,
+                color: Colors.red,
+              ),
+              contentPadding: widget.padding ??
+                  const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+              suffix: widget.suffix,
+              suffixIconConstraints: widget.suffixIconConstraints ??
+                  const BoxConstraints(
+                    minHeight: 32,
+                    minWidth: 32,
+                  ),
+            ),
+            autovalidateMode: widget.hasAutoValidate
+                ? AutovalidateMode.onUserInteraction
+                : null,
+            obscureText: widget.isTextObscure,
+            onSaved: widget.onSavedValue,
+            textAlignVertical: TextAlignVertical.center,
+            keyboardType: widget.keyboardType,
+            maxLines: widget.maxLines,
+            maxLength: widget.maxLength,
+            enabled: widget.isEnabled,
+            onFieldSubmitted: widget.onFieldSubmitted,
+            textCapitalization: !widget.isTextObscure
+                ? TextCapitalization.sentences
+                : TextCapitalization.none,
+            minLines: widget.minLines,
+            onChanged: widget.onChanged,
+            focusNode: widget.focus,
+            style: widget.textStyle ??
+                const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            controller: widget.controller,
+            inputFormatters: widget.inputFormatter,
+            validator: widget.validator,
+          )
+        : TextFormField(
+            key: const ValueKey(0),
+            decoration: InputDecoration(
+              enabledBorder: widget.isNotBorder
+                  ? const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide: BorderSide(
+                          color: widget.isValidated
+                              ? const Color(0xFF6FBE45)
+                              : const Color(0xFFA1A3A2),
+                          width: 0.7),
+                    ),
+              focusedBorder: widget.isNotBorder
+                  ? const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).highlightColor, width: 0.7),
+                    ),
+              errorBorder: widget.isNotBorder
+                  ? const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide:
+                          const BorderSide(color: Colors.redAccent, width: 0.7),
+                    ),
+              focusedErrorBorder: widget.isNotBorder
+                  ? const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide:
+                          const BorderSide(color: Colors.redAccent, width: 0.7),
+                    ),
+              border: widget.isNotBorder
+                  ? const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 0.7),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(widget.radius)),
+                      borderSide: BorderSide(
+                          color: widget.isValidated
+                              ? const Color(0xFF6FBE45)
+                              : Colors.transparent,
+                          width: 0.7),
+                    ),
+              disabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+              isDense: true,
+              filled: !widget.isNotBorder || widget.fillColor != null,
+              suffixIcon: widget.suffixIcon,
+              prefix: widget.prefix,
+              prefixIcon: widget.prefixIcon,
+              fillColor: widget.isFilledTransparent
+                  ? Colors.transparent
+                  : widget.fillColor,
+              hintText: widget.hintText,
+              hintStyle: widget.hintStyle,
+              contentPadding: widget.padding ??
+                  const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+              suffix: widget.suffix,
+              suffixIconConstraints: widget.suffixIconConstraints ??
+                  const BoxConstraints(
+                    minHeight: 32,
+                    minWidth: 32,
+                  ),
+              errorStyle: const TextStyle(
+                  fontWeight: FontWeight.w300, fontSize: 10, color: Colors.red),
+            ),
+            obscureText: widget.isTextObscure,
+            onSaved: widget.onSavedValue,
+            onFieldSubmitted: widget.onFieldSubmitted,
+            keyboardType: widget.keyboardType,
+            enabled: widget.isEnabled,
+            textAlignVertical: TextAlignVertical.center,
+            focusNode: widget.focus,
+            textCapitalization: !widget.isTextObscure
+                ? TextCapitalization.sentences
+                : TextCapitalization.none,
+            autovalidateMode: widget.hasAutoValidate
+                ? AutovalidateMode.onUserInteraction
+                : null,
+            style: widget.textStyle ??
+                const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            onChanged: widget.onChanged,
+            controller: widget.controller,
+            inputFormatters: widget.inputFormatter,
+            validator: widget.validator,
+          );
   }
 }

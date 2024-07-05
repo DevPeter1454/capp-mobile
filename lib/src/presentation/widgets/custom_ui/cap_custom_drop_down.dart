@@ -1,6 +1,4 @@
-import 'package:capp/src/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CappCustomDropDown extends StatelessWidget {
   const CappCustomDropDown({
@@ -43,120 +41,115 @@ class CappCustomDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(builder: (context, theme, child) {
-      return Container(
-        decoration: hasNoBorder
-            ? null
-            : BoxDecoration(
-                color: containerBgColor ??
-                    Theme.of(context).inputDecorationTheme.fillColor,
-                borderRadius: BorderRadius.circular(borderRaduis ?? 10),
-                border: hasBorderLine
-                    ? Border.all(
-                        width: 0.7,
-                        color: !isValidated
-                            ? theme.isDarkMode
-                                ? const Color(0xFFCACBCA)
-                                : const Color(0xFFA1A3A2)
-                            : const Color(0xFF6FBE45))
-                    : null),
-        height: height ?? 60,
-        width: width,
-        child: Padding(
-          padding: padding ?? const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Center(
-            child: isOutlineIcon
-                ? DropdownButton(
-                    underline: const SizedBox(),
-                    isExpanded: true,
-                    value: selectedItem,
-                    selectedItemBuilder: selectedItemBuilder,
-                    items: dropDownList.map((value) {
-                      return DropdownMenuItem(
-                        value: value,
-                        enabled: isEnabled,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: valueWidget != null
-                              ? valueWidget!(value)
-                              : Text(
-                                  value.toString(),
-                                  style: textStyle ??
-                                      const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400),
-                                ),
-                        ),
-                      );
-                    }).toList(),
-                    borderRadius: BorderRadius.circular(20),
-                    hint: hintWidget ??
-                        Text(
-                          hintText ?? 'Select',
-                          style: hintStyle ??
-                              TextStyle(
-                                  color: Theme.of(context)
-                                      .hintColor
-                                      .withOpacity(.6)),
-                        ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      size: iconSize,
-                    ),
-                    iconEnabledColor:
-                        iconEnabledColor ?? Colors.black.withOpacity(.6),
-                    iconDisabledColor: Colors.black.withOpacity(.2),
-                    onChanged: isEnabled ? onValueChanged : null,
-                  )
-                : DropdownButton(
-                    underline: const SizedBox(),
-                    isExpanded: true,
-                    value: selectedItem,
-                    selectedItemBuilder: selectedItemBuilder,
-                    items: dropDownList.map((value) {
-                      return DropdownMenuItem(
-                        value: value,
-                        enabled: isEnabled,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: valueWidget != null
-                              ? valueWidget!(value)
-                              : Text(
-                                  value.toString(),
-                                  style: textStyle ??
-                                      const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400),
-                                ),
-                        ),
-                      );
-                    }).toList(),
-                    borderRadius: BorderRadius.circular(20),
-                    hint: hintWidget ??
-                        Text(
-                          hintText ?? 'Select',
-                          style: hintStyle ??
-                              TextStyle(
-                                  color: Theme.of(context)
-                                      .hintColor
-                                      .withOpacity(.6)),
-                        ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      size: iconSize ?? 20,
-                      color: isEnabled
-                          ? Colors.black
-                          : Colors.black.withOpacity(.3),
-                    ),
-                    iconEnabledColor: iconEnabledColor ??
-                        const Color(0xFFCFDAD9).withOpacity(.7),
-                    iconDisabledColor: const Color(0xFFCFDAD9).withOpacity(.2),
-                    onChanged: isEnabled ? onValueChanged : null,
+    return Container(
+      decoration: hasNoBorder
+          ? null
+          : BoxDecoration(
+              color: containerBgColor ??
+                  Theme.of(context).inputDecorationTheme.fillColor,
+              borderRadius: BorderRadius.circular(borderRaduis ?? 10),
+              border: hasBorderLine
+                  ? Border.all(
+                      width: 0.7,
+                      color: !isValidated
+                          ? const Color(0xFFA1A3A2)
+                          : const Color(0xFF6FBE45))
+                  : null),
+      height: height ?? 60,
+      width: width,
+      child: Padding(
+        padding: padding ?? const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Center(
+          child: isOutlineIcon
+              ? DropdownButton(
+                  underline: const SizedBox(),
+                  isExpanded: true,
+                  value: selectedItem,
+                  selectedItemBuilder: selectedItemBuilder,
+                  items: dropDownList.map((value) {
+                    return DropdownMenuItem(
+                      value: value,
+                      enabled: isEnabled,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: valueWidget != null
+                            ? valueWidget!(value)
+                            : Text(
+                                value.toString(),
+                                style: textStyle ??
+                                    const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400),
+                              ),
+                      ),
+                    );
+                  }).toList(),
+                  borderRadius: BorderRadius.circular(20),
+                  hint: hintWidget ??
+                      Text(
+                        hintText ?? 'Select',
+                        style: hintStyle ??
+                            TextStyle(
+                                color: Theme.of(context)
+                                    .hintColor
+                                    .withOpacity(.6)),
+                      ),
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    size: iconSize,
                   ),
-          ),
+                  iconEnabledColor:
+                      iconEnabledColor ?? Colors.black.withOpacity(.6),
+                  iconDisabledColor: Colors.black.withOpacity(.2),
+                  onChanged: isEnabled ? onValueChanged : null,
+                )
+              : DropdownButton(
+                  underline: const SizedBox(),
+                  isExpanded: true,
+                  value: selectedItem,
+                  selectedItemBuilder: selectedItemBuilder,
+                  items: dropDownList.map((value) {
+                    return DropdownMenuItem(
+                      value: value,
+                      enabled: isEnabled,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: valueWidget != null
+                            ? valueWidget!(value)
+                            : Text(
+                                value.toString(),
+                                style: textStyle ??
+                                    const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400),
+                              ),
+                      ),
+                    );
+                  }).toList(),
+                  borderRadius: BorderRadius.circular(20),
+                  hint: hintWidget ??
+                      Text(
+                        hintText ?? 'Select',
+                        style: hintStyle ??
+                            TextStyle(
+                                color: Theme.of(context)
+                                    .hintColor
+                                    .withOpacity(.6)),
+                      ),
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    size: iconSize ?? 20,
+                    color:
+                        isEnabled ? Colors.black : Colors.black.withOpacity(.3),
+                  ),
+                  iconEnabledColor: iconEnabledColor ??
+                      const Color(0xFFCFDAD9).withOpacity(.7),
+                  iconDisabledColor: const Color(0xFFCFDAD9).withOpacity(.2),
+                  onChanged: isEnabled ? onValueChanged : null,
+                ),
         ),
-        //
-      );
-    });
+      ),
+      //
+    );
   }
 }

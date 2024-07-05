@@ -22,7 +22,11 @@ class FGNSupportScheme extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Image.asset('assets/images/ic_fgn_scheme.png'),
+                        Image.asset(
+                          'assets/images/ic_fgn_scheme.png',
+                          height: 32,
+                          width: 32,
+                        ),
                         const SizedBox(
                           width: 10,
                         ),

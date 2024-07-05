@@ -1,11 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:capp/main.dart';
-import 'package:capp/src/providers/theme_provider.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 import 'custom_uis.dart';
 
@@ -17,7 +15,7 @@ class CustomDialogWidgets {
     required ValueChanged onItemClicked,
     dynamic itemSelected,
     required List list,
-    required String title,
+    required String? title,
     required Size size,
     bool hideBottomBtn = false,
     required Map<String, int> selectedItems,
@@ -32,140 +30,128 @@ class CustomDialogWidgets {
               topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
         ),
         builder: (ctxt) {
-          return Consumer<ThemeProvider>(
-              builder: (context, themeProvider, child) {
-            return Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                ),
-                child: Stack(
-                  children: [
-                    SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 15),
+          return Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+              ),
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  flex: 9,
+                                  child: Container(
+                                    child: Text(
+                                      title ?? 'Select Network',
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Icon(Icons.close,
+                                          size: 20, color: Colors.black)),
+                                )
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            height: 1,
+                            thickness: 0.5,
+                            color: Colors.grey.withOpacity(.35),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          // Column(
+                          //   children: [
+                          //     Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: list.asMap().entries.map((e) {
+                          //         return AddMoreChoreWidget(
+                          //           onQuantityUpdated: (val) {
+                          //             onQuantityChanged({e.value: val});
+                          //           },
+                          //           selectedItems: selectedItems,
+                          //           title: e.value,
+                          //         );
+                          //       }).toList(),
+                          //     ),
+                          //     const SizedBox(
+                          //       height: 30,
+                          //     ),
+                          //   ],
+                          // ),
+                          SizedBox(
+                            height: size.height * .15,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  !hideBottomBtn
+                      ? Positioned(
+                          bottom: 0,
+                          child: Container(
+                            width: size.width,
+                            padding: const EdgeInsets.fromLTRB(20, 25, 20, 10),
+                            color: Colors.black,
+                            child: SafeArea(
+                              top: false,
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Expanded(
-                                    flex: 9,
-                                    child: Container(
-                                      child: Text(
-                                        title ?? 'Select Network',
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600),
+                                  const Text(
+                                    '\$230.00',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16),
+                                  ),
+                                  CappCustomButton(
+                                    isActive: true,
+                                    onPress: onButtonPressed,
+                                    color: Colors.deepPurpleAccent,
+                                    isSolidColor: true,
+                                    width: size.width * .4,
+                                    paddingVertical: 14,
+                                    borderRadius: 10,
+                                    child: const Text(
+                                      'Add To Cart',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
                                       ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Icon(
-                                          Icons.close,
-                                          size: 20,
-                                          color: themeProvider.isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                        )),
                                   )
                                 ],
                               ),
                             ),
-                            Divider(
-                              height: 1,
-                              thickness: 0.5,
-                              color: Colors.grey.withOpacity(.35),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            // Column(
-                            //   children: [
-                            //     Column(
-                            //       crossAxisAlignment: CrossAxisAlignment.start,
-                            //       children: list.asMap().entries.map((e) {
-                            //         return AddMoreChoreWidget(
-                            //           onQuantityUpdated: (val) {
-                            //             onQuantityChanged({e.value: val});
-                            //           },
-                            //           selectedItems: selectedItems,
-                            //           title: e.value,
-                            //         );
-                            //       }).toList(),
-                            //     ),
-                            //     const SizedBox(
-                            //       height: 30,
-                            //     ),
-                            //   ],
-                            // ),
-                            SizedBox(
-                              height: size.height * .15,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    !hideBottomBtn
-                        ? Positioned(
-                            bottom: 0,
-                            child: Container(
-                              width: size.width,
-                              padding:
-                                  const EdgeInsets.fromLTRB(20, 25, 20, 10),
-                              color: themeProvider.isDarkMode
-                                  ? Colors.grey[900]
-                                  : Colors.white,
-                              child: SafeArea(
-                                top: false,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      '\$230.00',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16),
-                                    ),
-                                    CappCustomButton(
-                                      isActive: true,
-                                      onPress: onButtonPressed,
-                                      color: Colors.deepPurpleAccent,
-                                      isSolidColor: true,
-                                      width: size.width * .4,
-                                      paddingVertical: 14,
-                                      borderRadius: 10,
-                                      child: const Text(
-                                        'Add To Cart',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ))
-                        : const SizedBox()
-                  ],
-                ));
-          });
+                          ))
+                      : const SizedBox()
+                ],
+              ));
         });
   }
 
@@ -174,7 +160,7 @@ class CustomDialogWidgets {
       required ValueChanged onItemClicked,
       dynamic itemSelected,
       required List list,
-      required String title}) {
+      required String? title}) {
     showModalBottomSheet(
         context: context,
         isDismissible: false,
@@ -320,7 +306,7 @@ class CustomDialogWidgets {
       required ValueChanged onItemClicked,
       dynamic itemSelected,
       required List list,
-      required String title,
+      required String? title,
       Function()? onBtnTap,
       String? btnTitle,
       Icon? onBtnIcon}) {

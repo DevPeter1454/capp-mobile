@@ -33,8 +33,8 @@ class _CappSuccessScreenState extends State<CappSuccessScreen> {
       desc = 'You have successfully donated to this Party';
       btnName = 'Back';
     } else {
-      desc = 'Your account have successfully completed sign up';
-      btnName = 'Login';
+      desc = 'You have successfully completed sign up';
+      btnName = 'login';
     }
     super.initState();
   }

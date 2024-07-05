@@ -22,7 +22,11 @@ class PolicyLibraryScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Image.asset('assets/images/ic_policyLibrary.png'),
+                        Image.asset(
+                          'assets/images/ic_policyLibrary.png',
+                          height: 32,
+                          width: 32,
+                        ),
                         const SizedBox(
                           width: 10,
                         ),

@@ -53,6 +53,9 @@ class CustomListCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                height: 20,
+              ),
               SizedBox(
                 width: 215,
                 child: Text(
@@ -81,7 +84,7 @@ class CustomListCard extends StatelessWidget {
                 child: officeHolderName.isNull
                     ? const SizedBox.shrink()
                     : Text(
-                        isKnowMDA ? 'Minister' : 'Office',
+                        isKnowMDA ? 'Minister' : 'Office:',
                         style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 13,
@@ -104,6 +107,9 @@ class CustomListCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        const SizedBox(
+          width: 45,
         ),
         Expanded(
           child: GestureDetector(

@@ -110,54 +110,52 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 SizedBox(
                   height: context.heightPercentage(.03),
                 ),
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CappCustomButton(
-                            onPress: () {
-                              Get.toNamed(RouteConstants.signup);
-                            },
-                            color: AppColors.primary,
-                            isSolidColor: true,
-                            width: context.widthPercentage(.4),
-                            paddingVertical: 12,
-                            isActive: true,
-                            child: const Text(
-                              'Sign up',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500),
-                            )),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        CappCustomButton(
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CappCustomButton(
                           onPress: () {
-                            Get.toNamed(RouteConstants.login);
+                            Get.toNamed(RouteConstants.signup);
                           },
-                          color: AppColors.primary.withOpacity(.1),
+                          color: AppColors.primary,
                           isSolidColor: true,
                           width: context.widthPercentage(.4),
                           paddingVertical: 12,
                           isActive: true,
                           child: const Text(
-                            'Log in',
+                            'Sign up',
                             style: TextStyle(
-                                color: AppColors.primary,
+                                color: Colors.white,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500),
-                          ),
+                          )),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      CappCustomButton(
+                        onPress: () {
+                          Get.toNamed(RouteConstants.login);
+                        },
+                        color: AppColors.primary.withOpacity(.1),
+                        isSolidColor: true,
+                        width: context.widthPercentage(.4),
+                        paddingVertical: 12,
+                        isActive: true,
+                        child: const Text(
+                          'Log in',
+                          style: TextStyle(
+                              color: AppColors.primary,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],

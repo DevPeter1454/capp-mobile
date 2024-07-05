@@ -130,37 +130,61 @@ class _CappCustomBottomSheetState extends State<CappCustomBottomSheet> {
                       onPressed: () {},
                     ),
                     ShareIconButton(
-                      icon: Image.asset('assets/images/ic_whatsapp.png'),
+                      icon: Image.asset(
+                        'assets/images/ic_whatsapp.png',
+                        height: 16,
+                        width: 16,
+                      ),
                       label: 'Whatsapp',
                       color: Colors.green,
                       onPressed: () {},
                     ),
                     ShareIconButton(
-                      icon: Image.asset('assets/images/ic_facebook.png'),
+                      icon: Image.asset(
+                        'assets/images/ic_facebook.png',
+                        height: 16,
+                        width: 16,
+                      ),
                       label: 'Facebook',
                       color: Colors.blue[800],
                       onPressed: () {},
                     ),
                     ShareIconButton(
-                      icon: Image.asset('assets/images/ic_twitter.png'),
+                      icon: Image.asset(
+                        'assets/images/ic_twitter.png',
+                        height: 16,
+                        width: 16,
+                      ),
                       label: 'X',
                       color: Colors.lightBlue,
                       onPressed: () {},
                     ),
                     ShareIconButton(
-                      icon: Image.asset('assets/images/ic_pinterest.png'),
+                      icon: Image.asset(
+                        'assets/images/ic_pinterest.png',
+                        height: 16,
+                        width: 16,
+                      ),
                       label: 'Pinterest',
                       color: Colors.red,
                       onPressed: () {},
                     ),
                     ShareIconButton(
-                      icon: Image.asset('assets/images/ic_linkedin.png'),
+                      icon: Image.asset(
+                        'assets/images/ic_linkedin.png',
+                        height: 16,
+                        width: 16,
+                      ),
                       label: 'Linkedin',
                       color: Colors.blue[700],
                       onPressed: () {},
                     ),
                     ShareIconButton(
-                      icon: Image.asset('assets/images/ic_instagram.png'),
+                      icon: Image.asset(
+                        'assets/images/ic_instagram.png',
+                        height: 58,
+                        width: 58,
+                      ),
                       label: 'Instagram',
                       color: Colors.white,
                       onPressed: () {},

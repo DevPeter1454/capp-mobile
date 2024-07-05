@@ -87,7 +87,11 @@ class CivicBooksCardView extends StatelessWidget {
                   width: 33,
                   child: Row(
                     children: [
-                      Image.asset('assets/images/ic_book-saved.png'),
+                      Image.asset(
+                        'assets/images/ic_book-saved.png',
+                        height: 16,
+                        width: 16,
+                      ),
                       const SizedBox(
                         width: 3,
                       ),
