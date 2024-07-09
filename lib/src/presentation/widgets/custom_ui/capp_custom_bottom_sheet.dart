@@ -363,47 +363,47 @@ class _CappCustomBottomSheetState extends State<CappCustomBottomSheet> {
                             },
                           ),
                         ),
-                        SizedBox(
-                          height: context.heightPercentage(.015),
-                        ),
-                        const Text(
-                          'Donations',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          height: 12,
-                          width: context.widthPercentage(.8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColors.primary,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '200',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14),
-                            ),
-                            Text(
-                              '1,657,345',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14),
-                            ),
-                          ],
-                        )
+                        // SizedBox(
+                        //   height: context.heightPercentage(.015),
+                        // ),
+                        // const Text(
+                        //   'Donations',
+                        //   style: TextStyle(
+                        //       color: Colors.black,
+                        //       fontWeight: FontWeight.w600,
+                        //       fontSize: 14),
+                        // ),
+                        // const SizedBox(height: 15),
+                        // Container(
+                        //   height: 12,
+                        //   width: context.widthPercentage(.8),
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(12),
+                        //     color: AppColors.primary,
+                        //   ),
+                        // ),
+                        // const SizedBox(
+                        //   height: 12,
+                        // ),
+                        // const Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Text(
+                        //       '200',
+                        //       style: TextStyle(
+                        //           color: Colors.black,
+                        //           fontWeight: FontWeight.w400,
+                        //           fontSize: 14),
+                        //     ),
+                        //     Text(
+                        //       '1,657,345',
+                        //       style: TextStyle(
+                        //           color: Colors.black,
+                        //           fontWeight: FontWeight.w600,
+                        //           fontSize: 14),
+                        //     ),
+                        //   ],
+                        // )
                       ],
                     ),
                   ),

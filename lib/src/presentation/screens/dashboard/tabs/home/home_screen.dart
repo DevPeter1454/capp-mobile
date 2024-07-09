@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen>
       return availableHeight / context.heightPercentage(0.0042);
     } else {
       // Default case for heights greater than 844
-      return availableHeight / context.heightPercentage(0.0036);
+      return availableHeight / context.heightPercentage(0.0042);
     }
   }
 

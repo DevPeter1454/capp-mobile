@@ -108,9 +108,13 @@ class CustomListCard extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(
-          width: 45,
-        ),
+        isIconLeft
+            ? const SizedBox(
+                width: 59,
+              )
+            : const SizedBox(
+                width: 45,
+              ),
         Expanded(
           child: GestureDetector(
             onTap: onClickedPrimaryActionButton,

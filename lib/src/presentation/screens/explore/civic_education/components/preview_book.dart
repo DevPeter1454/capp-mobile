@@ -25,6 +25,8 @@ class _PreviewBookScreenState extends State<PreviewBookScreen> {
       return 11;
     } else if (context.height <= 896) {
       return 15;
+    } else if (context.height <= 932) {
+      return 14;
     } else {
       // Default case for heights greater than 844
       return 18;
@@ -42,10 +44,10 @@ class _PreviewBookScreenState extends State<PreviewBookScreen> {
       return availableHeight - 176;
     } else if (context.height <= 896) {
       return availableHeight - 88;
-    } else if (context.height <= 915) {
-      return availableHeight - 17;
+    } else if (context.height <= 932) {
+      return availableHeight - 93;
     } else {
-      // Default case for heights greater than 844
+      // Default case for heights greater than 932
       return availableHeight;
     }
   }
@@ -92,13 +94,15 @@ class _PreviewBookScreenState extends State<PreviewBookScreen> {
                       top: 3,
                       left: 3.5,
                       child: Container(
-                          height: context.height < 750 ? 225 : 325,
-                          width: context.height < 750 ? 225 : 325,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(widget.bookModel.imageUrl),
-                                  fit: BoxFit.contain),
-                              borderRadius: BorderRadius.circular(8))),
+                        height: context.height < 750 ? 225 : 325,
+                        width: context.height < 750 ? 225 : 325,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(widget.bookModel.imageUrl),
+                              fit: BoxFit.contain),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
                     )
                   ],
                 ),

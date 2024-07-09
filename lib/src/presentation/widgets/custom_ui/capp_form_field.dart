@@ -166,7 +166,7 @@ class _CappCustomFormFieldState extends State<CappCustomFormField> {
             enabled: widget.isEnabled,
             onFieldSubmitted: widget.onFieldSubmitted,
             textCapitalization: !widget.isTextObscure
-                ? TextCapitalization.sentences
+                ? TextCapitalization.none
                 : TextCapitalization.none,
             minLines: widget.minLines,
             onChanged: widget.onChanged,

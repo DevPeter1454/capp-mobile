@@ -16,7 +16,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Container(
@@ -39,7 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           SafeArea(
             child: ListView(
               padding: EdgeInsets.only(bottom: context.heightPercentage(.037)),
-              physics: const NeverScrollableScrollPhysics(),
+              // physics: const NeverScrollableScrollPhysics(),
               children: [
                 SizedBox(
                   height: context.height - 120,
@@ -107,7 +106,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                Container(
                   height: context.heightPercentage(.03),
                 ),
                 Padding(

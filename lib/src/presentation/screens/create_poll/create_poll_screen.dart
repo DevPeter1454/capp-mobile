@@ -19,6 +19,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   final firstOptionContoller = TextEditingController();
   final secondOptionController = TextEditingController();
+
   double calculateSpace(double height) {
     if (context.height <= 667) {
       return context.heightPercentage(.12);
@@ -26,14 +27,17 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
       return context.heightPercentage(.19);
     } else if (context.height <= 844) {
       return context.heightPercentage(.36);
+    } else if (context.height <= 932) {
+      return context.heightPercentage(.32);
     } else {
-      // Default case for heights greater than 844
+      // Default case for heights greater than 932
       return context.heightPercentage(.38);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    print(context.screenHeight);
     return Scaffold(
       key: scaffoldKey,
       body: SafeArea(

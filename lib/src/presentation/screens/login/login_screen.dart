@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return context.heightPercentage(.30);
     } else {
       // Default case for heights greater than 844
-      return context.heightPercentage(.35);
+      return context.heightPercentage(.31);
     }
   }
 
@@ -55,7 +55,6 @@ class _LoginScreenState extends State<LoginScreen> {
         body: BlocConsumer<LoginCubit, LoginState>(
           bloc: _loginCubit,
           listener: (context, state) {
-            print('login state is $state');
             state.maybeWhen(
                 loginSuccessful: () {
                   context.hideLoadingDialog();

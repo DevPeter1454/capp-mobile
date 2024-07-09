@@ -85,104 +85,106 @@ class _CappCustomButtomNavBarState extends State<CappCustomButtomNavBar> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: const Color(0xFF797A7A).withOpacity(.1),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 20,
-              color: Colors.black.withOpacity(.1),
-            )
-          ],
-        ),
-        margin: const EdgeInsets.only(bottom: 5, right: 10, left: 10),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () => navigateTo(0),
-                child: SizedBox(
-                  height: 45,
-                  child: Column(
-                    children: [
-                      _selectedIndex == 0
-                          ? Image.asset(
-                              'assets/images/home_selected.png',
-                              height: 24,
-                              width: 24,
-                            )
-                          : Image.asset(
-                              'assets/images/home.png',
-                              height: 24,
-                              width: 24,
-                            ),
-                      Text('Home',
-                          style: TextStyle(
-                              color: _selectedIndex == 0
-                                  ? AppColors.primary
-                                  : Colors.black))
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () => navigateTo(1),
-                child: SizedBox(
-                  height: 45,
-                  child: Column(
-                    children: [
-                      _selectedIndex == 1
-                          ? Image.asset(
-                              'assets/images/notification_selected.png',
-                              height: 24,
-                              width: 24,
-                            )
-                          : Image.asset(
-                              'assets/images/notification.png',
-                              height: 24,
-                              width: 24,
-                            ),
-                      Text(
-                        'Notification',
-                        style: TextStyle(
-                            color: _selectedIndex == 1
-                                ? AppColors.primary
-                                : Colors.black),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () => navigateTo(2),
-                child: SizedBox(
-                  height: 45,
-                  child: Column(
-                    children: [
-                      _selectedIndex == 2
-                          ? Image.asset(
-                              'assets/images/profile-tick_selected.png',
-                              height: 24,
-                              width: 24,
-                            )
-                          : Image.asset(
-                              'assets/images/profile-tick.png',
-                              height: 24,
-                              width: 24,
-                            ),
-                      Text('Profile',
-                          style: TextStyle(
-                              color: _selectedIndex == 2
-                                  ? AppColors.primary
-                                  : Colors.black))
-                    ],
-                  ),
-                ),
-              ),
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: const Color(0xFF797A7A).withOpacity(.1),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 20,
+                color: Colors.black.withOpacity(.1),
+              )
             ],
+          ),
+          margin: const EdgeInsets.only(bottom: 5, right: 10, left: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => navigateTo(0),
+                  child: SizedBox(
+                    height: 45,
+                    child: Column(
+                      children: [
+                        _selectedIndex == 0
+                            ? Image.asset(
+                                'assets/images/home_selected.png',
+                                height: 24,
+                                width: 24,
+                              )
+                            : Image.asset(
+                                'assets/images/home.png',
+                                height: 24,
+                                width: 24,
+                              ),
+                        Text('Home',
+                            style: TextStyle(
+                                color: _selectedIndex == 0
+                                    ? AppColors.primary
+                                    : Colors.black))
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => navigateTo(1),
+                  child: SizedBox(
+                    height: 45,
+                    child: Column(
+                      children: [
+                        _selectedIndex == 1
+                            ? Image.asset(
+                                'assets/images/notification_selected.png',
+                                height: 24,
+                                width: 24,
+                              )
+                            : Image.asset(
+                                'assets/images/notification.png',
+                                height: 24,
+                                width: 24,
+                              ),
+                        Text(
+                          'Notification',
+                          style: TextStyle(
+                              color: _selectedIndex == 1
+                                  ? AppColors.primary
+                                  : Colors.black),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => navigateTo(2),
+                  child: SizedBox(
+                    height: 45,
+                    child: Column(
+                      children: [
+                        _selectedIndex == 2
+                            ? Image.asset(
+                                'assets/images/profile-tick_selected.png',
+                                height: 24,
+                                width: 24,
+                              )
+                            : Image.asset(
+                                'assets/images/profile-tick.png',
+                                height: 24,
+                                width: 24,
+                              ),
+                        Text('Profile',
+                            style: TextStyle(
+                                color: _selectedIndex == 2
+                                    ? AppColors.primary
+                                    : Colors.black))
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

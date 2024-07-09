@@ -18,7 +18,7 @@ class CappCustomCardView extends StatelessWidget {
     return GestureDetector(
       onTap: isCivicVideo ? onTap : null,
       child: Container(
-        width: isCivicVideo ? 357 : 327,
+        width: isCivicVideo ? 357 : 300,
         height: 170,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -75,7 +75,7 @@ class CappCustomCardView extends StatelessWidget {
                       children: [
                         Container(
                           height: 46,
-                          width: 373,
+                          width: 390,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(8),
