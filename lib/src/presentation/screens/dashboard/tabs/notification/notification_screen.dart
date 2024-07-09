@@ -1,11 +1,21 @@
+import 'package:capp/src/data_source/network/shared_preference_service.dart';
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
 
-class NotiificationScreen extends StatelessWidget {
+import '../../../../../data_source/di/injection_container.dart';
+
+class NotiificationScreen extends StatefulWidget {
   final bool isClickedOnDashBoard;
   final Function()? onClicked;
   const NotiificationScreen(
       {super.key, this.isClickedOnDashBoard = false, this.onClicked});
+
+  @override
+  State<NotiificationScreen> createState() => _NotiificationScreenState();
+}
+
+class _NotiificationScreenState extends State<NotiificationScreen> {
+  final sharred = getIt.get<SharedPreferencesService>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +35,9 @@ class NotiificationScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        isClickedOnDashBoard
+                        widget.isClickedOnDashBoard
                             ? IconButton(
-                                onPressed: onClicked,
+                                onPressed: widget.onClicked,
                                 icon: const Icon(
                                   Icons.arrow_back_ios_new_rounded,
                                   color: Colors.black,

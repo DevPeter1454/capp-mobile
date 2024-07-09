@@ -75,7 +75,7 @@ class RouteGenerator {
     GetPage(name: RouteConstants.signup, page: () => const SignUpScreen()),
     GetPage(
         name: RouteConstants.userDetails,
-        page: () => const UserSignUpDetailScreen()),
+        page: () =>  UserSignUpDetailScreen(email: Get.arguments, password: Get.arguments,)),
     GetPage(
         name: RouteConstants.otpVerify,
         page: () => VerifyOtpScreen(route: Get.arguments)),

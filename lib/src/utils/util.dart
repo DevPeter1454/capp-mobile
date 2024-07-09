@@ -3,10 +3,12 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:capp/src/theme/app_colors.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show PlatformException, rootBundle;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 abstract class Util {
   static Future<String> loadAsset(String filename) async {
@@ -247,7 +249,7 @@ extension TruncateDoubles on double {
       (this * pow(10, fractionalDigits)).truncate() / pow(10, fractionalDigits);
 }
 
-extension SizeExtension on BuildContext {
+extension BuildContextWrapper on BuildContext {
   // Get the width of the screen
   double get screenWidth => MediaQuery.of(this).size.width;
 
@@ -259,4 +261,53 @@ extension SizeExtension on BuildContext {
 
   // Get a percentage of screen height
   double heightPercentage(double percentage) => screenHeight * percentage;
+
+  TextTheme get textTheme => Theme.of(this).textTheme;
+
+  void showSnackBar(String errorMessage) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(
+          errorMessage,
+          style: textTheme.bodySmall?.copyWith(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  void showLoadingDialog() {
+    showDialog(
+        context: this,
+        barrierDismissible: false,
+        barrierColor: Colors.black.withOpacity(.8),
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.black.withOpacity(.8),
+            child: Container(
+              height: 150,
+              width: 230,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(8)),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Loading .....',
+                    style: TextStyle(color: Colors.black, fontSize: 15),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  void hideLoadingDialog() {
+    Navigator.of(this, rootNavigator: true).pop();
+  }
 }

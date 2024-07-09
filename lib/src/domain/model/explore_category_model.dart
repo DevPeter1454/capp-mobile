@@ -26,7 +26,7 @@ final List<ExploreCategoryModel> exploreCategorylist = [
   ExploreCategoryModel(
       title: 'Civic Education',
       widgetPath: const CivicEducationScreen(),
-      iconPath: 'assets/images/ic_civic_eduction.png',
+      iconPath: 'assets/images/ic_civic_education.png',
       color: const Color(0xFFE4F9E0)),
   ExploreCategoryModel(
       title: 'Policy Library',
@@ -44,7 +44,7 @@ final List<ExploreCategoryModel> exploreCategorylist = [
       iconPath: 'assets/images/ic_know_your_mda.png',
       color: const Color(0xFFFFF8E0)),
   ExploreCategoryModel(
-      title: 'Know your Leders',
+      title: 'Know your Leaders',
       widgetPath: const KnowYourLeader(),
       iconPath: 'assets/images/ic_know_your_leaders.png',
       color: const Color(0xFFEFEEFF)),

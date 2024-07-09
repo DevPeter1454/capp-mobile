@@ -1,4 +1,6 @@
 
+import 'package:injectable/injectable.dart';
+
 abstract class DialogHandler {
 
   /// Register global progress indicators
@@ -19,6 +21,7 @@ abstract class DialogHandler {
   bool isDialogVisible();
 }
 
+@LazySingleton(as: DialogHandler)
 class DialogHandlerImpl implements DialogHandler {
   bool _isDialogVisible = false;
 

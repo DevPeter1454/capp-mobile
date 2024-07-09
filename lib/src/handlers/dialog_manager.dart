@@ -21,7 +21,7 @@ class _DialogManagerState extends State<DialogManager> {
   @override
   void initState() {
     super.initState();
-    _dialogHandler = locator<DialogHandler>();
+    _dialogHandler = getIt.get<DialogHandler>();
     _dialogHandler.registerGlobalProgressIndicatorDialog(showGlobalIndicator);
     _dialogHandler.registerDismissDialog(dismissDialog);
   }

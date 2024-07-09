@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:injectable/injectable.dart';
 
 enum ConnectivityStatus { Online, Offline }
 
+@lazySingleton
 class ConnectivityService {
   final Connectivity _connectivity = Connectivity();
 

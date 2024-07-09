@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:capp/src/presentation/screens/dashboard/tabs/notification/notification_screen.dart';
-import 'package:capp/src/providers/theme_provider.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 import 'tabs/home/home_screen.dart';
@@ -74,112 +73,129 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Consumer<ThemeProvider>(builder: (context, theme, child) {
-      return WillPopScope(
-        onWillPop: () => exitDialog(context),
-        child: Scaffold(
-          key: scaffoldKey,
-          body: SizedBox(
-            height: size.height,
-            child: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _pageController,
-              onPageChanged: onPageChanged,
-              children: const <Widget>[
-                HomeScreen(),
-                NotiificationScreen(),
-                ProfileScreen(),
+    return WillPopScope(
+      onWillPop: () => exitDialog(context),
+      child: Scaffold(
+        key: scaffoldKey,
+        body: SizedBox(
+          height: context.height,
+          child: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _pageController,
+            onPageChanged: onPageChanged,
+            children: const <Widget>[
+              HomeScreen(),
+              NotiificationScreen(),
+              ProfileScreen(),
+            ],
+          ),
+        ),
+        bottomNavigationBar: SafeArea(
+          top: false,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: const Color(0xFF797A7A).withOpacity(.1),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 20,
+                  color: Colors.black.withOpacity(.1),
+                )
               ],
             ),
-          ),
-          bottomNavigationBar: SafeArea(
-            top: false,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: theme.isDarkMode
-                    ? const Color(0xFF797A7A).withOpacity(.4)
-                    : const Color(0xFF797A7A).withOpacity(.1),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 20,
-                    color: Colors.black.withOpacity(.1),
-                  )
-                ],
-              ),
-              margin: const EdgeInsets.only(bottom: 5, right: 10, left: 10),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () => navigateTo(0),
-                      child: SizedBox(
-                        height: 45,
-                        child: Column(
-                          children: [
-                            _selectedIndex == 0
-                                ? Image.asset('assets/images/home_selected.png')
-                                : Image.asset('assets/images/home.png'),
-                            Text('Home',
-                                style: TextStyle(
-                                    color: _selectedIndex == 0
-                                        ? AppColors.primary
-                                        : Colors.black))
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => navigateTo(1),
-                      child: SizedBox(
-                        height: 45,
-                        child: Column(
-                          children: [
-                            _selectedIndex == 1
-                                ? Image.asset(
-                                    'assets/images/notification_selected.png')
-                                : Image.asset('assets/images/notification.png'),
-                            Text(
-                              'Notification',
+            margin: const EdgeInsets.only(bottom: 5, right: 10, left: 10),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () => navigateTo(0),
+                    child: SizedBox(
+                      height: 45,
+                      child: Column(
+                        children: [
+                          _selectedIndex == 0
+                              ? Image.asset(
+                                  'assets/images/home_selected.png',
+                                  height: 24,
+                                  width: 24,
+                                )
+                              : Image.asset(
+                                  'assets/images/home.png',
+                                  height: 24,
+                                  width: 24,
+                                ),
+                          Text('Home',
                               style: TextStyle(
-                                  color: _selectedIndex == 1
+                                  color: _selectedIndex == 0
                                       ? AppColors.primary
-                                      : Colors.black),
-                            )
-                          ],
-                        ),
+                                      : Colors.black))
+                        ],
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () => navigateTo(2),
-                      child: SizedBox(
-                        height: 45,
-                        child: Column(
-                          children: [
-                            _selectedIndex == 2
-                                ? Image.asset(
-                                    'assets/images/profile-tick_selected.png')
-                                : Image.asset('assets/images/profile-tick.png'),
-                            Text('Profile',
-                                style: TextStyle(
-                                    color: _selectedIndex == 2
-                                        ? AppColors.primary
-                                        : Colors.black))
-                          ],
-                        ),
+                  ),
+                  GestureDetector(
+                    onTap: () => navigateTo(1),
+                    child: SizedBox(
+                      height: 45,
+                      child: Column(
+                        children: [
+                          _selectedIndex == 1
+                              ? Image.asset(
+                                  'assets/images/notification_selected.png',
+                                  height: 24,
+                                  width: 24,
+                                )
+                              : Image.asset(
+                                  'assets/images/notification.png',
+                                  height: 24,
+                                  width: 24,
+                                ),
+                          Text(
+                            'Notification',
+                            style: TextStyle(
+                                color: _selectedIndex == 1
+                                    ? AppColors.primary
+                                    : Colors.black),
+                          )
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  GestureDetector(
+                    onTap: () => navigateTo(2),
+                    child: SizedBox(
+                      height: 45,
+                      child: Column(
+                        children: [
+                          _selectedIndex == 2
+                              ? Image.asset(
+                                  'assets/images/profile-tick_selected.png',
+                                  height: 24,
+                                  width: 24,
+                                )
+                              : Image.asset(
+                                  'assets/images/profile-tick.png',
+                                  height: 24,
+                                  width: 24,
+                                ),
+                          Text('Profile',
+                              style: TextStyle(
+                                  color: _selectedIndex == 2
+                                      ? AppColors.primary
+                                      : Colors.black))
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 }
