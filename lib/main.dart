@@ -10,6 +10,7 @@ import 'src/constants/route_constants.dart';
 import 'src/data_source/di/injection_container.dart';
 import 'src/data_source/network/connectivity.dart';
 import 'src/providers/theme_provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final GlobalKey<NavigatorState> navigatorKey =
     GlobalKey(debugLabel: "Main Navigator");
@@ -75,25 +76,29 @@ class _MyAppState extends State<MyApp>
         onPanDown: (_) {
           FocusScope.of(context).unfocus();
         },
-        child: GetMaterialApp(
-          navigatorKey: navigatorKey,
-          debugShowCheckedModeBanner: false,
-          enableLog: true,
-          initialRoute: RouteConstants.initialPage,
-          getPages: RouteGenerator.routes,
-          // themeMode: themeProvider.themeMode,
-          theme: MyThemes.lightTheme,
-          // darkTheme: MyThemes.darkTheme,
-          scaffoldMessengerKey: scaffoldMessengerKey,
-          builder: (context, child) {
-            return Navigator(
-              onGenerateRoute: (settings) => CupertinoPageRoute(
-                builder: (context) => DialogManager(
-                  child: child!,
+        child: ScreenUtilInit(
+          designSize: const Size(375,812),
+          minTextAdapt: true,
+          child: GetMaterialApp(
+            navigatorKey: navigatorKey,
+            debugShowCheckedModeBanner: false,
+            enableLog: true,
+            initialRoute: RouteConstants.initialPage,
+            getPages: RouteGenerator.routes,
+            // themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            // darkTheme: MyThemes.darkTheme,
+            scaffoldMessengerKey: scaffoldMessengerKey,
+            builder: (context, child) {
+              return Navigator(
+                onGenerateRoute: (settings) => CupertinoPageRoute(
+                  builder: (context) => DialogManager(
+                    child: child!,
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ));
   }
 }

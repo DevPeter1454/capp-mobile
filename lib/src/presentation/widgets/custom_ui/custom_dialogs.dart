@@ -524,12 +524,10 @@ class CustomDialogWidgets {
                             const SizedBox(
                               height: 15,
                             ),
-                            Container(
-                              child: Text(
-                                title,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w700),
-                              ),
+                            Text(
+                              title,
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w700),
                             ),
                           ],
                         ),

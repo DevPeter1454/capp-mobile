@@ -24,33 +24,33 @@ class ExploreCategoryModel {
 
 final List<ExploreCategoryModel> exploreCategorylist = [
   ExploreCategoryModel(
-      title: 'Civic Education',
+      title: 'Civic \nEducation',
       widgetPath: const CivicEducationScreen(),
-      iconPath: 'assets/images/ic_civic_education.png',
+      iconPath: 'assets/icons/civic.svg',
       color: const Color(0xFFE4F9E0)),
   ExploreCategoryModel(
       title: 'Policy Library',
       widgetPath: const PolicyLibraryScreen(),
-      iconPath: 'assets/images/ic_policyLibrary.png',
+      iconPath: 'assets/icons/policy.svg',
       color: const Color(0xFFE6F0FD)),
   ExploreCategoryModel(
       title: 'Join a Political Party',
       widgetPath: const JoinPartyScreen(),
-      iconPath: 'assets/images/ic_join_a_party.png',
+      iconPath: 'assets/icons/party.svg',
       color: const Color(0xFFFFE5E5)),
   ExploreCategoryModel(
-      title: 'Know your MDA’s',
+      title: 'Know your \nMDA’s',
       widgetPath: const KnowYourMDA(),
-      iconPath: 'assets/images/ic_know_your_mda.png',
+      iconPath: 'assets/icons/mda.svg',
       color: const Color(0xFFFFF8E0)),
   ExploreCategoryModel(
       title: 'Know your Leaders',
       widgetPath: const KnowYourLeader(),
-      iconPath: 'assets/images/ic_know_your_leaders.png',
+      iconPath: 'assets/icons/people.svg',
       color: const Color(0xFFEFEEFF)),
   ExploreCategoryModel(
       title: 'FGN Support Scheme',
       widgetPath: const FGNSupportScheme(),
-      iconPath: 'assets/images/ic_fgn_scheme.png',
+      iconPath: 'assets/icons/support.svg',
       color: const Color(0xFFF7E6FD)),
 ];

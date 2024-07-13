@@ -1,5 +1,6 @@
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CustomTopNavBar extends StatelessWidget {
@@ -42,8 +43,10 @@ class CustomTopNavBar extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w500),
           ),
           primaryActionButton.isNull
               ? const SizedBox.shrink()

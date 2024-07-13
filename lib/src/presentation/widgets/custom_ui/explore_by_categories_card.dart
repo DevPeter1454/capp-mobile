@@ -1,4 +1,7 @@
+import 'package:capp/src/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExploreByCategoryCard extends StatelessWidget {
   const ExploreByCategoryCard({
@@ -28,8 +31,8 @@ class ExploreByCategoryCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               color: ctnColor,
             ),
-            height: 60,
-            width: 120,
+            height: 122.h,
+            width: 155.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -37,14 +40,19 @@ class ExploreByCategoryCard extends StatelessWidget {
                 SizedBox(
                   height: 32,
                   width: 32,
-                  child: Image.asset(image),
+                  child: SvgPicture.asset(image),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                SizedBox(
+                  height: 42.h,
+                  width: 108.w,
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 14.sp, color: AppColors.blackTextColor),
+                  ),
                 )
               ],
             )),

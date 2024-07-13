@@ -1,5 +1,6 @@
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CappCustomButton extends StatelessWidget {
   final bool isActive;
@@ -86,6 +87,7 @@ class CappCustomButton extends StatelessWidget {
         ),
         padding: EdgeInsets.symmetric(vertical: paddingVertical),
         width: width ?? size.width,
+        height: 50.h,
         child: Center(child: child),
       ),
     );

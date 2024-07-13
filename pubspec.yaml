@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.1 <4.0.0'
+  sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -67,6 +67,7 @@ dependencies:
   json_serializable: ^6.8.0
   flutter_spinkit: ^5.2.1
   dio: ^5.4.1
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +85,8 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/icons/
+    - assets/images/success.gif
 
   fonts:
 #    - family: CreditFonts

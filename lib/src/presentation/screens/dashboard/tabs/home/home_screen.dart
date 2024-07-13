@@ -9,6 +9,7 @@ import 'package:capp/src/theme/app_colors.dart';
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'components/top_header_widget.dart';
 
@@ -95,11 +96,11 @@ class _HomeScreenState extends State<HomeScreen>
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 20,
+                            horizontal: 20.w,
                           ),
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
@@ -127,8 +128,7 @@ class _HomeScreenState extends State<HomeScreen>
                             builder: (context, constraints) {
                               final availableHeight = constraints.maxHeight;
                               return GridView.builder(
-                                padding:
-                                    const EdgeInsets.only(left: 15, top: 8),
+                                padding: EdgeInsets.only(left: 15.w, top: 15.h),
                                 // physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   var e = exploreCategorylist[index];
