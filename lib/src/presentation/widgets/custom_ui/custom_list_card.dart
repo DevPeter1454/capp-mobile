@@ -1,7 +1,7 @@
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomListCard extends StatelessWidget {
   final String? title,
@@ -32,7 +32,7 @@ class CustomListCard extends StatelessWidget {
       children: [
         isKnowMDA
             ? CircleAvatar(
-                radius: 42,
+                radius: 42.r,
                 backgroundColor: AppColors.primaryLight,
                 backgroundImage: AssetImage(mdaImageUrl!),
               )
@@ -41,93 +41,106 @@ class CustomListCard extends StatelessWidget {
                 width: ctnWidth,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(politicalPartyImageUrl!),
-                        fit: BoxFit.cover),
-                    borderRadius: BorderRadius.circular(8)),
+                      image: NetworkImage(
+                        politicalPartyImageUrl!,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.circular(8.r)),
               ),
         SizedBox(
-          width: context.widthPercentage(.015),
+          width: 12.w,
         ),
         SizedBox(
           width: context.widthPercentage(.386),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              const SizedBox(
                 height: 20,
               ),
               SizedBox(
-                width: 215,
+                width: 215.w,
                 child: Text(
                   title!,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: Colors.black),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14.sp,
+                      color: AppColors.blackTextColor),
                 ),
               ),
-              const SizedBox(
-                height: 13,
+              SizedBox(
+                height: 8.h,
               ),
               Text(
                 acroymn ?? '',
-                style: const TextStyle(
+                style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     color: AppColors.descText),
               ),
-              const SizedBox(
-                width: 10,
+              SizedBox(
+                width: 10.h,
               ),
               SizedBox(
-                height: 17,
-                child: officeHolderName.isNull
+                height: 17.h,
+                child: officeHolderName == null
                     ? const SizedBox.shrink()
                     : Text(
                         isKnowMDA ? 'Minister' : 'Office:',
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.w400,
-                            fontSize: 13,
+                            fontSize: 11.sp,
                             color: AppColors.descText),
                       ),
               ),
-              const SizedBox(
-                width: 25,
+              SizedBox(
+                width: 25.h,
               ),
               SizedBox(
-                height: 17,
-                width: 215,
+                height: 17.h,
+                width: 215.w,
                 child: Text(
                   officeHolderName ?? '',
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                      color: AppColors.descText),
+                      fontSize: 11.sp,
+                      color: const Color(0XFF4F4F4F)),
                 ),
               ),
             ],
           ),
         ),
         isIconLeft
-            ? const SizedBox(
-                width: 59,
+            ? SizedBox(
+                width: 59.w,
               )
-            : const SizedBox(
-                width: 45,
+            : SizedBox(
+                width: 45.w,
               ),
         Expanded(
           child: GestureDetector(
             onTap: onClickedPrimaryActionButton,
-            child: SizedBox(
-              width: 30,
-              height: 30,
-              child: isIconLeft
-                  ? Image.asset(
-                      'assets/images/arrow-left.png',
-                    )
-                  : Image.asset(
-                      'assets/images/arrow-down.png',
-                    ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 20.w,
+                  height: 20.h,
+                  child: isIconLeft
+                      ? Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.descText,
+                          size: 18.sp,
+                        )
+                      : Image.asset(
+                          'assets/images/arrow-down.png',
+                        ),
+                ),
+                SizedBox(
+                  height: 40.h,
+                )
+              ],
             ),
           ),
         )

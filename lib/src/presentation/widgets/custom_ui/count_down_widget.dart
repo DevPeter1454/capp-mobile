@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Countdown extends AnimatedWidget {
-  Countdown({Key? key, required this.animation, required this.style})
+  const Countdown({Key? key, required this.animation, required this.style})
       : super(key: key, listenable: animation);
 
   final Animation<int> animation;

@@ -14,25 +14,33 @@ class FgnSupportRepositoryImpl implements FgnSupportRepository {
 
   @override
   Future<List<FgnSupportSchemeModel>> getSupportSchemes() async {
-    print("appiii");
-    // Future.delayed(const Duration(seconds: 10));
-    final response = await dioClient.dioGet(
-        'https://capp-api-7d8a6573f031.herokuapp.com/api/v1/user/supports',
-        options: Options(headers: {
-          'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
-        }));
-    final result = response.data;
-    print("result $result");
-    final List<FgnSupportSchemeModel> supportSchemes = [];
-    for (var item in result["data"]) {
-      supportSchemes.add(FgnSupportSchemeModel(
-          id: item["_id"],
-          title: item["title"],
-          acronym: FgnSupportSchemeModel.forTest().acronym,
-          url: FgnSupportSchemeModel.forTest().url,
-          body: item["body"]));
-    }
-    print("supportSchemes ${supportSchemes[0].id}");
-    return supportSchemes;
+    // Existing code...
+    // Add a return statement at the end to ensure a non-null value is returned.
+  
+   try{
+     print("appiii");
+      // Future.delayed(const Duration(seconds: 10));
+      final response = await dioClient.dioGet(
+          'https://capp-api-7d8a6573f031.herokuapp.com/api/v1/user/supports',
+          options: Options(headers: {
+            'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
+          }));
+      final result = response.data;
+      print("result $result");
+      final List<FgnSupportSchemeModel> supportSchemes = [];
+      for (var item in result["data"]) {
+        supportSchemes.add(FgnSupportSchemeModel(
+            id: item["_id"],
+            title: item["title"],
+            acronym: FgnSupportSchemeModel.forTest().acronym,
+            url: FgnSupportSchemeModel.forTest().url,
+            body: item["body"]));
+      }
+      
+      return supportSchemes;
+   }catch(e){
+    print(e);
+    return []; 
+   }
   }
 }

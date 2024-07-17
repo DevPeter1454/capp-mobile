@@ -1,4 +1,5 @@
 {
   "yaml.schemaStore.enable": false,
-  "dart.flutterSdkPath": ".fvm/versions/3.16.0"
+  "dart.flutterSdkPath": ".fvm/versions/3.16.0",
+  "explorer.compactFolders": false
 }

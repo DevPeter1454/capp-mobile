@@ -38,7 +38,7 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
 
   Future<void> getSupportSchemes() async {
     final response = await _supportSchemeCubit.getSupportSchemes();
-    // print("response from screen $response");
+    print("response from screen $response");
     setState(() {
       _supportSchemes = response;
     });
@@ -59,7 +59,9 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
                 context.hideLoadingDialog();
                 context.showSnackBar(message);
               },
-              loaded: (supportSchemes) {},
+              loaded: (supportSchemes) {
+                // context.hideLoadingDialog();
+              },
               orElse: () {});
         },
         builder: (context, state) {
@@ -74,7 +76,7 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
                   child: SingleChildScrollView(
                     controller: controller,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      padding:  EdgeInsets.symmetric(horizontal: 15.w),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -86,8 +88,8 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
                               children: [
                                 SvgPicture.asset(
                                   'assets/icons/support.svg',
-                                  height: 32,
-                                  width: 32,
+                                  height: 32.h,
+                                  width: 32.w,
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -211,6 +213,7 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
                                                 fontWeight: FontWeight.w600)),
                                   ),
                                 ]),
+                            
                             SizedBox(
                               height: 16.h,
                             ),

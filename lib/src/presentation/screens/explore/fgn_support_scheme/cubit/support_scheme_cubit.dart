@@ -15,13 +15,13 @@ class SupportSchemeCubit extends Cubit<SupportSchemeState> {
       : super(const SupportSchemeState.initial());
 
   Future<dynamic> getSupportSchemes() async {
-    print("loaddinin");
+    
     emit(const SupportSchemeState.loading());
     try {
       List<FgnSupportSchemeModel> response =
           await fgnSupportRepository.getSupportSchemes();
       emit(SupportSchemeState.loaded(response));
-      print("done loadinginio");
+      
       return response;
     } on NetworkException catch (exception) {
       emit(SupportSchemeState.error(exception.message));

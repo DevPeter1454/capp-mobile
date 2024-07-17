@@ -72,7 +72,7 @@ class _CPChoiceSelectorState extends State<CPChoiceSelector> {
                           ),
                           borderRadius: BorderRadius.circular(4)
                         ),
-                        padding: EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Center(
                             child: Text(
                               e.value,

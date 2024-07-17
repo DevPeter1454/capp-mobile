@@ -10,7 +10,7 @@ class ThemeProvider extends ChangeNotifier {
 
   bool get isDarkMode {
     if (themeMode == ThemeMode.system) {
-      final brightness = SchedulerBinding.instance?.window.platformBrightness;
+      final brightness = SchedulerBinding.instance.window.platformBrightness;
       return brightness == Brightness.dark;
     } else {
       return themeMode == ThemeMode.dark;
@@ -51,7 +51,6 @@ class MyThemes {
 
       primaryColorLight: Colors.white.withOpacity(.05),
     primaryColorDark: Colors.white.withOpacity(.05),
-      selectedRowColor: const Color(0xFFF8F9F9).withOpacity(.1),
       indicatorColor:  AppColors.offWhite.withOpacity(.1) ,
       hoverColor: Colors.black45
 
@@ -88,7 +87,6 @@ class MyThemes {
     colorScheme: const ColorScheme.light().copyWith(primary: AppColors.primary, secondary: Colors.white),
     primaryColorLight: Colors.transparent,
       primaryColorDark: Colors.white,
-      selectedRowColor: const Color(0xFFF8F9F9),
       indicatorColor:  AppColors.offWhite,
       hoverColor: Colors.grey[100]
       // selectedRowColor: Color(0xFFFFFFFF)

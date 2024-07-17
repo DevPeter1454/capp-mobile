@@ -2,6 +2,8 @@ import 'package:capp/src/presentation/widgets/widgets.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class CivicBooksCardView extends StatelessWidget {
@@ -20,28 +22,28 @@ class CivicBooksCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return  Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Stack(
           children: [
             Container(
-              height: 120,
-              width: 120,
+              height: 100.h,
+              width: 100.w,
               decoration: BoxDecoration(
                   color: AppColors.descText.withOpacity(.3),
-                  borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8.r)),
             ),
             Positioned(
               top: 4,
               left: 5,
               child: Container(
-                  height: 110,
-                  width: 110,
+                  height: 90.h,
+                  width: 90.w,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(imageUrl), fit: BoxFit.contain),
-                      borderRadius: BorderRadius.circular(8))),
+                      borderRadius: BorderRadius.circular(8.r))),
             )
           ],
         ),
@@ -55,20 +57,20 @@ class CivicBooksCardView extends StatelessWidget {
           children: [
             Text(
               category,
-              style: const TextStyle(
+              style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 10,
+                  fontSize: 10.sp,
                   color: AppColors.descText),
             ),
-            const SizedBox(
-              height: 13,
+            SizedBox(
+              height: 8.h,
             ),
             Text(
               title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-              ),
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16.sp,
+                  color: const Color(0XFF19202D)),
             ),
             Text(
               'Author: $author',
@@ -77,40 +79,40 @@ class CivicBooksCardView extends StatelessWidget {
                   fontSize: 12,
                   color: AppColors.descText),
             ),
-            const SizedBox(
-              height: 22,
+            SizedBox(
+              height: 4.h,
             ),
             Row(
               children: [
                 SizedBox(
-                  height: 17,
-                  width: 33,
+                  height: 17.h,
+                  width: 33.w,
                   child: Row(
                     children: [
-                      Image.asset(
-                        'assets/images/ic_book-saved.png',
-                        height: 16,
-                        width: 16,
+                      SvgPicture.asset(
+                        'assets/icons/book-saved.svg',
+                        height: 16.h,
+                        width: 16.w,
                       ),
                       const SizedBox(
                         width: 3,
                       ),
                       Text(numofPages,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontWeight: FontWeight.w400,
-                              fontSize: 11,
+                              fontSize: 11.sp,
                               color: AppColors.descText))
                     ],
                   ),
                 ),
-                const SizedBox(
-                  width: 10,
+                SizedBox(
+                  width: 10.w,
                 ),
                 SizedBox(
                   height: 17,
                   child: Row(
                     children: [
-                      Image.asset('assets/images/ic_microphone.png'),
+                      SvgPicture.asset('assets/icons/microphone.svg'),
                       const SizedBox(
                         width: 3,
                       ),
@@ -129,14 +131,15 @@ class CivicBooksCardView extends StatelessWidget {
                   onPress: onClickedRead,
                   color: AppColors.primary.withOpacity(.1),
                   isSolidColor: true,
-                  width: context.width * .2,
-                  paddingVertical: 12,
+                  width: 55.w,
+                  height: 26.h,
+                  paddingVertical: 4.h,
                   isActive: true,
-                  child: const Text(
+                  child: Text(
                     'Read',
                     style: TextStyle(
                         color: AppColors.primary,
-                        fontSize: 15,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500),
                   ),
                 )
@@ -144,6 +147,10 @@ class CivicBooksCardView extends StatelessWidget {
             )
           ],
         ),
+        Positioned(
+          top: 0,
+          child: SvgPicture.asset("assets/icons/more.svg"),
+        )
       ],
     );
   }

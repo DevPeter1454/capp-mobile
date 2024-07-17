@@ -7,6 +7,7 @@ class CappCustomButton extends StatelessWidget {
   final Function()? onPress;
   final Widget child;
   final double? width;
+  final double? height;
   final double borderWidth;
   final Color color, borderColor, shadowColor, secGradientColor;
   final double paddingVertical, borderRadius;
@@ -27,7 +28,7 @@ class CappCustomButton extends StatelessWidget {
       this.shadowColor = Colors.blue,
       this.isSolidColor = false,
       this.secGradientColor = const Color(0xFF035FAE),
-      this.borderRadius = 8})
+      this.borderRadius = 8, this.height})
       : super(key: key);
 
   @override
@@ -87,7 +88,7 @@ class CappCustomButton extends StatelessWidget {
         ),
         padding: EdgeInsets.symmetric(vertical: paddingVertical),
         width: width ?? size.width,
-        height: 50.h,
+        height: height?? 50.h,
         child: Center(child: child),
       ),
     );

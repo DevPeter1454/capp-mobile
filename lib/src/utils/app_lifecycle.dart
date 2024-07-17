@@ -1,6 +1,5 @@
 import 'package:capp/src/constants/route_constants.dart';
 import 'package:capp/src/data_source/network/shared_preference_service.dart';
-import 'package:capp/src/presentation/screens/forgotPassword/forgot_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

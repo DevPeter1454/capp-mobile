@@ -33,6 +33,7 @@ class DioClient {
     try {
       return await dioRequest.call();
     } on DioException catch (e) {
+      print(e.message);
       throw NetworkException.fromDioError(e);
     }
   }

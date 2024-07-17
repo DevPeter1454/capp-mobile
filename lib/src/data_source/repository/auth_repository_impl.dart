@@ -1,3 +1,4 @@
+import 'package:capp/src/constants/api_route_constant.dart';
 import 'package:capp/src/data_source/network/api_client.dart';
 import 'package:capp/src/data_source/network/shared_preference_service.dart';
 import 'package:capp/src/domain/repository/auth_repository.dart';
@@ -12,7 +13,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> logIn({required String email, required String password}) async {
     final response = await dioClient.dioPost(
-        'https://capp-api-7d8a6573f031.herokuapp.com/api/v1/user/auth/signin', {
+       ApiConstant.login, {
       "email": email,
       "password": password,
     });
