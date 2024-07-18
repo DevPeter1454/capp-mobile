@@ -2,6 +2,7 @@ import 'package:capp/src/constants/route_constants.dart';
 import 'package:capp/src/data_source/di/injection_container.dart';
 import 'package:capp/src/data_source/network/error/capp_error_screen.dart';
 import 'package:capp/src/presentation/screens/dashboard/tabs/profile/cubit/user_profile_cubit.dart';
+import 'package:capp/src/presentation/screens/dashboard/tabs/profile/pages/edit_info_screen.dart';
 import 'package:capp/src/presentation/screens/forgotPassword/create_new_password_screen.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _profileCubit = getIt.get<UserProfileCubit>();
@@ -55,6 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             builder: (context, state) {
               return state.map(
                 initial: (_) => const SizedBox.shrink(),
+                updateSuccessful: (_) => const SizedBox.shrink(),
                 loading: (_) {
                   return Scaffold(
                     body: SizedBox(
@@ -94,8 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -128,18 +128,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           children: [
                                             Text(
                                               value.user.firstname,
-                                              style: const TextStyle(
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.w500),
+                                              style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                                             ),
                                             const SizedBox(
                                               width: 5,
                                             ),
                                             Text(
                                               value.user.surname,
-                                              style: const TextStyle(
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.w500),
+                                              style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                                             ),
                                           ],
                                         ),
@@ -151,8 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                   const Text(
                                     'See and edit your profile information below',
-                                    style:
-                                        TextStyle(color: AppColors.inputHint),
+                                    style: TextStyle(color: AppColors.inputHint),
                                   ),
                                   const SizedBox(
                                     height: 20,
@@ -163,10 +158,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Column(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
                                   child: ProfileItemWidget(
-                                    cardPressed: () {},
+                                    cardPressed: () => Get.to(() => EditProfileInfo(
+                                          userData: value.user,
+                                        )),
                                     cardText: 'Edit Information',
                                     iconWidget: Image.asset(
                                       'assets/images/ic_profile.png',
@@ -176,19 +172,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 Divider(
-                                  color: Theme.of(context)
-                                      .hintColor
-                                      .withOpacity(.6),
+                                  color: Theme.of(context).hintColor.withOpacity(.6),
                                   thickness: 0.2,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
                                   child: ProfileItemWidget(
-                                    cardPressed: () => Get.to(
-                                        () => const CreateNewPasswordScreen(
-                                              isForgotPassword: false,
-                                            )),
+                                    cardPressed: () => Get.to(() => const CreateNewPasswordScreen(
+                                          isForgotPassword: false,
+                                        )),
                                     cardText: 'Change Password',
                                     iconWidget: Image.asset(
                                       'assets/images/ic_lock.png',
@@ -198,14 +190,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 Divider(
-                                  color: Theme.of(context)
-                                      .hintColor
-                                      .withOpacity(.6),
+                                  color: Theme.of(context).hintColor.withOpacity(.6),
                                   thickness: 0.2,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
                                   child: ProfileItemWidget(
                                     cardPressed: () {
                                       logoutUser();
@@ -219,9 +208,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 Divider(
-                                  color: Theme.of(context)
-                                      .hintColor
-                                      .withOpacity(.6),
+                                  color: Theme.of(context).hintColor.withOpacity(.6),
                                   thickness: 0.2,
                                 ),
                               ],

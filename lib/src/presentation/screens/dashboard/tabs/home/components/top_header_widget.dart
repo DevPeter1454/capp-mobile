@@ -1,10 +1,12 @@
 import 'package:capp/src/data_source/di/injection_container.dart';
 import 'package:capp/src/presentation/screens/dashboard/tabs/profile/cubit/user_profile_cubit.dart';
+import 'package:capp/src/presentation/screens/login/login_screen.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 
 class TopHeaderWidget extends StatefulWidget {
   const TopHeaderWidget({
@@ -63,11 +65,24 @@ class _TopHeaderWidgetState extends State<TopHeaderWidget> {
                     const SizedBox(
                       height: 2,
                     ),
-                    BlocBuilder<UserProfileCubit, UserProfileState>(
+                    BlocConsumer<UserProfileCubit, UserProfileState>(
                       bloc: _userProfileCubit,
+                      listener: (context, state) {
+                        state.maybeWhen(
+                            error: (error) {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          const LoginScreen()),
+                                  (route) => false);
+                            },
+                            orElse: () {});
+                      },
                       builder: (context, state) {
                         return state.when(
                           initial: () => const SizedBox.shrink(),
+                          updateSuccessful: () => const SizedBox.shrink(),
                           loading: () => const SpinKitCubeGrid(
                               color: AppColors.primary, size: 15.0),
                           retrieved: (userData) => GestureDetector(

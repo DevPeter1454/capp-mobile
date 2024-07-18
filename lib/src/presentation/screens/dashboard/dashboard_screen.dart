@@ -16,16 +16,15 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-PageController _pageController = PageController(initialPage: 0);
-navigationTapped(int page) {
-  if (page != 3) {
-    _pageController.jumpToPage(page);
-  }
-}
-
 class _DashboardScreenState extends State<DashboardScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
+  final PageController _pageController = PageController(initialPage: 0);
+  navigationTapped(int page) {
+    if (page != 3) {
+      _pageController.jumpToPage(page);
+    }
+  }
 
   @override
   void initState() {
@@ -54,8 +53,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   exitDialog(BuildContext context) {
     if (_selectedIndex != 0) {
-      _pageController.animateToPage(0,
-          duration: const Duration(milliseconds: 200), curve: Curves.bounceIn);
+      _pageController.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.bounceIn);
     } else {
       CustomDialogWidgets.buildOperationStatusDialog(
           // context: context,
@@ -105,8 +103,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             margin: const EdgeInsets.only(bottom: 5, right: 10, left: 10),
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -127,11 +124,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   height: 24,
                                   width: 24,
                                 ),
-                          Text('Home',
-                              style: TextStyle(
-                                  color: _selectedIndex == 0
-                                      ? AppColors.primary
-                                      : Colors.black))
+                          Text('Home', style: TextStyle(color: _selectedIndex == 0 ? AppColors.primary : Colors.black))
                         ],
                       ),
                     ),
@@ -155,10 +148,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                           Text(
                             'Notification',
-                            style: TextStyle(
-                                color: _selectedIndex == 1
-                                    ? AppColors.primary
-                                    : Colors.black),
+                            style: TextStyle(color: _selectedIndex == 1 ? AppColors.primary : Colors.black),
                           )
                         ],
                       ),
@@ -182,10 +172,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   width: 24,
                                 ),
                           Text('Profile',
-                              style: TextStyle(
-                                  color: _selectedIndex == 2
-                                      ? AppColors.primary
-                                      : Colors.black))
+                              style: TextStyle(color: _selectedIndex == 2 ? AppColors.primary : Colors.black))
                         ],
                       ),
                     ),

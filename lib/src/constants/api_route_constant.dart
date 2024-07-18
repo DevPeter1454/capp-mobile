@@ -8,11 +8,15 @@ class ApiConstant {
   static const String verifyOtp = 'auth/verify-otp';
   static const String passwordReset = 'password/reset';
   static const String logout = 'auth/logout';
+  static const String updateInfo = "api/v1/user/auth/update_user";
 
   //------------  Know your leader  ------------------------------//
   static const String getLeadersList = "${baseUrl}api/v1/user/leader/list";
 
   static const String getALeader = "${baseUrl}api/v1/user/leader";
+
+  //------------  Civic Education  ------------------------------//
+  static const String getCivicEducationList = "${baseUrl}api/v1/user/education/list";
 
   //------------  Transaction Pin  ------------------------------//
   static const String transactionPin = 'transactionpin';

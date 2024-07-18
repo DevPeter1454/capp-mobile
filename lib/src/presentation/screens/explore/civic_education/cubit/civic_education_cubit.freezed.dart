@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'rate_leader_cubit.dart';
+part of 'civic_education_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,13 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$RateLeaderState {
+mixin _$CivicEducationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LeaderProfile leader) loaded,
+    required TResult Function(List<CivicEducationBookModel> civicEducation)
+        loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ mixin _$RateLeaderState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LeaderProfile leader)? loaded,
+    TResult? Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ mixin _$RateLeaderState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LeaderProfile leader)? loaded,
+    TResult Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -69,16 +70,16 @@ mixin _$RateLeaderState {
 }
 
 /// @nodoc
-abstract class $RateLeaderStateCopyWith<$Res> {
-  factory $RateLeaderStateCopyWith(
-          RateLeaderState value, $Res Function(RateLeaderState) then) =
-      _$RateLeaderStateCopyWithImpl<$Res, RateLeaderState>;
+abstract class $CivicEducationStateCopyWith<$Res> {
+  factory $CivicEducationStateCopyWith(
+          CivicEducationState value, $Res Function(CivicEducationState) then) =
+      _$CivicEducationStateCopyWithImpl<$Res, CivicEducationState>;
 }
 
 /// @nodoc
-class _$RateLeaderStateCopyWithImpl<$Res, $Val extends RateLeaderState>
-    implements $RateLeaderStateCopyWith<$Res> {
-  _$RateLeaderStateCopyWithImpl(this._value, this._then);
+class _$CivicEducationStateCopyWithImpl<$Res, $Val extends CivicEducationState>
+    implements $CivicEducationStateCopyWith<$Res> {
+  _$CivicEducationStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -95,7 +96,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$RateLeaderStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$CivicEducationStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -109,7 +110,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'RateLeaderState.initial()';
+    return 'CivicEducationState.initial()';
   }
 
   @override
@@ -126,7 +127,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LeaderProfile leader) loaded,
+    required TResult Function(List<CivicEducationBookModel> civicEducation)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -137,7 +139,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LeaderProfile leader)? loaded,
+    TResult? Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -148,7 +150,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LeaderProfile leader)? loaded,
+    TResult Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -196,7 +198,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements RateLeaderState {
+abstract class _Initial implements CivicEducationState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -209,7 +211,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$RateLeaderStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$CivicEducationStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -223,7 +225,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'RateLeaderState.loading()';
+    return 'CivicEducationState.loading()';
   }
 
   @override
@@ -240,7 +242,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LeaderProfile leader) loaded,
+    required TResult Function(List<CivicEducationBookModel> civicEducation)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -251,7 +254,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LeaderProfile leader)? loaded,
+    TResult? Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -262,7 +265,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LeaderProfile leader)? loaded,
+    TResult Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -310,7 +313,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements RateLeaderState {
+abstract class _Loading implements CivicEducationState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -320,12 +323,12 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({LeaderProfile leader});
+  $Res call({List<CivicEducationBookModel> civicEducation});
 }
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$RateLeaderStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$CivicEducationStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
@@ -334,13 +337,13 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? leader = null,
+    Object? civicEducation = null,
   }) {
     return _then(_$LoadedImpl(
-      null == leader
-          ? _value.leader
-          : leader // ignore: cast_nullable_to_non_nullable
-              as LeaderProfile,
+      null == civicEducation
+          ? _value._civicEducation
+          : civicEducation // ignore: cast_nullable_to_non_nullable
+              as List<CivicEducationBookModel>,
     ));
   }
 }
@@ -348,14 +351,20 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(this.leader);
+  const _$LoadedImpl(final List<CivicEducationBookModel> civicEducation)
+      : _civicEducation = civicEducation;
 
+  final List<CivicEducationBookModel> _civicEducation;
   @override
-  final LeaderProfile leader;
+  List<CivicEducationBookModel> get civicEducation {
+    if (_civicEducation is EqualUnmodifiableListView) return _civicEducation;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_civicEducation);
+  }
 
   @override
   String toString() {
-    return 'RateLeaderState.loaded(leader: $leader)';
+    return 'CivicEducationState.loaded(civicEducation: $civicEducation)';
   }
 
   @override
@@ -363,11 +372,13 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            (identical(other.leader, leader) || other.leader == leader));
+            const DeepCollectionEquality()
+                .equals(other._civicEducation, _civicEducation));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, leader);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_civicEducation));
 
   @JsonKey(ignore: true)
   @override
@@ -380,10 +391,11 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LeaderProfile leader) loaded,
+    required TResult Function(List<CivicEducationBookModel> civicEducation)
+        loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(leader);
+    return loaded(civicEducation);
   }
 
   @override
@@ -391,10 +403,10 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LeaderProfile leader)? loaded,
+    TResult? Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult? Function(String message)? error,
   }) {
-    return loaded?.call(leader);
+    return loaded?.call(civicEducation);
   }
 
   @override
@@ -402,12 +414,12 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LeaderProfile leader)? loaded,
+    TResult Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(leader);
+      return loaded(civicEducation);
     }
     return orElse();
   }
@@ -450,10 +462,11 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements RateLeaderState {
-  const factory _Loaded(final LeaderProfile leader) = _$LoadedImpl;
+abstract class _Loaded implements CivicEducationState {
+  const factory _Loaded(final List<CivicEducationBookModel> civicEducation) =
+      _$LoadedImpl;
 
-  LeaderProfile get leader;
+  List<CivicEducationBookModel> get civicEducation;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -470,7 +483,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$RateLeaderStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$CivicEducationStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -500,7 +513,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'RateLeaderState.error(message: $message)';
+    return 'CivicEducationState.error(message: $message)';
   }
 
   @override
@@ -525,7 +538,8 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LeaderProfile leader) loaded,
+    required TResult Function(List<CivicEducationBookModel> civicEducation)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -536,7 +550,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LeaderProfile leader)? loaded,
+    TResult? Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -547,7 +561,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LeaderProfile leader)? loaded,
+    TResult Function(List<CivicEducationBookModel> civicEducation)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -595,7 +609,7 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements RateLeaderState {
+abstract class _Error implements CivicEducationState {
   const factory _Error(final String message) = _$ErrorImpl;
 
   String get message;

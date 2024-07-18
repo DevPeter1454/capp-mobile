@@ -19,12 +19,10 @@ import '../../widgets/widgets.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {
   final bool isForgotPassword;
-  const CreateNewPasswordScreen({Key? key, this.isForgotPassword = true})
-      : super(key: key);
+  const CreateNewPasswordScreen({Key? key, this.isForgotPassword = true}) : super(key: key);
 
   @override
-  State<CreateNewPasswordScreen> createState() =>
-      _CreateNewPasswordScreenState();
+  State<CreateNewPasswordScreen> createState() => _CreateNewPasswordScreenState();
 }
 
 class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
@@ -40,8 +38,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {});
     final sharedPrefs = getIt.get<SharedPreferencesService>();
-    final appLifecycleService = AppLifecycleService(sharedPrefs,
-        isForgotPassword: widget.isForgotPassword);
+    final appLifecycleService = AppLifecycleService(sharedPrefs, isForgotPassword: widget.isForgotPassword);
     appLifecycleService.startObserving();
     super.initState();
   }
@@ -61,8 +58,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
           desc: 'Going back takes you to the login screen ',
           onPositiveBtnTap: () async {
             await _userRepository.logOut();
-            Get.offNamedUntil(
-                RouteConstants.login, ModalRoute.withName('/login'));
+            Get.offNamedUntil(RouteConstants.login, ModalRoute.withName('/login'));
           },
           positiveBtnTitle: 'Yes',
           negativeBtnTitle: 'No',
@@ -97,8 +93,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                     } else {
                       context.hideLoadingDialog();
                       Get.back();
-                      context.showSnackBar(
-                          'Password has been changed successfully');
+                      context.showSnackBar('Password has been changed successfully');
                     }
                   },
                   loading: () {
@@ -149,9 +144,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                                       width: 10,
                                     ),
                                     Text(
-                                      widget.isForgotPassword
-                                          ? 'Forgot Password'
-                                          : 'Create New Password',
+                                      widget.isForgotPassword ? 'Forgot Password' : 'Create New Password',
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                           // color: Color(0xFF76706A),
@@ -167,30 +160,23 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                               ),
                               const Text(
                                 'Please enter a new password that you can easily remember for login.',
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w400),
+                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                               ),
                               const SizedBox(
                                 height: 15,
                               ),
                               InputFieldColumnWidget(
-                                inputFieldTitle: widget.isForgotPassword
-                                    ? 'New Password'
-                                    : 'Old Password',
+                                inputFieldTitle: widget.isForgotPassword ? 'New Password' : 'Old Password',
                                 inputFieldWidget: CappCustomFormField(
                                   hintText: '********',
                                   // onSavedValue: (value) => password = value,
                                   onChanged: (val) {
                                     setState(() {});
                                   },
-                                  inputFormatter: [
-                                    FilteringTextInputFormatter.deny(
-                                        RegExp(r"\s\b|\b\s"))
-                                  ],
+                                  inputFormatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
 
                                   isTextObscure: _passwordVisible,
-                                  isValidated:
-                                      passwordController.text.isValidEmail,
+                                  isValidated: passwordController.text.isValidEmail,
                                   suffix: GestureDetector(
                                       onTap: () {
                                         setState(() {
@@ -198,12 +184,9 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                                         });
                                       },
                                       child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 5),
+                                        padding: const EdgeInsets.only(right: 5),
                                         child: Icon(
-                                          _passwordVisible
-                                              ? Icons.visibility_off_outlined
-                                              : Icons.visibility_outlined,
+                                          _passwordVisible ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                                           size: 20,
                                         ),
                                       )),
@@ -218,33 +201,25 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                                 height: 5,
                               ),
                               InputFieldColumnWidget(
-                                inputFieldTitle: widget.isForgotPassword
-                                    ? 'Re-enter New Password'
-                                    : 'New Password',
+                                inputFieldTitle: widget.isForgotPassword ? 'Re-enter New Password' : 'New Password',
                                 inputFieldWidget: CappCustomFormField(
                                   hintText: '********',
                                   // onSavedValue: (value) => password = value,
                                   onChanged: (val) {
                                     setState(() {});
                                   },
-                                  inputFormatter: [
-                                    FilteringTextInputFormatter.deny(
-                                        RegExp(r"\s\b|\b\s"))
-                                  ],
+                                  inputFormatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
 
                                   isTextObscure: _confirmPasswordVisible,
-                                  isValidated:
-                                      confirmPasswordController.text.length > 6,
+                                  isValidated: confirmPasswordController.text.length > 6,
                                   suffix: GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          _confirmPasswordVisible =
-                                              !_confirmPasswordVisible;
+                                          _confirmPasswordVisible = !_confirmPasswordVisible;
                                         });
                                       },
                                       child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 5),
+                                        padding: const EdgeInsets.only(right: 5),
                                         child: Icon(
                                           _confirmPasswordVisible
                                               ? Icons.visibility_off_outlined
@@ -273,21 +248,14 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                               Center(
                                 child: CappCustomButton(
                                   isActive: widget.isForgotPassword
-                                      ? passwordController
-                                              .text.isValidPassword ==
-                                          confirmPasswordController
-                                              .text.isValidPassword
-                                      : passwordController
-                                              .text.isValidPassword &&
-                                          confirmPasswordController
-                                              .text.isValidPassword,
+                                      ? passwordController.text.isValidPassword ==
+                                          confirmPasswordController.text.isValidPassword
+                                      : passwordController.text.isValidPassword &&
+                                          confirmPasswordController.text.isValidPassword,
                                   onPress: () {
                                     _resetPasswordCubit.resetPassword(
-                                        oldPassword:
-                                            passwordController.text.trim(),
-                                        newPassword: confirmPasswordController
-                                            .text
-                                            .trim());
+                                        oldPassword: passwordController.text.trim(),
+                                        newPassword: confirmPasswordController.text.trim());
                                   },
                                   color: AppColors.primary,
                                   isSolidColor: true,

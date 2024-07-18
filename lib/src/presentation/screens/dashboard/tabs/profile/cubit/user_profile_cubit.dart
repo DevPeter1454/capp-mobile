@@ -31,6 +31,22 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     }
   }
 
+  Future<void>editUserInfo({required Map<String, dynamic> userData})async{
+    emit(const UserProfileState.loading());
+    try {
+      await userRepository.editUserInfo(userData: userData);
+      emit(const UserProfileState.updateSuccessful());
+    } on NetworkException catch (e) {
+      emit(
+        UserProfileState.error(e.message),
+      );
+    } catch (e) {
+      emit(
+        UserProfileState.error(e.toString()),
+      );
+    }
+  }
+
   void logOut() async {
     await userRepository.logOut();
   }

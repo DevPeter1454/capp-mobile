@@ -22,7 +22,7 @@ class CivicBooksCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Stack(
@@ -42,16 +42,14 @@ class CivicBooksCardView extends StatelessWidget {
                   width: 90.w,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(imageUrl), fit: BoxFit.contain),
+                          image: NetworkImage(imageUrl), fit: BoxFit.fitHeight),
                       borderRadius: BorderRadius.circular(8.r))),
             )
           ],
         ),
-        SizedBox(
-          width: context.width > 375
-              ? context.widthPercentage(.026)
-              : context.widthPercentage(.015),
-        ),
+        // SizedBox(
+        //   width: 5.w,
+        // ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -74,9 +72,9 @@ class CivicBooksCardView extends StatelessWidget {
             ),
             Text(
               'Author: $author',
-              style: const TextStyle(
+              style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: AppColors.descText),
             ),
             SizedBox(
@@ -94,8 +92,8 @@ class CivicBooksCardView extends StatelessWidget {
                         height: 16.h,
                         width: 16.w,
                       ),
-                      const SizedBox(
-                        width: 3,
+                      SizedBox(
+                        width: 2.w,
                       ),
                       Text(numofPages,
                           style: TextStyle(
@@ -106,23 +104,20 @@ class CivicBooksCardView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 10.w,
+                  width: 6.w,
                 ),
-                SizedBox(
-                  height: 17,
-                  child: Row(
-                    children: [
-                      SvgPicture.asset('assets/icons/microphone.svg'),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Text(time,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 11,
-                              color: AppColors.descText))
-                    ],
-                  ),
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/icons/microphone.svg'),
+                    SizedBox(
+                      width: 2.w,
+                    ),
+                    const Text("5h 20min",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 11,
+                            color: AppColors.descText))
+                  ],
                 ),
                 SizedBox(
                   width: context.widthPercentage(.025),

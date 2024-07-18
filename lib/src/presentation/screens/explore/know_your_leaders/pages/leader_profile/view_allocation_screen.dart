@@ -1,6 +1,5 @@
 import 'package:capp/src/domain/model/leader_profile.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

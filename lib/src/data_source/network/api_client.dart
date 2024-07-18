@@ -46,4 +46,18 @@ class DioClient {
   Future<Response<dynamic>> dioGet(url, {Options? options}) {
     return _makeRequest(() => _dioClient.get(url, options: options));
   }
+
+  Future<Response<dynamic>> dioPut(url, data, {Options? options}) {
+    return _makeRequest(
+        () => _dioClient.put(url, data: data, options: options));
+  }
+
+  Future<Response<dynamic>> dioDelete(url, {Options? options}) {
+    return _makeRequest(() => _dioClient.delete(url, options: options));
+  }
+
+  Future<Response<dynamic>> dioPatch(url, data, {Options? options}) {
+    return _makeRequest(
+        () => _dioClient.patch(url, data: data, options: options));
+  }
 }
