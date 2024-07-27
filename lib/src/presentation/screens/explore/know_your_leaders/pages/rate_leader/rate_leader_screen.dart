@@ -46,7 +46,7 @@ class _RateLeaderScreenState extends State<RateLeaderScreen> {
         state.maybeWhen(
             loaded: (leader) {
               if (leader.id.isNotEmpty) {
-                Get.off(() => const SuccessfulRatingScreen(),
+                Get.off(() => const SuccessfulRatingScreen(text: "You have submitted your rating and recommendation"),
                     transition: tr.Transition.fade);
               } else {
                 Get.snackbar("Error", "An error occurred while rating leader");

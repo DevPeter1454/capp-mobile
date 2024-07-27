@@ -54,8 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Text(
                             'Welcome to',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500, fontSize: 20),
+                            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                           ),
                           SizedBox(
                             width: 5,
@@ -72,8 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       const Text(
                         'Enter your Email and Password to start your registration',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w400),
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(
                         height: 15,
@@ -87,14 +85,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             setState(() {});
                           },
                           keyboardType: TextInputType.emailAddress,
-                          inputFormatter: [
-                            FilteringTextInputFormatter.deny(
-                                RegExp(r"\s\b|\b\s"))
-                          ],
-                          validator: (value) =>
-                              value!.isNotEmpty && value.isValidEmail
-                                  ? null
-                                  : 'Please enter valid email',
+                          inputFormatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
+                          validator: (value) => value!.isNotEmpty && value.isValidEmail ? null : 'Please enter valid email',
                           controller: emailController,
                         ),
                       ),
@@ -109,10 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onChanged: (val) {
                             setState(() {});
                           },
-                          inputFormatter: [
-                            FilteringTextInputFormatter.deny(
-                                RegExp(r"\s\b|\b\s"))
-                          ],
+                          inputFormatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
 
                           isTextObscure: _passwordVisible,
                           isValidated: passwordController.text.isValidPassword,
@@ -125,9 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 5),
                                 child: Icon(
-                                  _passwordVisible
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_outlined,
+                                  _passwordVisible ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                                   size: 20,
                                 ),
                               )),
@@ -147,12 +134,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       Center(
                         child: CappCustomButton(
-                          isActive: emailController.text.isValidEmail &&
-                              passwordController.text.isValidPassword,
+                          isActive: emailController.text.isValidEmail && passwordController.text.isValidPassword,
                           onPress: () {
-                            Get.to(() => UserSignUpDetailScreen(
-                                email: emailController.text.trim(),
-                                password: passwordController.text.trim()));
+                            Get.to(() =>
+                                UserSignUpDetailScreen(email: emailController.text.trim().toLowerCase(), password: passwordController.text.trim()));
                           },
                           color: AppColors.primary,
                           isSolidColor: true,
@@ -189,8 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ..onTap = () {
                                         Get.toNamed(RouteConstants.login);
                                       },
-                                    style: const TextStyle(
-                                        color: AppColors.primary)),
+                                    style: const TextStyle(color: AppColors.primary)),
                               ],
                             ),
                           ),

@@ -67,8 +67,7 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
         builder: (context, state) {
           return state.maybeWhen(
               loading: () => const Center(
-                    child:
-                        SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
+                    child: SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
                   ),
               loaded: (loaded) {
                 return SafeArea(
@@ -93,8 +92,7 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                               ),
                               const Text(
                                 'Civic Education',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w500),
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                               )
                             ],
                           ),
@@ -115,18 +113,13 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                             children: [
                               const Text(
                                 'Books',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w500),
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                               ),
                               GestureDetector(
-                                onTap: () => Get.toNamed(
-                                    RouteConstants.viewAllCivicBooks),
+                                onTap: () => Get.toNamed(RouteConstants.viewAllCivicBooks, arguments: loaded),
                                 child: const Text(
                                   'See All',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.primary),
+                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.primary),
                                 ),
                               ),
                             ],
@@ -139,28 +132,25 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                             height: calculateMainAxisExtent(context.height),
                             child: ListView.separated(
                               shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
+                              physics: const AlwaysScrollableScrollPhysics(),
                               itemBuilder: (context, int index) {
                                 var e = loaded[index];
                                 return CivicBooksCardView(
                                     title: e.name,
-                                    imageUrl: e.coverImageUrl,
+                                    imageUrl: "https://cdn.pixabay.com/photo/2018/03/15/11/13/nigeria-3227878_1280.png",
                                     time: e.createdAt.toIso8601String(),
                                     numofPages: e.pageNumber.toString(),
                                     author: e.author,
-                                    onClickedRead: () => Get.to(
-                                        () => ReadPdfScreen(pdfUrl: e.url)),
+                                    onClickedRead: () => Get.to(() => ReadPdfScreen(pdfUrl: e.url)),
                                     category: e.category);
                               },
                               separatorBuilder: (context, int index) {
                                 return Divider(
-                                  color: Theme.of(context)
-                                      .hintColor
-                                      .withOpacity(.6),
+                                  color: Theme.of(context).hintColor.withOpacity(.6),
                                   thickness: 0.2,
                                 );
                               },
-                              itemCount: 3,
+                              itemCount: loaded.length,
                             ),
                           ),
                           Divider(
@@ -175,18 +165,13 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                             children: [
                               const Text(
                                 'Videos',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w500),
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                               ),
                               GestureDetector(
-                                onTap: () => Get.toNamed(
-                                    RouteConstants.viewAllCivicVideo),
+                                onTap: () => Get.toNamed(RouteConstants.viewAllCivicVideo),
                                 child: const Text(
                                   'See All',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.primary),
+                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.primary),
                                 ),
                               ),
                             ],

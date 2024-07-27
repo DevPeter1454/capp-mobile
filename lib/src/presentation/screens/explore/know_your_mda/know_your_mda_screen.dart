@@ -3,7 +3,9 @@ import 'package:capp/src/presentation/widgets/custom_ui/custom_list_card.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 import 'package:capp/src/presentation/widgets/widgets.dart';
 import 'package:capp/src/theme/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class KnowYourMDA extends StatefulWidget {
@@ -41,8 +43,7 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
                       ),
                       const Text(
                         'Know your MDA\'s',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                       )
                     ],
                   ),
@@ -67,15 +68,13 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
                         child: CappCustomFormField(
                           hintText: 'Search by Ministry, Department or agency',
                           onChanged: (val) {},
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                           keyboardType: TextInputType.text,
                           fillColor: AppColors.appGrey.withOpacity(.3),
-                          radius: 8,
-                          prefixIcon: Image.asset(
-                            'assets/images/search.png',
-                            height: 20,
-                            width: 20,
+                          radius: 8.r,
+                          prefixIcon: const Icon(
+                            CupertinoIcons.search,
+                            color: Color(0XFF828282),
                           ),
                           controller: _searchController,
                         ),
@@ -89,11 +88,9 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
                     height: context.height,
                     child: ListView.separated(
                       itemBuilder: (context, int index) {
-                        List<PoliticalPartyModel> items = List.generate(
-                            6, (index) => PoliticalPartyModel.forTest());
+                        List<PoliticalPartyModel> items = List.generate(6, (index) => PoliticalPartyModel.forTest());
                         return const CustomListCard(
-                          title:
-                              'Federal Ministry of Agriculture and Food Security',
+                          title: 'Federal Ministry of Agriculture and Food Security',
                           isKnowMDA: true,
                           mdaImageUrl: 'assets/images/ministry.png',
                           officeHolderName: 'Adedayo Adelabu',

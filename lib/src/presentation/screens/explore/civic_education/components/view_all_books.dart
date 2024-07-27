@@ -1,12 +1,20 @@
-import 'package:capp/src/domain/model/book_model.dart';
-import 'package:capp/src/presentation/screens/explore/civic_education/components/civic_book_cardview.dart';
-import 'package:capp/src/presentation/screens/explore/civic_education/components/preview_book.dart';
-import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:capp/src/presentation/screens/explore/civic_education/pages/read_pdf_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:capp/src/domain/model/book_model.dart';
+import 'package:capp/src/domain/model/civic_education_model.dart';
+import 'package:capp/src/presentation/screens/explore/civic_education/components/civic_book_cardview.dart';
+import 'package:capp/src/presentation/screens/explore/civic_education/components/preview_book.dart';
+import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
+
 class ViewAllBooksScreen extends StatelessWidget {
-  const ViewAllBooksScreen({super.key});
+  final List<CivicEducationBookModel> loaded;
+  const ViewAllBooksScreen({
+    Key? key,
+    required this.loaded,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +35,14 @@ class ViewAllBooksScreen extends StatelessWidget {
                   child: ListView.separated(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     itemBuilder: (context, int index) {
-                      var e = civicBooksList[index];
+                      var e = loaded[index];
                       return CivicBooksCardView(
-                          title: e.title,
-                          imageUrl: e.imageUrl,
-                          time: e.time,
-                          onClickedRead: () =>
-                              Get.to(() => PreviewBookScreen(bookModel: e)),
-                          numofPages: e.numOfPages.toString(),
+                          title: e.name,
+                          imageUrl: "https://cdn.pixabay.com/photo/2018/03/15/11/13/nigeria-3227878_1280.png",
+                          time: e.createdAt.toIso8601String(),
+                          numofPages: e.pageNumber.toString(),
                           author: e.author,
+                          onClickedRead: () => Get.to(() => ReadPdfScreen(pdfUrl: e.url)),
                           category: e.category);
                     },
                     separatorBuilder: (context, int index) {
@@ -44,7 +51,7 @@ class ViewAllBooksScreen extends StatelessWidget {
                         thickness: 0.2,
                       );
                     },
-                    itemCount: civicBooksList.length,
+                    itemCount: loaded.length,
                   ),
                 ),
               )

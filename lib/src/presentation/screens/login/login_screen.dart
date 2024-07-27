@@ -89,9 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 Text(
                                   'Login to',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 20),
+                                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                                 ),
                                 SizedBox(
                                   width: 5,
@@ -107,8 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             const Text(
                               'Enter your Email and Password to login to \nCapp',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w400),
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                             SizedBox(
                               height: context.heightPercentage(.015),
@@ -123,16 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 keyboardType: TextInputType.emailAddress,
 
-                                isValidated: emailController.text.isNotEmpty &&
-                                    emailController.text.isValidEmail,
-                                inputFormatter: [
-                                  FilteringTextInputFormatter.deny(
-                                      RegExp(r"\s\b|\b\s"))
-                                ],
-                                validator: (value) =>
-                                    value!.isNotEmpty && value.isValidEmail
-                                        ? null
-                                        : 'Please enter valid email',
+                                isValidated: emailController.text.isNotEmpty && emailController.text.isValidEmail,
+                                inputFormatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
+                                validator: (value) => value!.isNotEmpty && value.isValidEmail ? null : 'Please enter valid email',
                                 controller: emailController,
                               ),
                             ),
@@ -146,13 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onChanged: (val) {
                                   setState(() {});
                                 },
-                                inputFormatter: [
-                                  FilteringTextInputFormatter.deny(
-                                      RegExp(r"\s\b|\b\s"))
-                                ],
+                                inputFormatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
                                 isTextObscure: _passwordVisible,
-                                isValidated:
-                                    passwordController.text.isValidPassword,
+                                isValidated: passwordController.text.isValidPassword,
                                 suffix: GestureDetector(
                                     onTap: () {
                                       setState(() {
@@ -162,9 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(right: 5),
                                       child: Icon(
-                                        _passwordVisible
-                                            ? Icons.visibility_off_outlined
-                                            : Icons.visibility_outlined,
+                                        _passwordVisible ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                                         size: 20,
                                       ),
                                     )),
@@ -176,19 +160,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                            height: calculateMainAxisExtent(context.height)),
+                        SizedBox(height: calculateMainAxisExtent(context.height)),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Center(
                               child: CappCustomButton(
-                                isActive: emailController.text.isValidEmail &&
-                                    passwordController.text.isValidPassword,
+                                isActive: emailController.text.isValidEmail && passwordController.text.isValidPassword,
                                 onPress: () async {
-                                  _loginCubit.login(
-                                      email: emailController.text.trim(),
-                                      password: passwordController.text.trim());
+                                  _loginCubit.login(email: emailController.text.trim().toLowerCase(), password: passwordController.text.trim());
                                 },
                                 color: AppColors.primary,
                                 isSolidColor: true,
@@ -208,8 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             Center(
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
                                 child: RichText(
                                   textAlign: TextAlign.center,
                                   text: TextSpan(
@@ -224,12 +203,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           text: 'Sign Up',
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {
-                                              Get.toNamed(
-                                                  RouteConstants.signup);
+                                              Get.toNamed(RouteConstants.signup);
                                             },
-                                          style: const TextStyle(
-                                              color: AppColors.primary,
-                                              fontWeight: FontWeight.w500)),
+                                          style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w500)),
                                     ],
                                   ),
                                 ),
@@ -248,10 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: const Text(
                                     'Forgot Password?',
                                     style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        decoration: TextDecoration.underline,
-                                        fontWeight: FontWeight.w400),
+                                        color: Colors.black, fontSize: 14, decoration: TextDecoration.underline, fontWeight: FontWeight.w400),
                                   ),
                                 ),
                               ),

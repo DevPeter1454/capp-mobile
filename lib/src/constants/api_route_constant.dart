@@ -18,6 +18,11 @@ class ApiConstant {
   //------------  Civic Education  ------------------------------//
   static const String getCivicEducationList = "${baseUrl}api/v1/user/education/list";
 
+  static const String getPolicyList = "${baseUrl}api/v1/user/policy";
+  static const String getPolicyCollections = "${baseUrl}api/v1/user/collections";
+  static const String createPolicyCollection = "${baseUrl}api/v1/user/collection/create";
+  static const String updatePolicyCollection = "${baseUrl}/api/v1/user/collection";
+
   //------------  Transaction Pin  ------------------------------//
   static const String transactionPin = 'transactionpin';
   static const String resetTransactionPin = 'pin/reset-transaction-pin';

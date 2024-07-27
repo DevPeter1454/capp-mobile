@@ -5,14 +5,11 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import 'package:capp/src/data_source/network/shared_preference_service.dart';
 
-
 class ReadPdfScreen extends StatefulWidget {
-
   final String pdfUrl;
   const ReadPdfScreen({
     Key? key,
     required this.pdfUrl,
-   
   }) : super(key: key);
 
   @override
@@ -22,16 +19,20 @@ class ReadPdfScreen extends StatefulWidget {
 class _ReadPdfScreenState extends State<ReadPdfScreen> {
   // PdfViewerController pdfViewerController = PdfViewerController();
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
           child: SfPdfViewer.network(
-        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
-        
+        // 'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+        widget.pdfUrl,
+        onDocumentLoaded: (details) {
+          print('Document loaded');
+        },
+        onDocumentLoadFailed: (reason) {
+          print('Failed to load the document: $reason');
+        },
+
         // controller: pdfViewerController,
       )),
     );

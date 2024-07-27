@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class SuccessfulRatingScreen extends StatefulWidget {
-  const SuccessfulRatingScreen({super.key});
+  final String text;
+  const SuccessfulRatingScreen({super.key, required this.text});
 
   @override
   State<SuccessfulRatingScreen> createState() => _SuccessfulRatingScreenState();
@@ -30,10 +31,9 @@ class _SuccessfulRatingScreenState extends State<SuccessfulRatingScreen> {
                 height: 60.h,
                 width: 303.w,
                 child: Text(
-                  "You have submitted your rating and recommendation",
+                  widget.text,
                   textAlign: TextAlign.center,
-                  style:
-                      TextStyle(fontWeight: FontWeight.w600, fontSize: 20.sp),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.sp),
                 ),
               ),
               SizedBox(
@@ -52,19 +52,15 @@ class _SuccessfulRatingScreenState extends State<SuccessfulRatingScreen> {
               CappCustomButton(
                   onPress: () {
                     Navigator.pop(context);
-                    Get.off(() => const DashboardScreen(),
-                        transition: Transition.fade);
+                    Get.off(() => const DashboardScreen(), transition: Transition.fade);
                   },
                   color: AppColors.primary,
                   isSolidColor: true,
                   paddingVertical: 12,
                   isActive: true,
                   child: const Text(
-                    'Go back',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
+                    'Go to dashboard',
+                    style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
                   )),
               SizedBox(
                 height: 60.h,

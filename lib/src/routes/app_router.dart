@@ -66,7 +66,7 @@ class RouteGenerator {
 
     GetPage(
         name: RouteConstants.viewAllCivicBooks,
-        page: () => const ViewAllBooksScreen()),
+        page: () =>  ViewAllBooksScreen(loaded: Get.arguments,)),
 
     GetPage(
         name: RouteConstants.viewAllCivicVideo,
