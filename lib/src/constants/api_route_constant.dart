@@ -21,8 +21,12 @@ class ApiConstant {
   static const String getPolicyList = "${baseUrl}api/v1/user/policy";
   static const String getPolicyCollections = "${baseUrl}api/v1/user/collections";
   static const String createPolicyCollection = "${baseUrl}api/v1/user/collection/create";
-  static const String updatePolicyCollection = "${baseUrl}/api/v1/user/collection";
+  static const String updatePolicyCollection = "${baseUrl}api/v1/user/collection";
 
+  static const String getPoliticalParties = "${baseUrl}api/v1/user/parties";
+  static const String joinAPoliticalParty = "${baseUrl}api/v1/user/parties";
+
+  static const String getMdas = "${baseUrl}api/v1/user/mda/list";
   //------------  Transaction Pin  ------------------------------//
   static const String transactionPin = 'transactionpin';
   static const String resetTransactionPin = 'pin/reset-transaction-pin';

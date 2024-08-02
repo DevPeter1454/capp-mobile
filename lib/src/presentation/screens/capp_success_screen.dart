@@ -25,8 +25,7 @@ class _CappSuccessScreenState extends State<CappSuccessScreen> {
     } else if (widget.arguments.name == RouteConstants.changePassword) {
       desc = 'Your password has been updated successfully';
       btnName = 'Login';
-    } else if (widget.arguments.name ==
-        RouteConstants.joinPartyUserSignUpScreen) {
+    } else if (widget.arguments.name == RouteConstants.joinPartyUserSignUpScreen) {
       desc = 'You have successfully joined this Party';
       btnName = 'Back';
     } else if (widget.arguments.name == RouteConstants.donationScreen) {
@@ -90,19 +89,17 @@ class _CappSuccessScreenState extends State<CappSuccessScreen> {
                     child: Text(
                       desc,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w600),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 50,
                 ),
-                Icon(
-                  Icons.check_circle_outline_rounded,
-                  size: 130,
-                  color: AppColors.appGrey.withOpacity(.7),
-                ),
+                const Image(
+                    image: AssetImage(
+                  "assets/images/success.gif",
+                ))
               ],
             ),
             Padding(

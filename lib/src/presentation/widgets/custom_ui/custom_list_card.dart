@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomListCard extends StatelessWidget {
-  final String? title,
-      acroymn,
-      officeHolderName,
-      politicalPartyImageUrl,
-      mdaImageUrl;
+  final String? title, acroymn, officeHolderName, politicalPartyImageUrl, mdaImageUrl;
   final bool isKnowMDA;
   final bool isIconLeft;
   final double ctnheight, ctnWidth;
@@ -34,7 +30,7 @@ class CustomListCard extends StatelessWidget {
             ? CircleAvatar(
                 radius: 42.r,
                 backgroundColor: AppColors.primaryLight,
-                backgroundImage: AssetImage(mdaImageUrl!),
+                backgroundImage: NetworkImage(mdaImageUrl!),
               )
             : Container(
                 height: ctnheight,
@@ -63,10 +59,7 @@ class CustomListCard extends StatelessWidget {
                 width: 215.w,
                 child: Text(
                   title!,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14.sp,
-                      color: AppColors.blackTextColor),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp, color: AppColors.blackTextColor),
                 ),
               ),
               SizedBox(
@@ -74,10 +67,7 @@ class CustomListCard extends StatelessWidget {
               ),
               Text(
                 acroymn ?? '',
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 13.sp,
-                    color: AppColors.descText),
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13.sp, color: AppColors.descText),
               ),
               SizedBox(
                 width: 10.h,
@@ -86,12 +76,12 @@ class CustomListCard extends StatelessWidget {
                 height: 17.h,
                 child: officeHolderName == null
                     ? const SizedBox.shrink()
-                    : Text(
-                        isKnowMDA ? 'Minister' : 'Office:',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 11.sp,
-                            color: AppColors.descText),
+                    : FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          isKnowMDA ? 'Minister' : 'Office:',
+                          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11.sp, color: AppColors.descText),
+                        ),
                       ),
               ),
               SizedBox(
@@ -100,12 +90,12 @@ class CustomListCard extends StatelessWidget {
               SizedBox(
                 height: 17.h,
                 width: 215.w,
-                child: Text(
-                  officeHolderName ?? '',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 11.sp,
-                      color: const Color(0XFF4F4F4F)),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    officeHolderName ?? '',
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11.sp, color: const Color(0XFF4F4F4F)),
+                  ),
                 ),
               ),
             ],

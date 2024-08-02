@@ -40,20 +40,18 @@ class CustomTopNavBar extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500),
+          Flexible(
+            child: Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.w500),
+            ),
           ),
           primaryActionButton.isNull
               ? const SizedBox.shrink()
               : SizedBox(
-                  width: context.width > 375
-                      ? context.widthPercentage(spacing)
-                      : context.widthPercentage(.2),
+                  width: context.width > 375 ? context.widthPercentage(spacing) : context.widthPercentage(.2),
                 ),
           Expanded(
             child: Row(
@@ -64,9 +62,7 @@ class CustomTopNavBar extends StatelessWidget {
                     width: 24,
                     height: 24,
                     child: Center(
-                      child: primaryActionButton.isNull
-                          ? const SizedBox.shrink()
-                          : Image.asset(primaryActionButton!),
+                      child: primaryActionButton.isNull ? const SizedBox.shrink() : Image.asset(primaryActionButton!),
                     ),
                   ),
                 ),
@@ -79,9 +75,7 @@ class CustomTopNavBar extends StatelessWidget {
                       width: 24,
                       height: 24,
                       child: Center(
-                        child: secondaryActionButton.isNull
-                            ? const SizedBox.shrink()
-                            : Image.asset(secondaryActionButton!),
+                        child: secondaryActionButton.isNull ? const SizedBox.shrink() : Image.asset(secondaryActionButton!),
                       )),
                 ),
               ],

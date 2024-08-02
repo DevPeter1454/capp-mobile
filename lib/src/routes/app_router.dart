@@ -33,55 +33,38 @@ class RouteGenerator {
         },
         transition: Transition.fadeIn),
     GetPage(name: RouteConstants.home, page: () => const DashboardScreen()),
-    GetPage(
-        name: RouteConstants.forgotPassword,
-        page: () => const ForgotPasswordScreen()),
-    GetPage(
-        name: RouteConstants.createNewPassword,
-        page: () => const CreateNewPasswordScreen()),
+    GetPage(name: RouteConstants.forgotPassword, page: () => const ForgotPasswordScreen()),
+    GetPage(name: RouteConstants.createNewPassword, page: () => const CreateNewPasswordScreen()),
 
     GetPage(name: RouteConstants.welcome, page: () => const WelcomeScreen()),
-    GetPage(
-        name: RouteConstants.donationScreen,
-        page: () => const DonationScreen()),
-    GetPage(
-        name: RouteConstants.joinPartyUserSignUpScreen,
-        page: () => const JoinPartyUserSignUpScreen()),
-    GetPage(
-        name: RouteConstants.policyLibrary,
-        page: () => const PolicyLibraryScreen()),
-    GetPage(
-        name: RouteConstants.fgnSupport, page: () => const FGNSupportScheme()),
+    GetPage(name: RouteConstants.donationScreen, page: () => DonationScreen(id: Get.arguments)),
+    GetPage(name: RouteConstants.joinPartyUserSignUpScreen, page: () => JoinPartyUserSignUpScreen(id: Get.arguments)),
+    GetPage(name: RouteConstants.policyLibrary, page: () => const PolicyLibraryScreen()),
+    GetPage(name: RouteConstants.fgnSupport, page: () => const FGNSupportScheme()),
 
-    GetPage(
-        name: RouteConstants.knowYourLeaders,
-        page: () => const KnowYourLeader()),
+    GetPage(name: RouteConstants.knowYourLeaders, page: () => const KnowYourLeader()),
     GetPage(name: RouteConstants.knowyourMDA, page: () => const KnowYourMDA()),
-    GetPage(
-        name: RouteConstants.joinParty, page: () => const JoinPartyScreen()),
+    GetPage(name: RouteConstants.joinParty, page: () => const JoinPartyScreen()),
 
-    GetPage(
-        name: RouteConstants.civicEducation,
-        page: () => const CivicEducationScreen()),
+    GetPage(name: RouteConstants.civicEducation, page: () => const CivicEducationScreen()),
 
     GetPage(
         name: RouteConstants.viewAllCivicBooks,
-        page: () =>  ViewAllBooksScreen(loaded: Get.arguments,)),
+        page: () => ViewAllBooksScreen(
+              loaded: Get.arguments,
+            )),
 
-    GetPage(
-        name: RouteConstants.viewAllCivicVideo,
-        page: () => const ViewAllVidoesScreen()),
+    GetPage(name: RouteConstants.viewAllCivicVideo, page: () => const ViewAllVidoesScreen()),
     GetPage(name: RouteConstants.login, page: () => const LoginScreen()),
     GetPage(name: RouteConstants.signup, page: () => const SignUpScreen()),
     GetPage(
         name: RouteConstants.userDetails,
-        page: () =>  UserSignUpDetailScreen(email: Get.arguments, password: Get.arguments,)),
-    GetPage(
-        name: RouteConstants.otpVerify,
-        page: () => VerifyOtpScreen(route: Get.arguments)),
-    GetPage(
-        name: RouteConstants.success,
-        page: () => CappSuccessScreen(arguments: Get.arguments)),
+        page: () => UserSignUpDetailScreen(
+              email: Get.arguments,
+              password: Get.arguments,
+            )),
+    GetPage(name: RouteConstants.otpVerify, page: () => VerifyOtpScreen(route: Get.arguments)),
+    GetPage(name: RouteConstants.success, page: () => CappSuccessScreen(arguments: Get.arguments)),
     GetPage(
         name: RouteConstants.previewBook,
         page: () => PreviewBookScreen(
