@@ -59,10 +59,16 @@ class _MdaDetailsScreenState extends State<MdaDetailsScreen> {
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [
               CustomTopNavBar(title: widget.mda.ministryName),
               SizedBox(height: 31.5.h),
-              Image.network(
-                widget.mda.ministryLogo,
-                height: 247.h,
-                width: double.infinity,
+              Image.network(widget.mda.ministryLogo, height: 247.h, width: double.infinity,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
               ),
               Flexible(
                   child: Text(
@@ -97,11 +103,16 @@ class _MdaDetailsScreenState extends State<MdaDetailsScreen> {
                 child: Column(children: [
                   ClipRRect(
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(8.r), topRight: Radius.circular(8.r)),
-                      child: Image.network(
-                        widget.mda.ministryImage,
-                        height: 185.h,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
+                      child: Image.network(widget.mda.ministryImage, height: 185.h, fit: BoxFit.fill, width: double.infinity,
+                         loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
                       )),
                   Flexible(
                     child: SizedBox(

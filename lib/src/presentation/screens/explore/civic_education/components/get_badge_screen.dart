@@ -1,14 +1,23 @@
+import 'package:capp/src/constants/api_route_constant.dart';
 import 'package:capp/src/constants/route_constants.dart';
+import 'package:capp/src/data_source/di/injection_container.dart';
+import 'package:capp/src/presentation/screens/dashboard/tabs/profile/cubit/user_profile_cubit.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/capp_custom_bottom_sheet.dart';
 import 'package:capp/src/presentation/widgets/widgets.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class GetBadgeScreen extends StatelessWidget {
+class GetBadgeScreen extends StatefulWidget {
   const GetBadgeScreen({super.key});
 
+  @override
+  State<GetBadgeScreen> createState() => _GetBadgeScreenState();
+}
+
+class _GetBadgeScreenState extends State<GetBadgeScreen> {
   exitDialog(BuildContext context) {
     CustomDialogWidgets.buildOperationStatusDialog(
         title: 'Please proceed to the dashboard',
@@ -17,6 +26,14 @@ class GetBadgeScreen extends StatelessWidget {
         positiveBtnTitle: 'Yes',
         negativeBtnTitle: 'No',
         onNegativeBtnTap: () {});
+  }
+
+  final _userProfileCubit = getIt.get<UserProfileCubit>();
+
+  @override
+  void initState() {
+    super.initState();
+    _userProfileCubit.getUserInfo();
   }
 
   @override
@@ -29,25 +46,17 @@ class GetBadgeScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 85, 15, 0),
               child: ListView(
-                physics: context.height < 730
-                    ? const AlwaysScrollableScrollPhysics()
-                    : const NeverScrollableScrollPhysics(),
+                physics: context.height < 730 ? const AlwaysScrollableScrollPhysics() : const NeverScrollableScrollPhysics(),
                 children: [
                   Container(
                     height: 299,
                     width: 294,
-                    decoration: BoxDecoration(
-                        color: AppColors.inputHint.withOpacity(.4),
-                        borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(color: AppColors.inputHint.withOpacity(.4), borderRadius: BorderRadius.circular(8)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
                           height: 10,
-                        ),
-                        const LogoWithTextWidget(
-                          fontSize: 24,
-                          logoWidth: 21,
                         ),
                         const SizedBox(
                           height: 15,
@@ -56,7 +65,7 @@ class GetBadgeScreen extends StatelessWidget {
                           child: SizedBox(
                             height: 200,
                             width: 200,
-                            child: Image.asset('assets/images/logo.png'),
+                            child: Image.asset('assets/images/reward.png'),
                           ),
                         ),
                         const SizedBox(
@@ -68,18 +77,16 @@ class GetBadgeScreen extends StatelessWidget {
                             height: 40,
                             width: context.widthPercentage(0.46),
                             padding: const EdgeInsets.symmetric(horizontal: 5),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8)),
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SizedBox(
                                   width: context.widthPercentage(.3),
-                                  child: const Text(
-                                    'Precious Batta',
-                                    style: TextStyle(
+                                  child: Text(
+                                    "${UserConstant.firstName} ${UserConstant.lastName}",
+                                    style: const TextStyle(
                                       color: AppColors.primary,
                                       overflow: TextOverflow.ellipsis,
                                       fontWeight: FontWeight.w500,
@@ -113,8 +120,7 @@ class GetBadgeScreen extends StatelessWidget {
                         context: context,
                         useSafeArea: true,
                         shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(20)),
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                         ),
                         builder: (context) {
                           return const CappCustomBottomSheet();
@@ -123,13 +129,12 @@ class GetBadgeScreen extends StatelessWidget {
                     },
                     child: Container(
                       height: 50,
-                      width: 175,
-                      decoration: BoxDecoration(
-                          color: AppColors.primaryLight,
-                          borderRadius: BorderRadius.circular(8)),
+                      width: 175.w,
+                      decoration: BoxDecoration(color: AppColors.primaryLight, borderRadius: BorderRadius.circular(8)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        // mainAxisSize: MainAxisSize.min,
                         children: [
                           const SizedBox(
                             height: 10,

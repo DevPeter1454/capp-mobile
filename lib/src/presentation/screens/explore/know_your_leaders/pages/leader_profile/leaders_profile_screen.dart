@@ -68,330 +68,219 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                       controller: controller,
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          CustomTopNavBar(title: leader.name),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          Row(
                             children: [
-                              CustomTopNavBar(title: leader.name),
-                              SizedBox(
-                                height: 15.h,
+                              CircleAvatar(
+                                radius: 50.r,
+                                backgroundImage: NetworkImage(widget.leaderProfile.url),
                               ),
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 50.r,
-                                    backgroundImage: NetworkImage(
-                                        LeaderProfile.forTest().profile),
-                                  ),
-                                  SizedBox(width: 16.w),
-                                  Expanded(
-                                      child: SizedBox(
-                                    width: 177.w,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                              SizedBox(width: 16.w),
+                              Expanded(
+                                  child: SizedBox(
+                                width: 177.w,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      leader.title,
+                                      style: TextStyle(fontSize: 16.sp, color: AppColors.blackTextColor, fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(height: 12.h),
+                                    CappCustomButton(
+                                        onPress: () {},
+                                        color: AppColors.primary.withOpacity(0.10),
+                                        isSolidColor: true,
+                                        width: 150.w,
+                                        paddingVertical: 12,
+                                        isActive: true,
+                                        child: const Text(
+                                          'Project Tracking',
+                                          style: TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w500),
+                                        )),
+                                    SizedBox(height: 12.h),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          leader.title,
-                                          style: TextStyle(
-                                              fontSize: 16.sp,
-                                              color: AppColors.blackTextColor,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        SizedBox(height: 12.h),
-                                        CappCustomButton(
-                                            onPress: () {},
-                                            color: AppColors.primary
-                                                .withOpacity(0.10),
-                                            isSolidColor: true,
-                                            width: 150.w,
-                                            paddingVertical: 12,
-                                            isActive: true,
-                                            child: const Text(
-                                              'Project Tracking',
-                                              style: TextStyle(
-                                                  color: AppColors.primary,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500),
-                                            )),
-                                        SizedBox(height: 12.h),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "State",
-                                                  style: TextStyle(
-                                                      fontSize: 14.sp,
-                                                      color: const Color(
-                                                          0XFF6C727F)),
-                                                ),
-                                                Text(
-                                                  leader.lga,
-                                                  style: TextStyle(
-                                                      fontSize: 14.sp,
-                                                      color: AppColors
-                                                          .blackTextColor,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                )
-                                              ],
+                                            Text(
+                                              "State",
+                                              style: TextStyle(fontSize: 14.sp, color: const Color(0XFF6C727F)),
                                             ),
-                                            SizedBox(
-                                              width: 44.w,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Constituency",
-                                                  style: TextStyle(
-                                                      fontSize: 14.sp,
-                                                      color: const Color(
-                                                          0XFF6C727F)),
-                                                ),
-                                                Text(
-                                                  leader.constituency,
-                                                  style: TextStyle(
-                                                      fontSize: 14.sp,
-                                                      color: AppColors
-                                                          .blackTextColor,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                )
-                                              ],
+                                            Text(
+                                              leader.lga,
+                                              style: TextStyle(fontSize: 14.sp, color: AppColors.blackTextColor, fontWeight: FontWeight.w600),
                                             )
                                           ],
                                         ),
-                                        SizedBox(height: 12.h),
-                                        InkWell(
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                                context: context,
-                                                builder: (context) {
-                                                  return SizedBox(
-                                                    height: 497.h,
-                                                    width: double.infinity,
-                                                    child:
-                                                        SingleChildScrollView(
-                                                      child: Column(
-                                                        children: [
-                                                          Padding(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        20.w,
-                                                                    vertical:
-                                                                        16.h),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                    "Roles & Responsibilities",
-                                                                    style: TextStyle(
-                                                                        fontSize: 18
-                                                                            .sp,
-                                                                        fontWeight:
-                                                                            FontWeight.w600)),
-                                                                InkWell(
-                                                                  onTap: () {
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                  },
-                                                                  child: SvgPicture
-                                                                      .asset(
-                                                                          "assets/icons/close.svg"),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Divider(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .hintColor
-                                                                .withOpacity(
-                                                                    .6),
-                                                            thickness: 0.2,
-                                                          ),
-                                                          Padding(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        20.w,
-                                                                    vertical:
-                                                                        16.h),
-                                                            child: Align(
-                                                              alignment: Alignment
-                                                                  .centerLeft,
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                // mainAxisAlignment:
-                                                                //     MainAxisAlignment.spaceBetween,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    leader
-                                                                        .responsibility,
-                                                                    style: TextStyle(
-                                                                        fontSize: 14
-                                                                            .sp,
-                                                                        color: AppColors
-                                                                            .descText),
-                                                                  ),
-                                                                  SizedBox(
-                                                                      height:
-                                                                          50.h),
-                                                                  // const Spacer(),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    // padding: EdgeInsets.symmetric(
-                                                    //     horizontal: 20.w, vertical: 10.h),
-                                                  );
-                                                });
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Text("Read More",
-                                                  style: TextStyle(
-                                                      color: AppColors.primary,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600)),
-                                              SvgPicture.asset(
-                                                  "assets/icons/arrow-down.svg")
-                                            ],
-                                          ),
+                                        SizedBox(
+                                          width: 44.w,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Constituency",
+                                              style: TextStyle(fontSize: 14.sp, color: const Color(0XFF6C727F)),
+                                            ),
+                                            Text(
+                                              leader.constituency,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(fontSize: 12.sp, color: AppColors.blackTextColor, fontWeight: FontWeight.w600),
+                                            )
+                                          ],
                                         )
                                       ],
                                     ),
-                                  ))
-                                ],
-                              ),
-                              Divider(
-                                color:
-                                    Theme.of(context).hintColor.withOpacity(.6),
-                                thickness: 0.2,
-                              ),
-                              SizedBox(height: 12.h),
-                              CappCustomButton(
-                                  onPress: () => Get.to(
-                                      () =>
-                                          ViewAllocationScreen(leader: leader),
-                                      transition: tr.Transition.fadeIn),
-                                  color: AppColors.primary.withOpacity(0.10),
-                                  isSolidColor: true,
-                                  width: double.infinity,
-                                  paddingVertical: 12,
-                                  isActive: true,
-                                  child: const Text(
-                                    'View Allocation',
-                                    style: TextStyle(
-                                        color: AppColors.primary,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500),
-                                  )),
-                              SizedBox(height: 12.h),
-                              SizedBox(
-                                  height: 224.h,
-                                  width: double.infinity,
-                                  child: Text(
-                                      "Lorem ipsum dolor sit amet consectetur. Vitae semper nisi libero aliquet fames sit eu mi turpis. Neque commodo ut turpis eros ac felis. Semper volutpat donec risus vestibulum dignissim magna. Magna eleifend rhoncus mattis convallis risus. Elementum laoreet nulla tempus fringilla cras. Eget arcu massa eget lorem eget quisque fa... Continue Reading. Lorem ipsum dolor sit amet consectetur. Vitae semper nisi libero aliquet fames sit eu mi turpis. Neque commodo ut turpis eros ac felis. Semper volutpat donec risus vestibulum dignissim magna. Magna eleifend rhoncus mattis convallis risus. Elementum laoreet nulla tempus fringilla cras. Eget arcu massa eget lorem eget quisque fa... Continue Reading",
-                                      style: TextStyle(
-                                          fontSize: 14.sp,
-                                          color: AppColors.descText))),
-                              CappCustomButton(
-                                  onPress: () => Get.to(
-                                      () =>
-                                          RateLeaderScreen(leaderId: leader.id),
-                                      transition: tr.Transition.rightToLeft),
-                                  color: AppColors.primary.withOpacity(0.10),
-                                  isSolidColor: true,
-                                  width: double.infinity,
-                                  paddingVertical: 12,
-                                  isActive: true,
-                                  child: const Text(
-                                    'Rate and Recommend',
-                                    style: TextStyle(
-                                        color: AppColors.primary,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500),
-                                  )),
-                              SizedBox(height: 20.h),
-                              Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Ratings and recommendations",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                                fontSize: 18.sp,
-                                                color: AppColors.blackTextColor,
-                                                fontWeight: FontWeight.w600)),
+                                    SizedBox(height: 12.h),
                                     InkWell(
-                                      onTap: () => Get.to(
-                                          () => LeaderAllRatingScreen(
-                                              leaderProfile: leader),
-                                          transition: tr.Transition.fadeIn),
-                                      child: Text("See all",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                  fontSize: 14.sp,
-                                                  color: AppColors.primary,
-                                                  fontWeight: FontWeight.w600)),
-                                    ),
-                                  ]),
-                              SizedBox(height: 12.h),
-                              leader.ratings.isEmpty
-                                  ? const SizedBox.shrink()
-                                  : ListView.separated(
-                                      itemCount: leader.ratings.length,
-                                      shrinkWrap: true,
-                                      controller: controller,
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (context) {
+                                              return SizedBox(
+                                                height: 497.h,
+                                                width: double.infinity,
+                                                child: SingleChildScrollView(
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Text("Roles & Responsibilities",
+                                                                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                Navigator.pop(context);
+                                                              },
+                                                              child: SvgPicture.asset("assets/icons/close.svg"),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Divider(
+                                                        color: Theme.of(context).hintColor.withOpacity(.6),
+                                                        thickness: 0.2,
+                                                      ),
+                                                      Padding(
+                                                        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                                                        child: Align(
+                                                          alignment: Alignment.centerLeft,
+                                                          child: Column(
+                                                            mainAxisSize: MainAxisSize.max,
+                                                            // mainAxisAlignment:
+                                                            //     MainAxisAlignment.spaceBetween,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                leader.responsibility,
+                                                                style: TextStyle(fontSize: 14.sp, color: AppColors.descText),
+                                                              ),
+                                                              SizedBox(height: 50.h),
+                                                              // const Spacer(),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                // padding: EdgeInsets.symmetric(
+                                                //     horizontal: 20.w, vertical: 10.h),
+                                              );
+                                            });
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text("Read More", style: TextStyle(color: AppColors.primary, fontSize: 14.sp, fontWeight: FontWeight.w600)),
+                                          SvgPicture.asset("assets/icons/arrow-down.svg")
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ))
+                            ],
+                          ),
+                          Divider(
+                            color: Theme.of(context).hintColor.withOpacity(.6),
+                            thickness: 0.2,
+                          ),
+                          SizedBox(height: 12.h),
+                          CappCustomButton(
+                              onPress: () => Get.to(() => ViewAllocationScreen(leader: leader), transition: tr.Transition.fadeIn),
+                              color: AppColors.primary.withOpacity(0.10),
+                              isSolidColor: true,
+                              width: double.infinity,
+                              paddingVertical: 12,
+                              isActive: true,
+                              child: const Text(
+                                'View Allocation',
+                                style: TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w500),
+                              )),
+                          SizedBox(height: 12.h),
+                          CappCustomButton(
+                              onPress: () => Get.to(() => RateLeaderScreen(leaderId: leader.id), transition: tr.Transition.rightToLeft),
+                              color: AppColors.primary.withOpacity(0.10),
+                              isSolidColor: true,
+                              width: double.infinity,
+                              paddingVertical: 12,
+                              isActive: true,
+                              child: const Text(
+                                'Rate and Recommend',
+                                style: TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w500),
+                              )),
+                          SizedBox(height: 20.h),
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                            Text("Ratings and recommendations",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(fontSize: 18.sp, color: AppColors.blackTextColor, fontWeight: FontWeight.w600)),
+                            InkWell(
+                              onTap: () => Get.to(() => LeaderAllRatingScreen(leaderProfile: leader), transition: tr.Transition.fadeIn),
+                              child: Text("See all",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(fontSize: 14.sp, color: AppColors.primary, fontWeight: FontWeight.w600)),
+                            ),
+                          ]),
+                          SizedBox(height: 12.h),
+                          leader.ratings.isEmpty
+                              ? const SizedBox.shrink()
+                              : ListView.separated(
+                                  itemCount: leader.ratings.length,
+                                  shrinkWrap: true,
+                                  controller: controller,
 
-                                      itemBuilder: (context, index) {
-                                        final rating = double.parse(
-                                            leader.ratings[index].toString());
-                                        final comment =
-                                            leader.comments[index]["comment"];
-                                        final user = leader.comments[index]
-                                                ["user"]["firstname"] +
-                                            leader.comments[index]["user"]
-                                                ["surname"];
-                                        final date =
-                                            leader.comments[index]["createdAt"];
-                                        return CustomRatingWidget(
-                                          initialRating: rating,
-                                          comment: comment,
-                                          user: user,
-                                          date: DateTime.parse(date),
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return SizedBox(height: 12.h);
-                                      },
-                                      // physics: const NeverScrollableScrollPhysics(),
-                                    ),
-                              SizedBox(height: 20.h),
-                            ]),
+                                  itemBuilder: (context, index) {
+                                    final rating = double.parse(leader.ratings[index].toString());
+                                    final comment = leader.comments[index]["comment"];
+                                    final user = leader.comments[index]["user"]["firstname"] + leader.comments[index]["user"]["surname"];
+                                    final date = leader.comments[index]["createdAt"];
+                                    return CustomRatingWidget(
+                                      initialRating: rating,
+                                      comment: comment,
+                                      user: user,
+                                      date: DateTime.parse(date),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return SizedBox(height: 12.h);
+                                  },
+                                  // physics: const NeverScrollableScrollPhysics(),
+                                ),
+                          SizedBox(height: 20.h),
+                        ]),
                       )));
             },
             orElse: () => const Text("Something went wrong"));
@@ -420,9 +309,7 @@ class CustomRatingWidget extends StatelessWidget {
         height: 152.h,
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
-        decoration: BoxDecoration(
-            border: Border.all(color: AppColors.appGrey),
-            borderRadius: BorderRadius.circular(8.r)),
+        decoration: BoxDecoration(border: Border.all(color: AppColors.appGrey), borderRadius: BorderRadius.circular(8.r)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

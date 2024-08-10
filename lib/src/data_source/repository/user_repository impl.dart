@@ -18,11 +18,10 @@ class UserRepositoryImpl implements UserRepository {
   Future<void> editUserInfo({required Map<String, dynamic> userData}) async {
     try {
       print("here");
-      final response =
-          await dioClient.dioPatch("https://capp-api-7d8a6573f031.herokuapp.com/api/v1/user/auth/update_user", userData,
-              options: Options(headers: {
-                'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
-              }));
+      final response = await dioClient.dioPatch("https://capp-api-7d8a6573f031.herokuapp.com/api/v1/user/auth/update_user", userData,
+          options: Options(headers: {
+            'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
+          }));
       print('response is ${response.data}');
 
       // return UserData();
@@ -39,7 +38,9 @@ class UserRepositoryImpl implements UserRepository {
       // print('response is $response');
       // print('response is ${response.data}');
       // print('response is ${response.data['data']}');
-
+      final user = UserData.fromJson(response.data['data']);
+      UserConstant.firstName = user.firstname;
+      UserConstant.lastName = user.surname;
       return UserData.fromJson(response.data['data']);
     } on DioException catch (e) {
       throw NetworkException.fromDioError(e);

@@ -28,11 +28,12 @@ class ViewAllVidoesScreen extends StatelessWidget {
                   child: ListView.separated(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     itemBuilder: (context, int index) {
-                      return CappCustomCardView(
-                        onTap: () => Get.to(() => WatchVideoScreen(
-                              video: videoList[index],
-                            )),
-                      );
+                      return const CappCustomCardView(
+                          // onTap: () => Get.to(() => WatchVideoScreen(
+
+                          //       video: videoList[index],
+                          //     )),
+                          );
                     },
                     separatorBuilder: (context, int index) {
                       return const SizedBox(height: 10);

@@ -32,17 +32,16 @@ class CustomListCard extends StatelessWidget {
                 backgroundColor: AppColors.primaryLight,
                 backgroundImage: NetworkImage(mdaImageUrl!),
               )
-            : Container(
-                height: ctnheight,
-                width: ctnWidth,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        politicalPartyImageUrl!,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.circular(8.r)),
+            : Image.network(politicalPartyImageUrl!, height: ctnheight, width: ctnWidth, fit: BoxFit.cover,
+               loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
               ),
         SizedBox(
           width: 12.w,
@@ -87,15 +86,11 @@ class CustomListCard extends StatelessWidget {
               SizedBox(
                 width: 25.h,
               ),
-              SizedBox(
-                height: 17.h,
-                width: 215.w,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    officeHolderName ?? '',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11.sp, color: const Color(0XFF4F4F4F)),
-                  ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  officeHolderName ?? '',
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11.sp, color: const Color(0XFF4F4F4F)),
                 ),
               ),
             ],

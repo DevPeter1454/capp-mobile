@@ -1,3 +1,5 @@
+import 'package:capp/src/domain/model/userdata.dart';
+
 class ApiConstant {
   //------------  BASE_Url  ------------------------------//
   static const String baseUrl = 'https://capp-api-7d8a6573f031.herokuapp.com/';
@@ -27,6 +29,8 @@ class ApiConstant {
   static const String joinAPoliticalParty = "${baseUrl}api/v1/user/parties";
 
   static const String getMdas = "${baseUrl}api/v1/user/mda/list";
+
+  static const String getQuizList = "${baseUrl}api/v1/user/quiz/list";
   //------------  Transaction Pin  ------------------------------//
   static const String transactionPin = 'transactionpin';
   static const String resetTransactionPin = 'pin/reset-transaction-pin';
@@ -52,4 +56,9 @@ class ApiConstant {
   static const String getServiceTypes = 'services/types';
   static const String getServiceById = 'service-details/{service_id}';
   static const String getServicePlans = 'services/plans';
+}
+
+class UserConstant {
+  static String firstName = "";
+  static  String lastName = "";
 }

@@ -3,14 +3,7 @@ import 'package:shimmer/shimmer.dart';
 
 class ImageWidgetWithShimmerLoader extends StatelessWidget {
   const ImageWidgetWithShimmerLoader(
-      {Key? key,
-      required this.image,
-      this.loadingWidget,
-      this.errorWidget,
-      this.height,
-      this.width,
-      this.highlightColor,
-      this.baseColor})
+      {Key? key, required this.image, this.loadingWidget, this.errorWidget, this.height, this.width, this.highlightColor, this.baseColor})
       : super(key: key);
   final String image;
   final Widget? loadingWidget, errorWidget;
@@ -26,8 +19,7 @@ class ImageWidgetWithShimmerLoader extends StatelessWidget {
           height: height ?? 130,
           width: width ?? 130,
           fit: BoxFit.cover,
-          loadingBuilder: (BuildContext context, Widget child,
-              ImageChunkEvent? loadingProgress) {
+          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
             if (loadingProgress == null) {
               return child;
             }
@@ -37,8 +29,7 @@ class ImageWidgetWithShimmerLoader extends StatelessWidget {
                   highlightColor: highlightColor ?? Colors.grey[300]!,
                   child: Material(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                       child: Center(
                         child: SizedBox(
                           width: width ?? 100,
@@ -49,12 +40,10 @@ class ImageWidgetWithShimmerLoader extends StatelessWidget {
                   ),
                 );
           },
-          errorBuilder:
-              (BuildContext context, Object exception, StackTrace? stackTrace) {
+          errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
             return errorWidget ??
                 Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     child: Center(
                         child: SizedBox(
                             width: (width ?? 100) - 30,

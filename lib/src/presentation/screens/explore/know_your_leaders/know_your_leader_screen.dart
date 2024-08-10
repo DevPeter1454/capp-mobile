@@ -45,14 +45,12 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
         listener: (context, state) {
           state.when(
               initial: () {},
-             
               loading: () {
                 print("loading...");
               },
               loaded: (leaders) {
-                print("got $leaders");
+                // print("got ${leaders[0].}");
               },
-             
               error: (message) {});
         },
         builder: (context, state) {
@@ -79,8 +77,7 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                             Column(
                               children: [
                                 SizedBox(height: 26.h),
-                                SvgPicture.asset(
-                                    "assets/icons/notification.svg"),
+                                SvgPicture.asset("assets/icons/notification.svg"),
                               ],
                             )
                           ],
@@ -100,10 +97,7 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                             ),
                             Text(
                               'Know your Leaders',
-                              style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.blackTextColor),
+                              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500, color: AppColors.blackTextColor),
                             )
                           ],
                         ),
@@ -112,8 +106,7 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                         ),
                         Text(
                           'Get to know more about your leaders',
-                          style: TextStyle(
-                              color: AppColors.descText, fontSize: 14.sp),
+                          style: TextStyle(color: AppColors.descText, fontSize: 14.sp),
                         ),
                         const SizedBox(
                           height: 10,
@@ -126,47 +119,41 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                           ),
                           borderColor: Colors.transparent,
                           hintText: "Search by Leaders name...",
-                          hintStyle: TextStyle(
-                              fontSize: 14.sp, fontWeight: FontWeight.normal),
+                          hintStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.normal),
                         ),
                         const SizedBox(
                           height: 15,
                         ),
-                        SizedBox(
-                          height: context.height * 1.5,
-                          child: ListView.separated(
-                            controller: controller,
-                            shrinkWrap: true,
-                            itemBuilder: (context, int index) {
-                              final item = leaders[index];
-                              return GestureDetector(
-                                onTap: () => Get.to(
-                                    () => LeaderProfileScreen(
-                                          leaderProfile: item,
-                                        ),
-                                    transition:
-                                        tr.Transition.rightToLeftWithFade),
-                                child: CustomListCard(
-                                  title: item.name,
-                                  isKnowMDA: false,
-                                  ctnWidth: 70.w,
-                                  ctnheight: 70.h,
-                                  politicalPartyImageUrl:
-                                      "https://upload.wikimedia.org/wikipedia/commons/7/77/Bola_Tinubu_portrait.jpg",
-                                  officeHolderName: item.title,
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, int index) {
-                              return Divider(
-                                color:
-                                    Theme.of(context).hintColor.withOpacity(.6),
-                                thickness: 0.2,
-                              );
-                            },
-                            itemCount: leaders.length,
-                          ),
+                        ListView.separated(
+                          controller: controller,
+                          shrinkWrap: true,
+                          itemBuilder: (context, int index) {
+                            final item = leaders[index];
+                            return GestureDetector(
+                              onTap: () => Get.to(
+                                  () => LeaderProfileScreen(
+                                        leaderProfile: item,
+                                      ),
+                                  transition: tr.Transition.rightToLeftWithFade),
+                              child: CustomListCard(
+                                title: item.name,
+                                isKnowMDA: false,
+                                ctnWidth: 70.w,
+                                ctnheight: 70.h,
+                                politicalPartyImageUrl: item.url,
+                                officeHolderName: item.title,
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, int index) {
+                            return Divider(
+                              color: Theme.of(context).hintColor.withOpacity(.6),
+                              thickness: 0.2,
+                            );
+                          },
+                          itemCount: leaders.length,
                         ),
+                        SizedBox(height: 40.h),
                       ],
                     ),
                   ),

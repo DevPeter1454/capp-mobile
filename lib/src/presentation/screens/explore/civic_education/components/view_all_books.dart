@@ -38,7 +38,7 @@ class ViewAllBooksScreen extends StatelessWidget {
                       var e = loaded[index];
                       return CivicBooksCardView(
                           title: e.name,
-                          imageUrl: "https://cdn.pixabay.com/photo/2018/03/15/11/13/nigeria-3227878_1280.png",
+                          imageUrl: e.coverImageUrl,
                           time: e.createdAt.toIso8601String(),
                           numofPages: e.pageNumber.toString(),
                           author: e.author,

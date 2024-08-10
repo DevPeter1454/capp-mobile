@@ -10,12 +10,7 @@ class ReadAllInfoScreen extends StatefulWidget {
   final String title, content;
   final bool isShowPartyInfo;
 
-  const ReadAllInfoScreen(
-      {Key? key,
-      required this.title,
-      required this.content,
-      this.isShowPartyInfo = true})
-      : super(key: key);
+  const ReadAllInfoScreen({Key? key, required this.title, required this.content, this.isShowPartyInfo = true}) : super(key: key);
 
   @override
   _ReadAllInfoScreenState createState() => _ReadAllInfoScreenState();
@@ -54,8 +49,7 @@ class _ReadAllInfoScreenState extends State<ReadAllInfoScreen> {
                   showModalBottomSheet(
                     context: context,
                     shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(20)),
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                     ),
                     builder: (context) {
                       return const CappCustomBottomSheet();
@@ -69,8 +63,7 @@ class _ReadAllInfoScreenState extends State<ReadAllInfoScreen> {
                   height: context.height,
                   child: LayoutBuilder(
                     builder: (context, constraints) {
-                      final List<String> contentList =
-                          _splitContentByPeriod(widget.content);
+                      final List<String> contentList = _splitContentByPeriod(widget.content);
 
                       final maxLines = (constraints.maxHeight / 52).floor();
 
@@ -86,18 +79,15 @@ class _ReadAllInfoScreenState extends State<ReadAllInfoScreen> {
                         itemBuilder: (context, pageIndex) {
                           final start = pageIndex * maxLines;
 
-                          final end =
-                              (start + maxLines).clamp(0, contentList.length);
-                          final pageContent =
-                              contentList.sublist(start, end).join(' ');
+                          final end = (start + maxLines).clamp(0, contentList.length);
+                          final pageContent = contentList.sublist(start, end).join(' ');
                           return SingleChildScrollView(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         widget.title,
@@ -112,8 +102,7 @@ class _ReadAllInfoScreenState extends State<ReadAllInfoScreen> {
                                           alignment: Alignment.center,
                                           child: Text(
                                             '${_currentPage + 1} / ${(contentList.length / maxLines).ceil()}',
-                                            style: const TextStyle(
-                                                color: AppColors.descText),
+                                            style: const TextStyle(color: AppColors.descText),
                                           ),
                                         ),
                                       ),
@@ -131,15 +120,12 @@ class _ReadAllInfoScreenState extends State<ReadAllInfoScreen> {
                                     height: 32,
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       GestureDetector(
                                         onTap: _currentPage > 0
-                                            ? () =>
-                                                _pageController.previousPage(
-                                                  duration: const Duration(
-                                                      milliseconds: 200),
+                                            ? () => _pageController.previousPage(
+                                                  duration: const Duration(milliseconds: 200),
                                                   curve: Curves.easeInOut,
                                                 )
                                             : null,
@@ -148,45 +134,30 @@ class _ReadAllInfoScreenState extends State<ReadAllInfoScreen> {
                                             Icon(
                                               Icons.arrow_back_ios_new_rounded,
                                               size: 16,
-                                              color: _currentPage < 1
-                                                  ? Colors.grey
-                                                  : Colors.black,
+                                              color: _currentPage < 1 ? Colors.grey : Colors.black,
                                             ),
                                             const SizedBox(
                                               width: 3,
                                             ),
                                             Text(
                                               'Prev',
-                                              style: TextStyle(
-                                                  color: _currentPage < 1
-                                                      ? Colors.grey
-                                                      : Colors.black),
+                                              style: TextStyle(color: _currentPage < 1 ? Colors.grey : Colors.black),
                                             )
                                           ],
                                         ),
                                       ),
                                       GestureDetector(
-                                        onTap: _currentPage <
-                                                (contentList.length / maxLines)
-                                                        .ceil() -
-                                                    1
+                                        onTap: _currentPage < (contentList.length / maxLines).ceil() - 1
                                             ? () => _pageController.nextPage(
-                                                  duration: const Duration(
-                                                      milliseconds: 200),
+                                                  duration: const Duration(milliseconds: 200),
                                                   curve: Curves.easeInOut,
                                                 )
                                             : widget.isShowPartyInfo
                                                 ? null
-                                                : () => Get.to(() => QuizScreen(
-                                                      quiz: quizzList,
-                                                    )),
+                                                : () => Get.to(() => const QuizScreen()),
                                         child: Row(
                                           children: [
-                                            _currentPage <
-                                                    (contentList.length /
-                                                                maxLines)
-                                                            .ceil() -
-                                                        1
+                                            _currentPage < (contentList.length / maxLines).ceil() - 1
                                                 ? const Text('Next')
                                                 : widget.isShowPartyInfo
                                                     ? const SizedBox.shrink()
@@ -194,21 +165,15 @@ class _ReadAllInfoScreenState extends State<ReadAllInfoScreen> {
                                             const SizedBox(
                                               width: 3,
                                             ),
-                                            _currentPage <
-                                                    (contentList.length /
-                                                                maxLines)
-                                                            .ceil() -
-                                                        1
+                                            _currentPage < (contentList.length / maxLines).ceil() - 1
                                                 ? const Icon(
-                                                    Icons
-                                                        .arrow_forward_ios_rounded,
+                                                    Icons.arrow_forward_ios_rounded,
                                                     size: 16,
                                                   )
                                                 : widget.isShowPartyInfo
                                                     ? const SizedBox.shrink()
                                                     : const Icon(
-                                                        Icons
-                                                            .arrow_forward_ios_rounded,
+                                                        Icons.arrow_forward_ios_rounded,
                                                         size: 16,
                                                       ),
                                           ],

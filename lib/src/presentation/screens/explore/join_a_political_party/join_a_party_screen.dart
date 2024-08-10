@@ -150,7 +150,11 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
                             SizedBox(
                               height: context.heightPercentage(.02),
                             ),
-                            SizedBox(
+                            parties.isEmpty
+                                ? const Center(
+                                    child: Text('No items available'),
+                                  )
+                                :  SizedBox(
                               height: context.height,
                               child: ListView.separated(
                                 shrinkWrap: true,

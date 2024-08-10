@@ -43,9 +43,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 SizedBox(
                   height: context.height - 120,
                   child: ListView(
-                    physics: context.height <= 667
-                        ? const AlwaysScrollableScrollPhysics()
-                        : const NeverScrollableScrollPhysics(),
+                    physics: context.height <= 667 ? const AlwaysScrollableScrollPhysics() : const NeverScrollableScrollPhysics(),
                     children: [
                       SizedBox(height: context.heightPercentage(.05)),
                       const LogoWithTextWidget(
@@ -61,9 +59,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         fit: BoxFit.fitWidth,
                       ),
                       Container(
-                        height: context.height > 850
-                            ? context.heightPercentage(.08)
-                            : context.heightPercentage(.04),
+                        height: context.height > 850 ? context.heightPercentage(.08) : context.heightPercentage(.04),
                       ),
                       context.width <= 360
                           ? const Padding(
@@ -72,10 +68,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 children: [
                                   Text(
                                     'You Complete the Puzzle \nto Nigeria’s Greatness',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w600),
+                                    style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.w600),
                                   ),
                                 ],
                               ),
@@ -84,10 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               padding: EdgeInsets.symmetric(horizontal: 20.0),
                               child: Text(
                                 'You Complete the Puzzle  to Nigeria’s Greatness',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w600),
+                                style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.w600),
                               ),
                             ),
                       SizedBox(
@@ -96,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet',
+                          'Welcome to the future of citizens participation in governance.',
                           style: TextStyle(
                               // color: Colors.white,
                               fontSize: 14,
@@ -129,10 +119,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           isActive: true,
                           child: const Text(
                             'Sign up',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
                           )),
                       const SizedBox(
                         width: 10,
@@ -148,10 +135,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         isActive: true,
                         child: const Text(
                           'Log in',
-                          style: TextStyle(
-                              color: AppColors.primary,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500),
+                          style: TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],

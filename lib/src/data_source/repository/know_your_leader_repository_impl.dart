@@ -28,6 +28,7 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
           }));
       final result = response.data["data"];
+      print(result);
 
       final List<LeaderProfile> convertedList = [];
       //map through result and add each one to convertedList
@@ -55,6 +56,7 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
       print(e);
       return LeaderProfile(
         id: '',
+        url:'',
         name: '',
         title: '',
         allocation: '',
@@ -73,10 +75,7 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
     try {
       final response = await dioClient.dioPost(
         "${ApiConstant.getALeader}/$id/rate",
-        {
-          "comment":comment,
-          "rating": rating
-        },
+        {"comment": comment, "rating": rating},
         options: Options(headers: {
           'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
         }),
@@ -88,6 +87,8 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
       return LeaderProfile(
         id: '',
         name: '',
+        url: '',
+
         title: '',
         allocation: '',
         profile: '',

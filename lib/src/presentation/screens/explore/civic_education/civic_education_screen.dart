@@ -8,6 +8,7 @@ import 'package:capp/src/presentation/screens/explore/civic_education/components
 import 'package:capp/src/presentation/screens/explore/civic_education/components/watch_video.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/cubit/civic_education_cubit.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/pages/read_pdf_screen.dart';
+import 'package:capp/src/presentation/screens/explore/civic_education/quiz/quiz_screen.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,24 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
     }
   }
 
+  String extractYouTubeId(String url) {
+    final Uri uri = Uri.parse(url);
+    if (uri.host == 'youtu.be') {
+      return uri.pathSegments.first;
+    } else if (uri.host.contains('youtube.com')) {
+      if (uri.queryParameters.containsKey('v')) {
+        return uri.queryParameters['v']!;
+      }
+      if (uri.pathSegments.contains('embed')) {
+        return uri.pathSegments.last;
+      }
+      if (uri.pathSegments.contains('watch')) {
+        return uri.queryParameters['v']!;
+      }
+    }
+    throw ArgumentError('Invalid YouTube URL');
+  }
+
   @override
   void initState() {
     super.initState();
@@ -70,6 +89,8 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                     child: SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
                   ),
               loaded: (loaded) {
+                final pdfFiles = loaded.where((element) => element.type == "pdf").toList();
+                final videoFiles = loaded.where((element) => element.type == "video").toList();
                 return SafeArea(
                   child: SingleChildScrollView(
                     child: SizedBox(
@@ -109,6 +130,39 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                             height: 20,
                           ),
                           Row(
+                            children: [
+                              Text("Take a quiz ", style: TextStyle(fontSize: 12.sp)),
+                              GestureDetector(
+                                onTap: () => Get.to(() => const QuizScreen()),
+                                child: const Row(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'Start Quiz',
+                                        style: TextStyle(color: AppColors.primary, decoration: TextDecoration.underline),
+                                      ),
+                                    ),
+                                    SizedBox(width: 6),
+                                    SizedBox(
+                                      height: 24,
+                                      width: 24,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.arrow_forward_ios_outlined,
+                                          size: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 28,
+                          ),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
@@ -116,7 +170,7 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                               ),
                               GestureDetector(
-                                onTap: () => Get.toNamed(RouteConstants.viewAllCivicBooks, arguments: loaded),
+                                onTap: () => Get.toNamed(RouteConstants.viewAllCivicBooks, arguments: pdfFiles),
                                 child: const Text(
                                   'See All',
                                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.primary),
@@ -127,32 +181,36 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                           const SizedBox(
                             height: 15,
                           ),
-                          SizedBox(
-                            // color: Colors.brown,
-                            height: calculateMainAxisExtent(context.height),
-                            child: ListView.separated(
-                              shrinkWrap: true,
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              itemBuilder: (context, int index) {
-                                var e = loaded[index];
-                                return CivicBooksCardView(
-                                    title: e.name,
-                                    imageUrl: "https://cdn.pixabay.com/photo/2018/03/15/11/13/nigeria-3227878_1280.png",
-                                    time: e.createdAt.toIso8601String(),
-                                    numofPages: e.pageNumber.toString(),
-                                    author: e.author,
-                                    onClickedRead: () => Get.to(() => ReadPdfScreen(pdfUrl: e.url)),
-                                    category: e.category);
-                              },
-                              separatorBuilder: (context, int index) {
-                                return Divider(
-                                  color: Theme.of(context).hintColor.withOpacity(.6),
-                                  thickness: 0.2,
-                                );
-                              },
-                              itemCount: loaded.length,
-                            ),
-                          ),
+                          pdfFiles.isEmpty
+                              ? const Center(
+                                  child: Text('No items available'),
+                                )
+                              : SizedBox(
+                                  // color: Colors.brown,
+                                  height: calculateMainAxisExtent(context.height),
+                                  child: ListView.separated(
+                                    shrinkWrap: true,
+                                    physics: const AlwaysScrollableScrollPhysics(),
+                                    itemBuilder: (context, int index) {
+                                      var e = pdfFiles[index];
+                                      return CivicBooksCardView(
+                                          title: e.name,
+                                          imageUrl: e.coverImageUrl,
+                                          time: e.createdAt.toIso8601String(),
+                                          numofPages: e.pageNumber.toString(),
+                                          author: e.author,
+                                          onClickedRead: () => Get.to(() => ReadPdfScreen(pdfUrl: e.url)),
+                                          category: e.category);
+                                    },
+                                    separatorBuilder: (context, int index) {
+                                      return Divider(
+                                        color: Theme.of(context).hintColor.withOpacity(.6),
+                                        thickness: 0.2,
+                                      );
+                                    },
+                                    itemCount: pdfFiles.length,
+                                  ),
+                                ),
                           Divider(
                             color: Theme.of(context).hintColor.withOpacity(.6),
                             thickness: 0.3,
@@ -180,23 +238,31 @@ class _CivicEducationScreenState extends State<CivicEducationScreen> {
                             height: 15,
                           ),
                           SingleChildScrollView(
-                            child: SizedBox(
-                              height: context.height * .70,
-                              child: ListView.separated(
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, int index) {
-                                  return CappCustomCardView(
-                                    onTap: () => Get.to(() => WatchVideoScreen(
-                                          video: videoList[index],
-                                        )),
-                                  );
-                                },
-                                separatorBuilder: (context, int index) {
-                                  return const SizedBox(height: 10);
-                                },
-                                itemCount: videoList.length,
-                              ),
-                            ),
+                            child: videoFiles.isEmpty
+                                ? const Center(
+                                    child: Text('No items available'),
+                                  )
+                                : SizedBox(
+                                    height: context.height,
+                                    child: ListView.separated(
+                                      shrinkWrap: true,
+                                      // physics: const NeverScrollableScrollPhysics(),
+                                      itemBuilder: (context, int index) {
+                                        return CappCustomCardView(
+                                          title: videoFiles[index].name,
+                                          imageUrl: "https://img.youtube.com/vi/${extractYouTubeId(videoFiles[index].url)}/0.jpg",
+                                          onTap: () => Get.to(() => WatchVideoScreen(
+                                                videoId: extractYouTubeId(videoFiles[index].url),
+                                                video: Video(title: videoFiles[index].name),
+                                              )),
+                                        );
+                                      },
+                                      separatorBuilder: (context, int index) {
+                                        return SizedBox(height: 10.h);
+                                      },
+                                      itemCount: videoFiles.length,
+                                    ),
+                                  ),
                           ),
                         ]),
                       ),

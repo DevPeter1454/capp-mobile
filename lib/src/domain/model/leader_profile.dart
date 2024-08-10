@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class LeaderProfile {
   final String id;
   final String name;
@@ -9,6 +10,7 @@ class LeaderProfile {
   final String constituency;
   final List<dynamic> ratings;
   final List<Map<dynamic, dynamic>> comments;
+  final String url;
 
   LeaderProfile({
     required this.id,
@@ -21,6 +23,7 @@ class LeaderProfile {
     required this.constituency,
     required this.ratings,
     required this.comments,
+    required this.url,
   });
 
   factory LeaderProfile.fromJson(Map<String, dynamic> json) {
@@ -32,6 +35,7 @@ class LeaderProfile {
       profile: json['profile'],
       responsibility: json['responsibility'],
       lga: json['lga'],
+      url:json["url"],
       constituency: json['constituency'],
       ratings: List<dynamic>.from(json['ratings']),
       comments: List<Map<dynamic, dynamic>>.from(json['comments']),
@@ -64,6 +68,7 @@ class LeaderProfile {
     String? constituency,
     List<dynamic>? ratings,
     List<Map<dynamic, dynamic>>? comments,
+    String? url,
   }) {
     return LeaderProfile(
       id: id ?? this.id,
@@ -76,6 +81,7 @@ class LeaderProfile {
       constituency: constituency ?? this.constituency,
       ratings: ratings ?? this.ratings,
       comments: comments ?? this.comments,
+      url:url ?? this.url,
     );
   }
   //explain what copywith is used for
@@ -88,8 +94,8 @@ class LeaderProfile {
         name: 'John Doe',
         title: 'Governor',
         allocation: 'N100,0000',
-        profile:
-            "https://upload.wikimedia.org/wikipedia/commons/7/77/Bola_Tinubu_portrait.jpg",
+        profile: "https://upload.wikimedia.org/wikipedia/commons/7/77/Bola_Tinubu_portrait.jpg",
+        url: "https://upload.wikimedia.org/wikipedia/commons/7/77/Bola_Tinubu_portrait.jpg",
         responsibility: 'Governor of Lagos State',
         lga: 'Ikeja',
         constituency: 'Lagos Central',

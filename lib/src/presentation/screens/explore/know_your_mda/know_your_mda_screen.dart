@@ -23,6 +23,7 @@ class KnowYourMDA extends StatefulWidget {
 
 class _KnowYourMDAState extends State<KnowYourMDA> {
   final _searchController = TextEditingController();
+  final ScrollController controller = ScrollController();
 
   final _knowYourMdaCubit = getIt.get<KnowYourMdaCubit>();
 
@@ -64,6 +65,7 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
               loaded: (mdas) {
                 return SafeArea(
                   child: SingleChildScrollView(
+                    controller: controller,
                     child: SizedBox(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -126,30 +128,35 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
                             const SizedBox(
                               height: 15,
                             ),
-                            ListView.separated(
-                              shrinkWrap: true,
-                              itemBuilder: (context, int index) {
-                                final mda = mdas[index];
-                                return GestureDetector(
-                                  onTap: () {
-                                    Get.to(() => MdaDetailsScreen(mda: mda));
-                                  },
-                                  child: CustomListCard(
-                                    title: mda.ministryName,
-                                    isKnowMDA: true,
-                                    mdaImageUrl: mda.ministryLogo,
-                                    officeHolderName: mda.ministerName,
+                            mdas.isEmpty
+                                ? const Center(
+                                    child: Text('No items available'),
+                                  )
+                                : ListView.separated(
+                                    shrinkWrap: true,
+                                    controller: controller,
+                                    itemBuilder: (context, int index) {
+                                      final mda = mdas[index];
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Get.to(() => MdaDetailsScreen(mda: mda));
+                                        },
+                                        child: CustomListCard(
+                                          title: mda.ministryName,
+                                          isKnowMDA: true,
+                                          mdaImageUrl: mda.ministryLogo,
+                                          officeHolderName: mda.ministerName,
+                                        ),
+                                      );
+                                    },
+                                    separatorBuilder: (context, int index) {
+                                      return Divider(
+                                        color: Theme.of(context).hintColor.withOpacity(.6),
+                                        thickness: 0.2,
+                                      );
+                                    },
+                                    itemCount: mdas.length,
                                   ),
-                                );
-                              },
-                              separatorBuilder: (context, int index) {
-                                return Divider(
-                                  color: Theme.of(context).hintColor.withOpacity(.6),
-                                  thickness: 0.2,
-                                );
-                              },
-                              itemCount: mdas.length,
-                            ),
                           ],
                         ),
                       ),

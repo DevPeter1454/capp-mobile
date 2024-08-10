@@ -6,13 +6,44 @@ import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class WatchVideoScreen extends StatelessWidget {
+class WatchVideoScreen extends StatefulWidget {
   final Video video;
-  const WatchVideoScreen({super.key, required this.video});
+  final String videoId;
+  const WatchVideoScreen({super.key, required this.video, required this.videoId});
+
+  @override
+  State<WatchVideoScreen> createState() => _WatchVideoScreenState();
+}
+
+class _WatchVideoScreenState extends State<WatchVideoScreen> {
+  String videoId = "";
+
+  String extractYouTubeId(String url) {
+    final Uri uri = Uri.parse(url);
+    if (uri.host == 'youtu.be') {
+      return uri.pathSegments.first;
+    } else if (uri.host.contains('youtube.com')) {
+      if (uri.queryParameters.containsKey('v')) {
+        return uri.queryParameters['v']!;
+      }
+      if (uri.pathSegments.contains('embed')) {
+        return uri.pathSegments.last;
+      }
+      if (uri.pathSegments.contains('watch')) {
+        return uri.queryParameters['v']!;
+      }
+    }
+    throw ArgumentError('Invalid YouTube URL');
+  }
 
   @override
   Widget build(BuildContext context) {
+    YoutubePlayerController controller = YoutubePlayerController(
+      initialVideoId: widget.videoId,
+      flags: const YoutubePlayerFlags(autoPlay: true, mute: false, showLiveFullscreenButton: false),
+    );
     return Scaffold(
       body: SafeArea(
         child: SizedBox(
@@ -24,14 +55,14 @@ class WatchVideoScreen extends StatelessWidget {
                   title: "Watch Video",
                 ),
                 const SizedBox(height: 27),
-                Container(
-                  height: 227,
-                  width: 347,
-                  decoration: BoxDecoration(
-                      image: const DecorationImage(
-                          image: AssetImage('assets/images/vol1.png'),
-                          fit: BoxFit.fill),
-                      borderRadius: BorderRadius.circular(8)),
+                YoutubePlayer(
+                  controller: controller,
+                  showVideoProgressIndicator: true,
+                  progressIndicatorColor: AppColors.primary,
+                  progressColors: const ProgressBarColors(
+                    playedColor: AppColors.primary,
+                    handleColor: AppColors.primary,
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
@@ -39,44 +70,14 @@ class WatchVideoScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    video.title,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w500),
+                    widget.video.title,
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                 ),
                 const SizedBox(
                   height: 12,
                 ),
-                GestureDetector(
-                  onTap: () => Get.to(() => QuizScreen(quiz: quizzList)),
-                  child: const Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Start Quiz',
-                          style: TextStyle(
-                              color: AppColors.primary,
-                              decoration: TextDecoration.underline),
-                        ),
-                      ),
-                      SizedBox(width: 6),
-                      SizedBox(
-                        height: 24,
-                        width: 24,
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            size: 12,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 28,
-                ),
+                
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Watch Others',
@@ -89,25 +90,27 @@ class WatchVideoScreen extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
-                Expanded(
-                  child: SizedBox(
-                    height: context.height * .70,
-                    child: ListView.separated(
-                      // physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, int index) {
-                        return CappCustomCardView(
-                          onTap: () => Get.to(() => WatchVideoScreen(
-                                video: videoList[index],
-                              )),
-                        );
-                      },
-                      separatorBuilder: (context, int index) {
-                        return const SizedBox(height: 10);
-                      },
-                      itemCount: videoList.length,
-                    ),
-                  ),
-                ),
+                // Expanded(
+                //   child: SizedBox(
+                //     height: context.height * .70,
+                //     child: ListView.separated(
+                //       // physics: const NeverScrollableScrollPhysics(),
+                //       itemBuilder: (context, int index) {
+                //         return CappCustomCardView(
+                //           imageUrl: "https://img.youtube.com/vi/${extractYouTubeId(videoFiles[index].url)}/0.jpg",,
+                //           onTap: () => Get.to(() => WatchVideoScreen(
+                //                 videoId: widget.videoId,
+                //                 video: videoList[index],
+                //               )),
+                //         );
+                //       },
+                //       separatorBuilder: (context, int index) {
+                //         return const SizedBox(height: 10);
+                //       },
+                //       itemCount: videoList.length,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:capp/src/data_source/network/exceptions/network_exception.dart';
 import 'package:capp/src/domain/model/civic_education_model.dart';
 import 'package:capp/src/domain/repository/civic_education_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,7 +21,10 @@ class CivicEducationCubit extends Cubit<CivicEducationState> {
           await civicEducationRepository.getAllCivicEducation();
       emit(CivicEducationState.loaded(response));
       return response;
-    } catch (e) {
+    } on NetworkException catch (exception) {
+      emit(CivicEducationState.error(exception.message));
+    }
+    catch (e) {
       CivicEducationState.error(e.toString());
     }
   }

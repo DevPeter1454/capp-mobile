@@ -32,14 +32,23 @@ class CivicBooksCardView extends StatelessWidget {
           height: 100.h,
           width: 100.w,
           decoration: BoxDecoration(color: AppColors.descText.withOpacity(.3), borderRadius: BorderRadius.circular(8.r)),
-          child: Positioned(
-            top: 4,
-            left: 5,
-            child: Container(
-                height: 70.h,
-                width: 70.w,
-                decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.fitHeight), borderRadius: BorderRadius.circular(8.r))),
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r)),
+            child: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+              height: 70.h,
+              width: 70.w,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
           ),
         ),
         SizedBox(
@@ -74,28 +83,21 @@ class CivicBooksCardView extends StatelessWidget {
               ),
               Row(
                 children: [
-                  SizedBox(
-                    height: 17.h,
-                    width: 33.w,
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/book-saved.svg',
-                          height: 16.h,
-                          width: 16.w,
-                        ),
-                        SizedBox(
-                          width: 2.w,
-                        ),
-                        Text(
-                          numofPages,
-                          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11.sp, color: AppColors.descText),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/book-saved.svg',
+                        height: 16.h,
+                        width: 16.w,
+                      ),
+                      Text(
+                        numofPages,
+                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11.sp, color: AppColors.descText),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    width: 6.w,
+                    width: 2.w,
                   ),
                   Row(
                     children: [
@@ -127,16 +129,13 @@ class CivicBooksCardView extends StatelessWidget {
             ],
           ),
         ),
-        Positioned(
-          top: 0,
-          child: InkWell(
-            onTap: () {
-              if (onMoreClicked != null) {
-                onMoreClicked?.call();
-              }
-            },
-            child: SvgPicture.asset("assets/icons/more.svg"),
-          ),
+        InkWell(
+          onTap: () {
+            if (onMoreClicked != null) {
+              onMoreClicked?.call();
+            }
+          },
+          child: SvgPicture.asset("assets/icons/more.svg"),
         )
       ],
     );
