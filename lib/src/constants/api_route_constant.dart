@@ -18,12 +18,16 @@ class ApiConstant {
   static const String getALeader = "${baseUrl}api/v1/user/leader";
 
   //------------  Civic Education  ------------------------------//
-  static const String getCivicEducationList = "${baseUrl}api/v1/user/education/list";
+  static const String getCivicEducationList =
+      "${baseUrl}api/v1/user/education/list";
 
   static const String getPolicyList = "${baseUrl}api/v1/user/policy";
-  static const String getPolicyCollections = "${baseUrl}api/v1/user/collections";
-  static const String createPolicyCollection = "${baseUrl}api/v1/user/collection/create";
-  static const String updatePolicyCollection = "${baseUrl}api/v1/user/collection";
+  static const String getPolicyCollections =
+      "${baseUrl}api/v1/user/collections";
+  static const String createPolicyCollection =
+      "${baseUrl}api/v1/user/collection/create";
+  static const String updatePolicyCollection =
+      "${baseUrl}api/v1/user/collections";
 
   static const String getPoliticalParties = "${baseUrl}api/v1/user/parties";
   static const String joinAPoliticalParty = "${baseUrl}api/v1/user/parties";
@@ -60,5 +64,5 @@ class ApiConstant {
 
 class UserConstant {
   static String firstName = "";
-  static  String lastName = "";
+  static String lastName = "";
 }

@@ -85,7 +85,8 @@ class _PolicyLibraryScreenState extends State<PolicyLibraryScreen> {
           builder: (context, state) {
             return state.maybeWhen(
                 loading: () => const Center(
-                      child: SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
+                      child:
+                          SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
                     ),
                 loadedAll: (policyList, collectionList) {
                   return SizedBox(
@@ -93,225 +94,277 @@ class _PolicyLibraryScreenState extends State<PolicyLibraryScreen> {
                       controller: scrollController,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                          const CustomTopNavBar(title: "Back to home"),
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          Row(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SvgPicture.asset(
-                                'assets/icons/policy.svg',
-                                height: 32.h,
-                                width: 32.w,
-                              ),
+                              const CustomTopNavBar(title: "Back to home"),
                               SizedBox(
-                                width: 10.w,
-                              ),
-                              Text(
-                                'Policy Library',
-                                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500, color: AppColors.blackTextColor),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          Text(
-                            'Your centralized repository for policy documents, regulations and laws.',
-                            style: TextStyle(color: AppColors.descText, fontSize: 14.sp),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          CappCustomFormField(
-                            fillColor: const Color(0XFFF4F4F6),
-                            prefixIcon: const Icon(
-                              CupertinoIcons.search,
-                              color: Color(0XFF828282),
-                            ),
-                            borderColor: Colors.transparent,
-                            hintText: "Search by author, title, etc",
-                            hintStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.normal),
-                          ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                            Text("My Collection",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(fontSize: 18.sp, color: AppColors.blackTextColor, fontWeight: FontWeight.w600)),
-                            InkWell(
-                              onTap: () {
-                                Get.to(
-                                  () => const AddNewCollectionScreen(),
-                                );
-                              },
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset("assets/icons/add-circle.svg"),
-                                  Text("New Collection",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(fontSize: 14.sp, color: AppColors.primary, fontWeight: FontWeight.w600)),
-                                ],
-                              ),
-                            ),
-                          ]),
-                          SizedBox(height: 10.h),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Column(
-                                children: [
-                                  if (collectionList.isEmpty) ...[
-                                    SvgPicture.asset("assets/icons/folder-empty.svg"),
-                                    SizedBox(
-                                      height: 60.h,
-                                      width: 294.w,
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Column(
-                                          children: [
-                                            Text("No folder created yet, select ‘New Collection’",
-                                                style: TextStyle(color: AppColors.descText, fontSize: 14.sp)),
-                                            Text("to create a collection", style: TextStyle(color: AppColors.descText, fontSize: 14.sp)),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ] else ...[
-                                    SizedBox(
-                                      height: calculateMainAxisExtent(context.height),
-                                      child: GridView.builder(
-                                        controller: scrollController,
-                                        shrinkWrap: true,
-                                        physics: const AlwaysScrollableScrollPhysics(),
-                                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          mainAxisSpacing: 4,
-                                          crossAxisSpacing: 0.2,
-                                          mainAxisExtent: 200,
-                                          childAspectRatio: 0.5,
-                                        ),
-                                        itemCount: collectionList.isEmpty ? 0 : collectionList.length,
-                                        itemBuilder: (context, index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              Get.to(() => ViewCollectionBooks(
-                                                    collection: collectionList[index],
-                                                    collectionList: collectionList,
-                                                  ));
-                                            },
-                                            child: Column(
-                                              children: [
-                                                SvgPicture.asset(
-                                                  "assets/icons/folder-open.svg",
-                                                  height: 130.h,
-                                                ),
-                                                Text(
-                                                  collectionList[index].name.capitalize!,
-                                                  style: TextStyle(fontSize: 16.sp, color: const Color(0XFF1E1E1E)),
-                                                ),
-                                                Text(
-                                                  "${collectionList[index].books.length} Policies",
-                                                  style: TextStyle(fontSize: 12.sp, color: AppColors.appGrey),
-                                                )
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ],
-                              ),
-                              SizedBox(
-                                height: 16.h,
+                                height: 15.h,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Policies",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(fontSize: 18.sp, color: AppColors.blackTextColor, fontWeight: FontWeight.w600)),
-                                  InkWell(
-                                    onTap: () {
-                                      // Get.to(());
-                                    },
-                                    child: Text("See All",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(fontSize: 14.sp, color: AppColors.primary, fontWeight: FontWeight.w600)),
+                                  SvgPicture.asset(
+                                    'assets/icons/policy.svg',
+                                    height: 32.h,
+                                    width: 32.w,
                                   ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Text(
+                                    'Policy Library',
+                                    style: TextStyle(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.blackTextColor),
+                                  )
                                 ],
                               ),
                               SizedBox(
                                 height: 15.h,
                               ),
-                              policyList.isEmpty
-                                  ? const Center(
-                                      child: Text('No items available'),
-                                    )
-                                  : Flexible(
-                                      // height: calculateMainAxisExtent(context.height),
-                                      child: ListView.separated(
-                                        shrinkWrap: true,
-                                        controller: scrollController,
-                                        // physics: const NeverScrollableScrollPhysics(),
-                                        itemBuilder: (context, int index) {
-                                          var e = policyList[index];
-                                          return CivicBooksCardView(
-                                              onMoreClicked: () {
-                                                String selectedValue = '';
-                                                showModalBottomSheet(
-                                                  backgroundColor: Colors.white,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return BottomSheetContent(
-                                                      bookId: e.id,
-                                                      values: collectionList,
-                                                      selectedValue: selectedValue,
-                                                      policyLibraryCubit: _policyLibraryCubit,
-                                                      onSelected: (value) {
-                                                        setState(() {
-                                                          selectedValue = value;
-                                                        });
-                                                        // Navigator.pop(context);
+                              Text(
+                                'Your centralized repository for policy documents, regulations and laws.',
+                                style: TextStyle(
+                                    color: AppColors.descText, fontSize: 14.sp),
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              CappCustomFormField(
+                                fillColor: const Color(0XFFF4F4F6),
+                                prefixIcon: const Icon(
+                                  CupertinoIcons.search,
+                                  color: Color(0XFF828282),
+                                ),
+                                borderColor: Colors.transparent,
+                                hintText: "Search by author, title, etc",
+                                hintStyle: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              SizedBox(
+                                height: 24.h,
+                              ),
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("My Collection",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                fontSize: 18.sp,
+                                                color: AppColors.blackTextColor,
+                                                fontWeight: FontWeight.w600)),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(
+                                          () => const AddNewCollectionScreen(),
+                                        );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              "assets/icons/add-circle.svg"),
+                                          Text("New Collection",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium!
+                                                  .copyWith(
+                                                      fontSize: 14.sp,
+                                                      color: AppColors.primary,
+                                                      fontWeight:
+                                                          FontWeight.w600)),
+                                        ],
+                                      ),
+                                    ),
+                                  ]),
+                              SizedBox(height: 10.h),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Column(
+                                    children: [
+                                      if (collectionList.isEmpty) ...[
+                                        SvgPicture.asset(
+                                            "assets/icons/folder-empty.svg"),
+                                        Align(
+                                          alignment: Alignment.center,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                  "No folder created yet, select ‘New Collection’ to create a collection",
+                                                  style: TextStyle(
+                                                      color: AppColors.descText,
+                                                      fontSize: 14.sp)),
+                                            ],
+                                          ),
+                                        ),
+                                      ] else ...[
+                                        GridView.builder(
+                                          controller: scrollController,
+                                          shrinkWrap: true,
+                                          physics:
+                                              const AlwaysScrollableScrollPhysics(),
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            mainAxisSpacing: 4,
+                                            crossAxisSpacing: 0.2,
+                                            mainAxisExtent: 200,
+                                            childAspectRatio: 0.5,
+                                          ),
+                                          itemCount: collectionList.isEmpty
+                                              ? 0
+                                              : collectionList.length,
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                Get.to(() =>
+                                                    ViewCollectionBooks(
+                                                      collection:
+                                                          collectionList[index],
+                                                      collectionList:
+                                                          collectionList,
+                                                    ));
+                                              },
+                                              child: Column(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    "assets/icons/folder-open.svg",
+                                                    height: 130.h,
+                                                  ),
+                                                  Text(
+                                                    collectionList[index]
+                                                        .name
+                                                        .capitalize!,
+                                                    style: TextStyle(
+                                                        fontSize: 16.sp,
+                                                        color: const Color(
+                                                            0XFF1E1E1E)),
+                                                  ),
+                                                  Text(
+                                                    "${collectionList[index].books.length} Policies",
+                                                    style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                        color:
+                                                            AppColors.appGrey),
+                                                  )
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 16.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Policies",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                  fontSize: 18.sp,
+                                                  color:
+                                                      AppColors.blackTextColor,
+                                                  fontWeight: FontWeight.w600)),
+                                      InkWell(
+                                        onTap: () {
+                                          // Get.to(());
+                                        },
+                                        child: Text("See All",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                    fontSize: 14.sp,
+                                                    color: AppColors.primary,
+                                                    fontWeight:
+                                                        FontWeight.w600)),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 15.h,
+                                  ),
+                                  policyList.isEmpty
+                                      ? const Center(
+                                          child: Text('No items available'),
+                                        )
+                                      : Flexible(
+                                          // height: calculateMainAxisExtent(context.height),
+                                          child: ListView.separated(
+                                            shrinkWrap: true,
+                                            controller: scrollController,
+                                            // physics: const NeverScrollableScrollPhysics(),
+                                            itemBuilder: (context, int index) {
+                                              var e = policyList[index];
+                                              return CivicBooksCardView(
+                                                  onMoreClicked: () {
+                                                    String selectedValue = '';
+                                                    showModalBottomSheet(
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return BottomSheetContent(
+                                                          bookId: e.id,
+                                                          values:
+                                                              collectionList,
+                                                          selectedValue:
+                                                              selectedValue,
+                                                          policyLibraryCubit:
+                                                              _policyLibraryCubit,
+                                                          onSelected: (value) {
+                                                            setState(() {
+                                                              selectedValue =
+                                                                  value;
+                                                            });
+                                                            // Navigator.pop(context);
+                                                          },
+                                                        );
                                                       },
                                                     );
                                                   },
-                                                );
-                                              },
-                                              title: e.name,
-                                              imageUrl: e.coverImageUrl,
-                                              time: e.createdAt.toIso8601String(),
-                                              numofPages: e.pageNumber.toString(),
-                                              author: e.author,
-                                              onClickedRead: () => Get.to(() => ReadPdfScreen(pdfUrl: e.url)),
-                                              category: e.category);
-                                        },
-                                        itemCount: policyList.length,
-                                        separatorBuilder: (BuildContext context, int index) {
-                                          return SizedBox(
-                                            height: 15.h,
-                                          );
-                                        },
-                                      ),
-                                    ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 100.h,
-                          ),
-                        ]),
+                                                  title: e.name,
+                                                  imageUrl: e.coverImageUrl,
+                                                  time: e.createdAt
+                                                      .toIso8601String(),
+                                                  numofPages:
+                                                      e.pageNumber.toString(),
+                                                  author: e.author,
+                                                  onClickedRead: () => Get.to(
+                                                      () => ReadPdfScreen(
+                                                          pdfUrl: e.url)),
+                                                  category: e.category);
+                                            },
+                                            itemCount: policyList.length,
+                                            separatorBuilder:
+                                                (BuildContext context,
+                                                    int index) {
+                                              return SizedBox(
+                                                height: 15.h,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 100.h,
+                              ),
+                            ]),
                       ),
                     ),
                   );
@@ -354,9 +407,11 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
     _selectedValue = widget.selectedValue;
   }
 
-  Future<void> updatePolicyCollection({required String bookId, required String collectionId}) async {
+  Future<void> updatePolicyCollection(
+      {required String bookId, required String collectionId}) async {
     if (mounted) Navigator.pop(context);
-    final response = await widget.policyLibraryCubit.updatePolicyCollection(bookId: bookId, collectionId: collectionId);
+    final response = await widget.policyLibraryCubit
+        .updatePolicyCollection(bookId: bookId, collectionId: collectionId);
     print("responseee $response");
   }
 
@@ -370,8 +425,12 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Add to Collection", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)),
-              GestureDetector(onTap: () => Navigator.pop(context), child: SvgPicture.asset("assets/icons/close.svg")),
+              Text("Add to Collection",
+                  style:
+                      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)),
+              GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: SvgPicture.asset("assets/icons/close.svg")),
             ],
           ),
         ),
@@ -398,13 +457,17 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
             itemBuilder: (context, index) {
               final value = widget.values[index];
               return ListTile(
-                title: Text(value.name.capitalize.toString(), style: TextStyle(fontSize: 14.sp, color: const Color(0XFF333333))),
+                title: Text(value.name.capitalize.toString(),
+                    style: TextStyle(
+                        fontSize: 14.sp, color: const Color(0XFF333333))),
                 trailing: Container(
                   width: 24.0,
                   height: 24.0,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: _selectedValue == value.id ? AppColors.primary : Colors.white,
+                      color: _selectedValue == value.id
+                          ? AppColors.primary
+                          : Colors.white,
                       border: Border.all(
                         color: AppColors.appGrey,
                       )),
@@ -430,17 +493,21 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
                 if (_selectedValue.isEmpty) {
                   Navigator.pop(context);
                 } else {
-                  updatePolicyCollection(bookId: widget.bookId, collectionId: _selectedValue);
+                  updatePolicyCollection(
+                      bookId: widget.bookId, collectionId: _selectedValue);
                 }
                 // Get.to(() => const FavoritesAddedScreen(), transition: Transition.fade);
               },
               color: AppColors.primary,
               isSolidColor: true,
               paddingVertical: 12,
-              isActive: true,
+              isActive: widget.values.isNotEmpty,
               child: const Text(
                 'Add to Collection',
-                style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500),
               )),
         ),
       ],

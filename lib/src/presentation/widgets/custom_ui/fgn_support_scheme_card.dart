@@ -52,11 +52,21 @@ class FgnSupportSchemeCard extends StatelessWidget {
                   height: 42.h,
                   child: Text(
                     title,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600),
                   )),
               SizedBox(height: 8.h),
-              Text("Acronym:", style: TextStyle(fontSize: 11.sp, color: const Color(0XFFBDBDBD))),
-              Text(acronym, style: TextStyle(fontSize: 11.sp, color: const Color(0XFF4F4F4F)))
+              Text("Ministry:",
+                  style: TextStyle(
+                      fontSize: 11.sp, color: const Color(0XFFBDBDBD))),
+              SizedBox(
+                  width: 215.w,
+                  child: Text(acronym,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 11.sp, color: const Color(0XFF4F4F4F))))
             ],
           ),
           Column(
@@ -73,39 +83,55 @@ class FgnSupportSchemeCard extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20.w, vertical: 16.h),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("Add to Favorites", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)),
-                                        SvgPicture.asset("assets/icons/close.svg"),
+                                        Text("Add to Favorites",
+                                            style: TextStyle(
+                                                fontSize: 18.sp,
+                                                fontWeight: FontWeight.w600)),
+                                        SvgPicture.asset(
+                                            "assets/icons/close.svg"),
                                       ],
                                     ),
                                   ),
                                   Divider(
-                                    color: Theme.of(context).hintColor.withOpacity(.6),
+                                    color: Theme.of(context)
+                                        .hintColor
+                                        .withOpacity(.6),
                                     thickness: 0.2,
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20.w, vertical: 16.h),
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         // mainAxisAlignment:
                                         //     MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Add Selected support scheme to favorites",
-                                            style: TextStyle(fontSize: 14.sp, color: AppColors.descText),
+                                            style: TextStyle(
+                                                fontSize: 14.sp,
+                                                color: AppColors.descText),
                                           ),
                                           SizedBox(height: 50.h),
                                           // const Spacer(),
                                           CappCustomButton(
                                               onPress: () {
                                                 Navigator.pop(context);
-                                                Get.to(() => const FavoritesAddedScreen(), transition: Transition.fade);
+                                                Get.to(
+                                                    () =>
+                                                        const FavoritesAddedScreen(),
+                                                    transition:
+                                                        Transition.fade);
                                               },
                                               color: AppColors.primary,
                                               isSolidColor: true,
@@ -113,7 +139,11 @@ class FgnSupportSchemeCard extends StatelessWidget {
                                               isActive: true,
                                               child: const Text(
                                                 'Add to Favorite',
-                                                style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                               )),
                                         ],
                                       ),

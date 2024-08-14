@@ -5,7 +5,9 @@ import 'package:capp/src/theme/app_colors.dart';
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class TopHeaderWidget extends StatefulWidget {
@@ -23,6 +25,12 @@ class TopHeaderWidget extends StatefulWidget {
 
 class _TopHeaderWidgetState extends State<TopHeaderWidget> {
   final _userProfileCubit = getIt.get<UserProfileCubit>();
+
+  final List<String> _bannerList = [
+    "assets/icons/App banner_1.svg",
+    "assets/icons/App banner_2.svg",
+    "assets/icons/App banner_3.svg",
+  ];
 
   @override
   void initState() {
@@ -168,17 +176,16 @@ class _TopHeaderWidgetState extends State<TopHeaderWidget> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 3,
                 itemBuilder: (context, int index) {
-                  return Container(
-                    width: 303,
-                    height: 101,
-                    margin: const EdgeInsets.only(right: 15),
-                    decoration: BoxDecoration(
-                        image: const DecorationImage(
-                            image: AssetImage(
-                                'assets/images/dashborad_header_img.png'),
-                            fit: BoxFit.fill),
-                        borderRadius: BorderRadius.circular(
-                            8)), // Add margin between items
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.r),
+                      child: SvgPicture.asset(
+                        _bannerList[index],
+                        width: size.width * .8,
+                        height: 120,
+                      ),
+                    ),
                   );
                 },
               ),

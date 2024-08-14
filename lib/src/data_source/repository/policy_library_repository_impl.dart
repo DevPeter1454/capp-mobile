@@ -68,9 +68,12 @@ class PolicyLibraryRepositoryImpl implements PolicyLibraryRepository {
   }
 
   @override
-  Future<CollectionModel> createPolicyCollection({required String name, required String description}) async {
+  Future<CollectionModel> createPolicyCollection(
+      {required String name, required String description}) async {
     try {
-      final response = await dioClient.dioPost(ApiConstant.createPolicyCollection, {"name": name, "description": description},
+      final response = await dioClient.dioPost(
+          ApiConstant.createPolicyCollection,
+          {"name": name, "description": description},
           options: Options(headers: {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
           }));
@@ -87,13 +90,22 @@ class PolicyLibraryRepositoryImpl implements PolicyLibraryRepository {
   }
 
   @override
-  Future<CollectionModel> updatePolicyCollection({required String bookId, required String collectionId}) async {
+  Future<CollectionModel> updatePolicyCollection(
+      {required String bookId, required String collectionId}) async {
     try {
-      final response = await dioClient.dioPatch("${ApiConstant.updatePolicyCollection}/$collectionId", {"books": bookId},
+      // final response = await dioClient.dioPatch("${ApiConstant.updatePolicyCollection}/$collectionId", {"books": bookId},
+      //     options: Options(headers: {
+      //       'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
+      //     }));
+      final response = await dioClient.dioPut(
+          "${ApiConstant.updatePolicyCollection}/$collectionId/books/$bookId",
+          {},
           options: Options(headers: {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
           }));
+
       final result = response.data;
+      print("result $result");
       return CollectionModel.fromMap(result);
     } catch (e) {
       print(e.toString);

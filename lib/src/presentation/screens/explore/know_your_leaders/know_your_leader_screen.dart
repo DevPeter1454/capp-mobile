@@ -49,9 +49,11 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                 print("loading...");
               },
               loaded: (leaders) {
-                // print("got ${leaders[0].}");
+                print("got ${leaders.length}");
               },
-              error: (message) {});
+              error: (message) {
+                print("Error: $message");
+              });
         },
         builder: (context, state) {
           return state.maybeWhen(
@@ -77,7 +79,8 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                             Column(
                               children: [
                                 SizedBox(height: 26.h),
-                                SvgPicture.asset("assets/icons/notification.svg"),
+                                SvgPicture.asset(
+                                    "assets/icons/notification.svg"),
                               ],
                             )
                           ],
@@ -97,7 +100,10 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                             ),
                             Text(
                               'Know your Leaders',
-                              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500, color: AppColors.blackTextColor),
+                              style: TextStyle(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.blackTextColor),
                             )
                           ],
                         ),
@@ -106,7 +112,8 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                         ),
                         Text(
                           'Get to know more about your leaders',
-                          style: TextStyle(color: AppColors.descText, fontSize: 14.sp),
+                          style: TextStyle(
+                              color: AppColors.descText, fontSize: 14.sp),
                         ),
                         const SizedBox(
                           height: 10,
@@ -119,7 +126,8 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                           ),
                           borderColor: Colors.transparent,
                           hintText: "Search by Leaders name...",
-                          hintStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.normal),
+                          hintStyle: TextStyle(
+                              fontSize: 14.sp, fontWeight: FontWeight.normal),
                         ),
                         const SizedBox(
                           height: 15,
@@ -134,7 +142,8 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                                   () => LeaderProfileScreen(
                                         leaderProfile: item,
                                       ),
-                                  transition: tr.Transition.rightToLeftWithFade),
+                                  transition:
+                                      tr.Transition.rightToLeftWithFade),
                               child: CustomListCard(
                                 title: item.name,
                                 isKnowMDA: false,
@@ -147,7 +156,8 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                           },
                           separatorBuilder: (context, int index) {
                             return Divider(
-                              color: Theme.of(context).hintColor.withOpacity(.6),
+                              color:
+                                  Theme.of(context).hintColor.withOpacity(.6),
                               thickness: 0.2,
                             );
                           },

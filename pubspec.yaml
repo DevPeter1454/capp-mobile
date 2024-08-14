@@ -46,7 +46,7 @@ dependencies:
   json_annotation: ^4.9.0
   # Utils
   dots_indicator: ^2.1.1
-  image_picker: ^0.8.0
+  image_picker: ^1.0.8
   #  cached_network_image: ^3.2.0
   pin_code_fields: ^7.0.0
   smooth_page_indicator: ^1.0.1
@@ -71,7 +71,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   intl: ^0.19.0
   syncfusion_flutter_pdfviewer: 24.2.6
- 
+
   youtube_player_flutter: ^9.0.1
 
 dev_dependencies:
@@ -81,6 +81,20 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   injectable_generator:
   build_runner: ^2.3.3
+
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/favicon_new.png"
+  min_sdk_android: 21
+
+dependency_overrides:
+  showcaseview:
+    git:
+      url: https://github.com/chandrabezzo/flutter_showcaseview
+      ref: ae8d8a327cdede529d264d1df02892fdc6161688
 
 flutter:
   uses-material-design: true

@@ -13,7 +13,13 @@ class SupportDetailsScreen extends StatefulWidget {
   final bool isFavorite;
   final String acronym;
   const SupportDetailsScreen(
-      {super.key, required this.id, required this.title, required this.body, required this.url, required this.isFavorite, required this.acronym});
+      {super.key,
+      required this.id,
+      required this.title,
+      required this.body,
+      required this.url,
+      required this.isFavorite,
+      required this.acronym});
 
   @override
   State<SupportDetailsScreen> createState() => _SupportDetailsScreenState();
@@ -33,11 +39,14 @@ class _SupportDetailsScreenState extends State<SupportDetailsScreen> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
-                    child: CustomTopNavBar(title: widget.acronym),
+                    child: CustomTopNavBar(title: widget.title),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 12.h),
-                    child: Icon(Icons.favorite, color: widget.isFavorite ? AppColors.primary : AppColors.appGrey),
+                    child: Icon(Icons.favorite,
+                        color: widget.isFavorite
+                            ? AppColors.primary
+                            : AppColors.appGrey),
                   )
                 ],
               ),
@@ -48,7 +57,11 @@ class _SupportDetailsScreenState extends State<SupportDetailsScreen> {
                 width: 327.w,
               ),
               SizedBox(height: 12.h),
-              Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.sp, color: const Color(0XFF19202D))),
+              Text(widget.acronym,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.sp,
+                      color: const Color(0XFF19202D))),
               SizedBox(height: 24.h),
               CappCustomButton(
                   onPress: () {
@@ -57,7 +70,8 @@ class _SupportDetailsScreenState extends State<SupportDetailsScreen> {
                       context: context,
                       useSafeArea: true,
                       shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(20)),
                       ),
                       builder: (context) {
                         return const CappCustomBottomSheet();
@@ -70,7 +84,10 @@ class _SupportDetailsScreenState extends State<SupportDetailsScreen> {
                   isActive: true,
                   child: const Text(
                     'Share',
-                    style: TextStyle(color: AppColors.primary, fontSize: 15, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500),
                   )),
               SizedBox(height: 53.h),
               Text(

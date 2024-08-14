@@ -28,10 +28,21 @@ class PoliticalPartyCubit extends Cubit<PoliticalPartyState> {
     }
   }
 
-  Future<dynamic> joinAPoliticalParty({required String id, required int age, required String occupation})async{
+  Future<dynamic> joinAPoliticalParty({required String id, required int age, required String occupation, required String firstName,
+    required String lastName,
+    required String gender,
+    required String email,
+    required String phoneNumber,
+    required String countryOfResidence,
+    required String stateOfResidence,
+    required String lga,
+    required String electoralWard,
+    required String pollingUnit,
+    required String nin,
+  })async{
     emit(const PoliticalPartyState.loading());
     try{
-     NewPoliticalPartyModel response = await politicalPartyRepository.joinAParty(id:id, age:age, occupation: occupation);
+     NewPoliticalPartyModel response = await politicalPartyRepository.joinAParty(id:id, age:age, occupation: occupation, firstName:firstName, lastName:lastName, gender:gender, email:email, phoneNumber:phoneNumber, countryOfResidence:countryOfResidence, stateOfResidence:stateOfResidence, lga:lga, electoralWard:electoralWard, pollingUnit:pollingUnit, nin:nin);
      emit(PoliticalPartyState.joined(response));
      return response;
     } on NetworkException catch (exception) {

@@ -16,9 +16,9 @@ class FgnSupportRepositoryImpl implements FgnSupportRepository {
   Future<List<FgnSupportSchemeModel>> getSupportSchemes() async {
     // Existing code...
     // Add a return statement at the end to ensure a non-null value is returned.
-  
-   try{
-     print("appiii");
+
+    try {
+      print("appiii");
       // Future.delayed(const Duration(seconds: 10));
       final response = await dioClient.dioGet(
           'https://capp-api-7d8a6573f031.herokuapp.com/api/v1/user/supports',
@@ -33,14 +33,14 @@ class FgnSupportRepositoryImpl implements FgnSupportRepository {
             id: item["_id"],
             title: item["title"],
             acronym: FgnSupportSchemeModel.forTest().acronym,
-            url: FgnSupportSchemeModel.forTest().url,
+            url: item["url"],
             body: item["body"]));
       }
-      
+
       return supportSchemes;
-   }catch(e){
-    print(e);
-    return []; 
-   }
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 }

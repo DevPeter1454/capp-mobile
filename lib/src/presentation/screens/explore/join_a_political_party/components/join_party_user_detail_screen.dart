@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:capp/src/constants/route_constants.dart';
 import 'package:capp/src/data_source/di/injection_container.dart';
@@ -14,13 +15,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class JoinPartyUserSignUpScreen extends StatefulWidget {
   final String id;
   const JoinPartyUserSignUpScreen({super.key, required this.id});
 
   @override
-  State<JoinPartyUserSignUpScreen> createState() => _JoinPartyUserSignUpScreenState();
+  State<JoinPartyUserSignUpScreen> createState() =>
+      _JoinPartyUserSignUpScreenState();
 }
 
 class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
@@ -39,16 +42,53 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
   List<String> lgas = ['Surulere', 'Lagos Mainland'];
   List<String> pollingUnit = ['Unit 1', 'Unit 2'];
   List<String> electoralWard = ['Ward 1', 'Ward 2'];
-  List<CountryCode> countryCode = [CountryCode('+234', 'assets/images/ngn.png')];
+  List<CountryCode> countryCode = [
+    CountryCode('+234', 'assets/images/ngn.png')
+  ];
 
-  String? selectedState, selectedLGA, selectedGender, selectedPollingUnit, selectedWard, selectedCountryOfResidence;
+  String? selectedState,
+      selectedLGA,
+      selectedGender,
+      selectedPollingUnit,
+      selectedWard,
+      selectedCountryOfResidence;
   CountryCode? selectedCountryCode;
 
   final _politicalPartyCubit = getIt.get<PoliticalPartyCubit>();
 
-  Future<void> joinAPoliticalParty({required String id, required int age, required String occupation}) async {
-    final response = await _politicalPartyCubit.joinAPoliticalParty(id: widget.id, age: age, occupation: occupation);
+  Future<void> joinAPoliticalParty(
+      {required String id,
+      required int age,
+      required String occupation}) async {
+    final response = await _politicalPartyCubit.joinAPoliticalParty(
+        id: widget.id,
+        age: age,
+        occupation: occupation,
+        firstName: _firstnameController.text,
+        lastName: _lastnameController.text,
+        gender: selectedGender!,
+        email: _emailController.text,
+        phoneNumber: _phoneController.text,
+        countryOfResidence: selectedCountryOfResidence!,
+        stateOfResidence: selectedState!,
+        lga: selectedLGA!,
+        electoralWard: selectedWard!,
+        pollingUnit: selectedPollingUnit!,
+        nin: _ninController.text);
     print("response from screen $response");
+  }
+
+  File? _image;
+
+  Future<void> pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
   }
 
   @override
@@ -89,7 +129,8 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
           builder: (context, state) {
             return state.maybeWhen(
                 loading: () => const Center(
-                      child: SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
+                      child:
+                          SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
                     ),
                 initial: () {
                   return SafeArea(
@@ -120,8 +161,11 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                   setState(() {});
                                 },
                                 keyboardType: TextInputType.text,
-                                isValidated: _firstnameController.text.isNotEmpty,
-                                validator: (value) => value!.isNotEmpty ? null : 'Please enter required  field',
+                                isValidated:
+                                    _firstnameController.text.isNotEmpty,
+                                validator: (value) => value!.isNotEmpty
+                                    ? null
+                                    : 'Please enter required  field',
                                 controller: _firstnameController,
                               ),
                             ),
@@ -136,8 +180,11 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 keyboardType: TextInputType.text,
                                 isNotBorder: true,
                                 fillColor: AppColors.appGrey.withOpacity(.3),
-                                isValidated: _lastnameController.text.isNotEmpty,
-                                validator: (value) => value!.isNotEmpty ? null : 'Please enter required field',
+                                isValidated:
+                                    _lastnameController.text.isNotEmpty,
+                                validator: (value) => value!.isNotEmpty
+                                    ? null
+                                    : 'Please enter required field',
                                 controller: _lastnameController,
                               ),
                             ),
@@ -148,7 +195,8 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 selectedItem: selectedGender,
                                 dropDownList: genders,
                                 hasBorderLine: false,
-                                containerBgColor: AppColors.appGrey.withOpacity(.3),
+                                containerBgColor:
+                                    AppColors.appGrey.withOpacity(.3),
                                 isValidated: selectedGender != null,
                                 hintText: 'Select Gender',
                                 onValueChanged: (value) {
@@ -171,7 +219,9 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 },
                                 keyboardType: TextInputType.text,
                                 isValidated: _emailController.text.isValidEmail,
-                                validator: (value) => value!.isNotEmpty ? null : 'Please enter valid email',
+                                validator: (value) => value!.isNotEmpty
+                                    ? null
+                                    : 'Please enter valid email',
                                 controller: _emailController,
                               ),
                             ),
@@ -180,13 +230,15 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                               inputFieldTitle: 'Phone',
                               inputFieldWidget: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   CappCustomDropDown(
                                     selectedItem: selectedCountryCode,
                                     dropDownList: countryCode,
                                     isValidated: selectedCountryCode != null,
-                                    padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6.0),
                                     hintText: 'Select',
                                     onValueChanged: (value) {
                                       setState(() {
@@ -198,7 +250,8 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                       return Row(
                                         children: [
                                           ClipRRect(
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                             child: SizedBox(
                                               height: 24,
                                               width: 24,
@@ -210,7 +263,9 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                           ),
                                           Text(
                                             name,
-                                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400),
                                           ),
                                         ],
                                       );
@@ -222,14 +277,21 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                     child: CappCustomFormField(
                                       hintText: 'Enter Phone Number',
                                       isNotBorder: true,
-                                      fillColor: AppColors.appGrey.withOpacity(.3),
+                                      fillColor:
+                                          AppColors.appGrey.withOpacity(.3),
                                       onChanged: (val) {
                                         setState(() {});
                                       },
                                       keyboardType: TextInputType.phone,
-                                      inputFormatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
-                                      isValidated: _phoneController.text.isValidPhone,
-                                      validator: (value) => value!.isNotEmpty ? null : 'Please enter required field',
+                                      inputFormatter: [
+                                        FilteringTextInputFormatter.deny(
+                                            RegExp(r"\s\b|\b\s"))
+                                      ],
+                                      isValidated:
+                                          _phoneController.text.isValidPhone,
+                                      validator: (value) => value!.isNotEmpty
+                                          ? null
+                                          : 'Please enter required field',
                                       controller: _phoneController,
                                     ),
                                   ),
@@ -248,7 +310,9 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 isNotBorder: true,
                                 fillColor: AppColors.appGrey.withOpacity(.3),
                                 isValidated: _ageController.text.isNotEmpty,
-                                validator: (value) => value!.isNotEmpty ? null : 'Please enter required field',
+                                validator: (value) => value!.isNotEmpty
+                                    ? null
+                                    : 'Please enter required field',
                                 controller: _ageController,
                               ),
                             ),
@@ -262,8 +326,11 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 keyboardType: TextInputType.text,
                                 isNotBorder: true,
                                 fillColor: AppColors.appGrey.withOpacity(.3),
-                                isValidated: _occupationController.text.isNotEmpty,
-                                validator: (value) => value!.isNotEmpty ? null : 'Please enter required field',
+                                isValidated:
+                                    _occupationController.text.isNotEmpty,
+                                validator: (value) => value!.isNotEmpty
+                                    ? null
+                                    : 'Please enter required field',
                                 controller: _occupationController,
                               ),
                             ),
@@ -276,10 +343,12 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 isValidated: selectedCountryOfResidence != null,
                                 hintText: 'Select Country',
                                 hasBorderLine: false,
-                                containerBgColor: AppColors.appGrey.withOpacity(.3),
+                                containerBgColor:
+                                    AppColors.appGrey.withOpacity(.3),
                                 onValueChanged: (value) {
                                   setState(() {
-                                    selectedCountryOfResidence = value.toString();
+                                    selectedCountryOfResidence =
+                                        value.toString();
                                   });
                                 },
                                 width: context.width,
@@ -292,7 +361,8 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 selectedItem: selectedState,
                                 dropDownList: states,
                                 hasBorderLine: false,
-                                containerBgColor: AppColors.appGrey.withOpacity(.3),
+                                containerBgColor:
+                                    AppColors.appGrey.withOpacity(.3),
                                 isValidated: selectedState != null,
                                 hintText: 'Select State',
                                 onValueChanged: (value) {
@@ -310,7 +380,8 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 selectedItem: selectedLGA,
                                 dropDownList: lgas,
                                 hasBorderLine: false,
-                                containerBgColor: AppColors.appGrey.withOpacity(.3),
+                                containerBgColor:
+                                    AppColors.appGrey.withOpacity(.3),
                                 isValidated: selectedLGA != null,
                                 hintText: 'Select Local Government Area',
                                 onValueChanged: (value) {
@@ -328,7 +399,8 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 selectedItem: selectedWard,
                                 dropDownList: electoralWard,
                                 hasBorderLine: false,
-                                containerBgColor: AppColors.appGrey.withOpacity(.3),
+                                containerBgColor:
+                                    AppColors.appGrey.withOpacity(.3),
                                 isValidated: selectedWard != null,
                                 hintText: 'Select Ward',
                                 onValueChanged: (value) {
@@ -346,7 +418,8 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 selectedItem: selectedPollingUnit,
                                 dropDownList: pollingUnit,
                                 hasBorderLine: false,
-                                containerBgColor: AppColors.appGrey.withOpacity(.3),
+                                containerBgColor:
+                                    AppColors.appGrey.withOpacity(.3),
                                 isValidated: selectedPollingUnit != null,
                                 hintText: 'Select Polling Unit',
                                 onValueChanged: (value) {
@@ -369,46 +442,64 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 fillColor: AppColors.appGrey.withOpacity(.3),
                                 isNotBorder: true,
                                 isValidated: _ninController.text.isNotEmpty,
-                                validator: (value) => value!.isNotEmpty ? null : 'Please enter required field',
+                                validator: (value) => value!.isNotEmpty
+                                    ? null
+                                    : 'Please enter required field',
                                 controller: _ninController,
                               ),
                             ),
-                            // InputFieldColumnWidget(
-                            //   inputFieldTitle: 'Upload Passport ID',
-                            //   inputFieldWidget: Container(
-                            //     height: 150,
-                            //     width: 380,
-                            //     decoration: BoxDecoration(color: AppColors.appGrey.withOpacity(.3), borderRadius: BorderRadius.circular(8)),
-                            //     child: Stack(
-                            //       children: [
-                            //         Positioned(
-                            //           top: 28,
-                            //           left: 125,
-                            //           child: Text(
-                            //             'Tap Icon to upload ',
-                            //             style: TextStyle(
-                            //               fontSize: 12,
-                            //               fontWeight: FontWeight.w500,
-                            //               color: AppColors.appGrey.withOpacity(.9),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //         Positioned(
-                            //             bottom: 25,
-                            //             left: 155,
-                            //             child: SizedBox(
-                            //               height: 60,
-                            //               width: 60,
-                            //               child: Image.asset(
-                            //                 'assets/images/ic_image.png',
-                            //                 fit: BoxFit.cover,
-                            //               ),
-                            //             ))
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-
+                            GestureDetector(
+                              onTap: () {
+                                pickImage();
+                              },
+                              child: _image != null
+                                  ? Image.file(
+                                      _image!,
+                                      width: 70,
+                                      height: 70,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : InputFieldColumnWidget(
+                                      inputFieldTitle: 'Upload Passport ID',
+                                      inputFieldWidget: Container(
+                                        height: 150,
+                                        width: 380,
+                                        decoration: BoxDecoration(
+                                            color: AppColors.appGrey
+                                                .withOpacity(.3),
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        child: Stack(
+                                          children: [
+                                            Positioned(
+                                              top: 28,
+                                              left: 125,
+                                              child: Text(
+                                                'Tap Icon to upload ',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: AppColors.appGrey
+                                                      .withOpacity(.9),
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                                bottom: 25,
+                                                left: 155,
+                                                child: SizedBox(
+                                                  height: 60,
+                                                  width: 60,
+                                                  child: Image.asset(
+                                                    'assets/images/ic_image.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                            ),
                             const SizedBox(
                               height: 12,
                             ),
@@ -417,22 +508,26 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                               child: CappCustomButton(
                                 onPress: () async {
                                   await joinAPoliticalParty(
-                                      id: widget.id, age: int.parse(_ageController.text), occupation: _occupationController.text.trim());
+                                      id: widget.id,
+                                      age: int.parse(_ageController.text),
+                                      occupation:
+                                          _occupationController.text.trim());
                                 },
                                 isSolidColor: true,
-                                isActive: _firstnameController.text.isNotEmpty &&
-                                    _emailController.text.isValidEmail &&
-                                    _lastnameController.text.isNotEmpty &&
-                                    _ninController.text.isNotEmpty &&
-                                    _phoneController.text.isNotEmpty &&
-                                    _ageController.text.isNotEmpty &&
-                                    selectedGender != null &&
-                                    selectedCountryCode != null &&
-                                    selectedCountryOfResidence != null &&
-                                    selectedLGA != null &&
-                                    selectedPollingUnit != null &&
-                                    selectedState != null &&
-                                    selectedWard != null,
+                                isActive:
+                                    _firstnameController.text.isNotEmpty &&
+                                        _emailController.text.isValidEmail &&
+                                        _lastnameController.text.isNotEmpty &&
+                                        _ninController.text.isNotEmpty &&
+                                        _phoneController.text.isNotEmpty &&
+                                        _ageController.text.isNotEmpty &&
+                                        selectedGender != null &&
+                                        selectedCountryCode != null &&
+                                        selectedCountryOfResidence != null &&
+                                        selectedLGA != null &&
+                                        selectedPollingUnit != null &&
+                                        selectedState != null &&
+                                        selectedWard != null,
                                 color: AppColors.primary,
                                 child: const Text(
                                   'Join Party',

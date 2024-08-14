@@ -39,11 +39,37 @@ class PoliticalPartyRepositoryImpl implements PoliticalPartyRepository {
   }
 
   @override
-  Future<NewPoliticalPartyModel> joinAParty({required String id, required int age, required String occupation }) async {
+  Future<NewPoliticalPartyModel> joinAParty({
+    required String id, 
+    required int age, 
+    required String occupation,
+    required String firstName,
+    required String lastName,
+    required String gender,
+    required String email,
+    required String phoneNumber,
+    required String countryOfResidence,
+    required String stateOfResidence,
+    required String lga,
+    required String electoralWard,
+    required String pollingUnit,
+    required String nin,
+    }) async {
     try {
       final response = await dioClient.dioPost("${ApiConstant.joinAPoliticalParty}/$id/join",{
         "age":age,
-        "occupation":occupation
+        "occupation":occupation,
+        "firstName":firstName,
+        "lastName":lastName,
+        "gender":gender,
+        "email":email,
+        "phoneNumber":phoneNumber,
+        "countryOfResidence":countryOfResidence,
+        "stateOfResidence":stateOfResidence,
+        "lga":lga,
+        "electoralWard":electoralWard,
+        "pollingUnit":pollingUnit,
+        "nin":nin,
       },
       options: Options(headers: {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',

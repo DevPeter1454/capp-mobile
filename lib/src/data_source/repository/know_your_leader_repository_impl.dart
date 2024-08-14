@@ -28,15 +28,16 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
           }));
       final result = response.data["data"];
-      print(result);
 
       final List<LeaderProfile> convertedList = [];
       //map through result and add each one to convertedList
-      result.forEach((element) {
-        convertedList.add(LeaderProfile.fromJson(element));
-      });
+      // result.forEach((element) {
+      //   convertedList.add(LeaderProfile.fromJson(element));
+      // });
+      log("result ${LeaderProfile.fromJson(result[0]).name} ");
 
-      return convertedList;
+      // return convertedList;
+      return [LeaderProfile.fromJson(result[0])];
     } catch (e) {
       log(e.toString());
       return [];
@@ -56,7 +57,7 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
       print(e);
       return LeaderProfile(
         id: '',
-        url:'',
+        url: '',
         name: '',
         title: '',
         allocation: '',
@@ -71,7 +72,10 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
   }
 
   @override
-  Future<LeaderProfile> rateALeader({required String id, required String comment, required double rating}) async {
+  Future<LeaderProfile> rateALeader(
+      {required String id,
+      required String comment,
+      required double rating}) async {
     try {
       final response = await dioClient.dioPost(
         "${ApiConstant.getALeader}/$id/rate",
@@ -88,7 +92,6 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
         id: '',
         name: '',
         url: '',
-
         title: '',
         allocation: '',
         profile: '',

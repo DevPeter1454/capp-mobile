@@ -56,83 +56,99 @@ class _MdaDetailsScreenState extends State<MdaDetailsScreen> {
         child: SizedBox(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [
-              CustomTopNavBar(title: widget.mda.ministryName),
-              SizedBox(height: 31.5.h),
-              Image.network(widget.mda.ministryLogo, height: 247.h, width: double.infinity,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
-              Flexible(
-                  child: Text(
-                widget.mda.ministryName,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.sp,
-                ),
-              )),
-              SizedBox(height: 20.h),
-              SizedBox(
-                height: calculateMainAxisExtent(425),
-                child: ContinueReading(
-                  content: widget.mda.ministryDescription ?? '',
-                  maxline: calculateMaxLines,
-                  onClickedContinueReading: () =>
-                      Get.to(() => ReadAllInfoScreen(title: widget.mda.ministryName, content: widget.mda.ministryDescription)),
-                ),
-              ),
-              // SizedBox(height: 36.h),
-              Text(
-                "Minister",
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
-              ),
-              Container(
-                height: 225.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Column(children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(8.r), topRight: Radius.circular(8.r)),
-                      child: Image.network(widget.mda.ministryImage, height: 185.h, fit: BoxFit.fill, width: double.infinity,
-                         loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          } else {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                        },
-                      )),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CustomTopNavBar(title: widget.mda.ministryName),
+                  SizedBox(height: 31.5.h),
+                  Image.network(
+                    widget.mda.ministryLogo,
+                    height: 247.h,
+                    width: double.infinity,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
                   Flexible(
-                    child: SizedBox(
-                      height: 35.h,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            widget.mda.ministerName,
-                            style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                      child: Text(
+                    widget.mda.ministryName,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.sp,
+                    ),
+                  )),
+                  SizedBox(height: 20.h),
+                  SizedBox(
+                    height: calculateMainAxisExtent(425),
+                    child: ContinueReading(
+                      content: widget.mda.ministryDescription ?? '',
+                      maxline: calculateMaxLines,
+                      onClickedContinueReading: () => Get.to(() =>
+                          ReadAllInfoScreen(
+                              title: widget.mda.ministryName,
+                              content: widget.mda.ministryDescription)),
+                    ),
+                  ),
+                  // SizedBox(height: 36.h),
+                  Text(
+                    "Minister",
+                    style:
+                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                  ),
+                  Container(
+                    height: 225.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: Column(children: [
+                      ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(8.r),
+                              topRight: Radius.circular(8.r)),
+                          child: Image.network(
+                            widget.mda.ministryImage,
+                            height: 185.h,
+                            fit: BoxFit.contain,
+                            width: double.infinity,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            },
+                          )),
+                      Flexible(
+                        child: SizedBox(
+                          height: 35.h,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                widget.mda.ministerName,
+                                style: TextStyle(
+                                    fontSize: 16.sp, color: Colors.white),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  )
+                      )
+                    ]),
+                  ),
+                  SizedBox(height: 25.h)
                 ]),
-              ),
-              SizedBox(height: 25.h)
-            ]),
           ),
         ),
       ),

@@ -28,6 +28,8 @@ class JoinPartyScreen extends StatefulWidget {
 class _JoinPartyScreenState extends State<JoinPartyScreen> {
   final _searchController = TextEditingController();
 
+  final _scrollController = ScrollController();
+
   final _politicalPartyCubit = getIt.get<PoliticalPartyCubit>();
 
   String extractAcronym(String input) {
@@ -79,11 +81,13 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
         builder: (context, state) {
           return state.maybeWhen(
               loading: () => const Center(
-                    child: SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
+                    child:
+                        SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
                   ),
               loaded: (parties) {
                 return SafeArea(
                   child: SingleChildScrollView(
+                    controller: _scrollController,
                     child: SizedBox(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -105,7 +109,9 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
                                 ),
                                 const Text(
                                   'Join a Political  Party',
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
                                 )
                               ],
                             ),
@@ -122,26 +128,38 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
                               height: 10,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 15, bottom: 10),
+                              padding:
+                                  const EdgeInsets.only(top: 15, bottom: 10),
                               child: SizedBox(
                                 width: context.width,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: CappCustomFormField(
-                                    hintText: 'Search by political party name...',
-                                    hintStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.normal),
+                                    hintText:
+                                        'Search by political party name...',
+                                    hintStyle: TextStyle(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.normal),
                                     onFieldSubmitted: (value) {
-                                      value.isNotEmpty ? Get.to(() => const SearchResultScreen()) : 'Please field cannot be empty';
+                                      value.isNotEmpty
+                                          ? Get.to(
+                                              () => const SearchResultScreen())
+                                          : 'Please field cannot be empty';
                                     },
                                     onChanged: (val) {},
-                                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 10),
                                     keyboardType: TextInputType.text,
                                     fillColor: const Color(0XFFF4F4F6),
                                     borderColor: Colors.transparent,
                                     radius: 8.r,
-                                    isValidated: _searchController.text.isNotEmpty,
-                                    validator: (value) => value!.isNotEmpty ? null : 'Please field cannot be empty',
-                                    prefixIcon: const Icon(CupertinoIcons.search),
+                                    isValidated:
+                                        _searchController.text.isNotEmpty,
+                                    validator: (value) => value!.isNotEmpty
+                                        ? null
+                                        : 'Please field cannot be empty',
+                                    prefixIcon:
+                                        const Icon(CupertinoIcons.search),
                                     controller: _searchController,
                                   ),
                                 ),
@@ -154,57 +172,69 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
                                 ? const Center(
                                     child: Text('No items available'),
                                   )
-                                :  SizedBox(
-                              height: context.height,
-                              child: ListView.separated(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, int index) {
-                                  final party = parties[index];
-                                  return CustomListCard(
-                                    title: party.name,
-                                    isKnowMDA: false,
-                                    politicalPartyImageUrl: party.logo,
-                                    onClickedPrimaryActionButton: () {
-                                      return showModalBottomSheet(
-                                        context: context,
-                                        useSafeArea: true,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                                        ),
-                                        builder: (context) {
-                                          return CappCustomBottomSheet(
-                                            isShareIcon: false,
-                                            partyDetails: party.description,
-                                            onClickedContinueReading: () =>
-                                                Get.to(() => ReadAllInfoScreen(title: party.name, content: party.description)),
-                                            politicalPartyLogo: party.logo,
-                                            politicalPartyName: party.name,
-                                            onClickedSecondaryActionButton: () {
-                                              Get.to(() => DonationScreen(id: party.id));
+                                : ListView.separated(
+                                    shrinkWrap: true,
+                                    controller: _scrollController,
+                                    // physics: const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, int index) {
+                                      final party = parties[index];
+                                      return CustomListCard(
+                                        title: party.name,
+                                        isKnowMDA: false,
+                                        politicalPartyImageUrl: party.logo,
+                                        onClickedPrimaryActionButton: () {
+                                          return showModalBottomSheet(
+                                            context: context,
+                                            useSafeArea: true,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                      top: Radius.circular(20)),
+                                            ),
+                                            builder: (context) {
+                                              return CappCustomBottomSheet(
+                                                isShareIcon: false,
+                                                partyDetails: party.description,
+                                                onClickedContinueReading: () =>
+                                                    Get.to(() =>
+                                                        ReadAllInfoScreen(
+                                                            title: party.name,
+                                                            content: party
+                                                                .description)),
+                                                politicalPartyLogo: party.logo,
+                                                politicalPartyName: party.name,
+                                                onClickedSecondaryActionButton:
+                                                    () {
+                                                  Get.to(() => DonationScreen(
+                                                      id: party.id));
+                                                },
+                                                onClickedPrimaryActionButton:
+                                                    () {
+                                                  Get.to(() =>
+                                                      JoinPartyUserSignUpScreen(
+                                                          id: party.id));
+                                                },
+                                                title: 'View Details',
+                                                acrocymn:
+                                                    extractAcronym(party.name),
+                                              );
                                             },
-                                            onClickedPrimaryActionButton: () {
-                                              Get.to(() => JoinPartyUserSignUpScreen(id: party.id));
-                                            },
-                                            title: 'View Details',
-                                            acrocymn: extractAcronym(party.name),
                                           );
                                         },
+                                        acroymn: extractAcronym(party.name),
+                                        isIconLeft: false,
                                       );
                                     },
-                                    acroymn: extractAcronym(party.name),
-                                    isIconLeft: false,
-                                  );
-                                },
-                                separatorBuilder: (context, int index) {
-                                  return Divider(
-                                    color: Theme.of(context).hintColor.withOpacity(.6),
-                                    thickness: 0.2,
-                                  );
-                                },
-                                itemCount: parties.length,
-                              ),
-                            ),
+                                    separatorBuilder: (context, int index) {
+                                      return Divider(
+                                        color: Theme.of(context)
+                                            .hintColor
+                                            .withOpacity(.6),
+                                        thickness: 0.2,
+                                      );
+                                    },
+                                    itemCount: parties.length,
+                                  ),
                             SizedBox(
                               height: context.heightPercentage(.04),
                             )
