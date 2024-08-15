@@ -1,5 +1,6 @@
 import 'package:capp/src/domain/model/mda.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/components/read_all_info_screen.dart';
+import 'package:capp/src/presentation/screens/explore/know_your_mda/pages/lodge_complaint_screen.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/continue_reading.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 import 'package:capp/src/presentation/widgets/widgets.dart';
@@ -76,27 +77,53 @@ class _MdaDetailsScreenState extends State<MdaDetailsScreen> {
                       }
                     },
                   ),
-                  Flexible(
+                  Center(
+                    child: Flexible(
+                        child: Align(
+                      alignment: Alignment.center,
                       child: Text(
-                    widget.mda.ministryName,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.sp,
+                        widget.mda.ministryName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.sp,
+                        ),
+                      ),
+                    )),
+                  ),
+                  const Divider(
+                    color: AppColors.descText,
+                    thickness: 0.5,
+                  ),
+                  SizedBox(height: 20.h),
+                  CappCustomButton(
+                    color: AppColors.primary.withOpacity(.1),
+                    isSolidColor: true,
+                    isActive: true,
+                    onPress: () {
+                      Get.to(() => const LodgeComplaintScreen());
+                    },
+                    child: Text(
+                      "Lodge a Complaint",
+                      style:
+                          TextStyle(fontSize: 16.sp, color: AppColors.primary),
                     ),
-                  )),
+                  ),
                   SizedBox(height: 20.h),
                   SizedBox(
                     height: calculateMainAxisExtent(425),
-                    child: ContinueReading(
-                      content: widget.mda.ministryDescription ?? '',
-                      maxline: calculateMaxLines,
-                      onClickedContinueReading: () => Get.to(() =>
-                          ReadAllInfoScreen(
-                              title: widget.mda.ministryName,
-                              content: widget.mda.ministryDescription)),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: ContinueReading(
+                        content: widget.mda.ministryDescription ?? '',
+                        maxline: calculateMaxLines,
+                        onClickedContinueReading: () => Get.to(() =>
+                            ReadAllInfoScreen(
+                                title: widget.mda.ministryName,
+                                content: widget.mda.ministryDescription)),
+                      ),
                     ),
                   ),
-                  // SizedBox(height: 36.h),
+                  SizedBox(height: 40.h),
                   Text(
                     "Minister",
                     style:
@@ -133,9 +160,9 @@ class _MdaDetailsScreenState extends State<MdaDetailsScreen> {
                         child: SizedBox(
                           height: 35.h,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Align(
-                              alignment: Alignment.centerLeft,
+                              alignment: Alignment.center,
                               child: Text(
                                 widget.mda.ministerName,
                                 style: TextStyle(

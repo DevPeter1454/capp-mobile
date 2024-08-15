@@ -71,7 +71,7 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              CustomTopNavBar(title: leader.title),
+                              CustomTopNavBar(title: leader.name),
                               SizedBox(
                                 height: 15.h,
                               ),
@@ -92,38 +92,82 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                                       children: [
                                         Text(
                                           leader.name,
-                                           style: TextStyle(
+                                          style: TextStyle(
                                               fontSize: 16.sp,
                                               color: AppColors.blackTextColor,
                                               fontWeight: FontWeight.w600),
                                         ),
                                         SizedBox(height: 12.h),
-                                        CappCustomButton(
-                                            onPress: () {},
-                                            color: AppColors.primary
-                                                .withOpacity(0.10),
-                                            isSolidColor: true,
-                                            width: 150.w,
-                                            paddingVertical: 12,
-                                            isActive: true,
-                                            child: const Text(
-                                              'Project Tracking',
-                                              style: TextStyle(
-                                                  color: AppColors.primary,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500),
-                                            )),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Office",
+                                                    style: TextStyle(
+                                                        fontSize: 14.sp,
+                                                        color: const Color(
+                                                            0XFF6C727F)),
+                                                  ),
+                                                  Text(
+                                                    leader.title,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 14.sp,
+                                                        color: AppColors
+                                                            .blackTextColor,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 44.w,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Political Party",
+                                                  style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      color: const Color(
+                                                          0XFF6C727F)),
+                                                ),
+                                                Text(
+                                                  leader.party,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      color: AppColors
+                                                          .blackTextColor,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                         SizedBox(height: 12.h),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "State",
+                                                  "LGA",
                                                   style: TextStyle(
                                                       fontSize: 14.sp,
                                                       color: const Color(
@@ -289,7 +333,6 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                                     Theme.of(context).hintColor.withOpacity(.6),
                                 thickness: 0.2,
                               ),
-                              SizedBox(height: 12.h),
                               CappCustomButton(
                                   onPress: () => Get.to(
                                       () =>
@@ -302,6 +345,21 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                                   isActive: true,
                                   child: const Text(
                                     'View Allocation',
+                                    style: TextStyle(
+                                        color: AppColors.primary,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500),
+                                  )),
+                              SizedBox(height: 12.h),
+                              CappCustomButton(
+                                  onPress: () {},
+                                  color: AppColors.primary.withOpacity(0.10),
+                                  isSolidColor: true,
+                                  width: double.infinity,
+                                  paddingVertical: 12,
+                                  isActive: true,
+                                  child: const Text(
+                                    'Project Tracking',
                                     style: TextStyle(
                                         color: AppColors.primary,
                                         fontSize: 15,
@@ -335,7 +393,7 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                                             .textTheme
                                             .bodyMedium!
                                             .copyWith(
-                                                fontSize: 18.sp,
+                                                fontSize: 16.sp,
                                                 color: AppColors.blackTextColor,
                                                 fontWeight: FontWeight.w600)),
                                     InkWell(
@@ -343,12 +401,12 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                                           () => LeaderAllRatingScreen(
                                               leaderProfile: leader),
                                           transition: tr.Transition.fadeIn),
-                                      child: Text("See all",
+                                      child: Text("See more",
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyMedium!
                                               .copyWith(
-                                                  fontSize: 14.sp,
+                                                  fontSize: 12.sp,
                                                   color: AppColors.primary,
                                                   fontWeight: FontWeight.w600)),
                                     ),

@@ -31,13 +31,13 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
 
       final List<LeaderProfile> convertedList = [];
       //map through result and add each one to convertedList
-      // result.forEach((element) {
-      //   convertedList.add(LeaderProfile.fromJson(element));
-      // });
+      result.forEach((element) {
+        convertedList.add(LeaderProfile.fromJson(element));
+      });
       log("result ${LeaderProfile.fromJson(result[0]).name} ");
 
-      // return convertedList;
-      return [LeaderProfile.fromJson(result[0])];
+      return convertedList;
+      // return [LeaderProfile.fromJson(result[0])];
     } catch (e) {
       log(e.toString());
       return [];
@@ -64,6 +64,7 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
         profile: '',
         responsibility: '',
         lga: '',
+        party: '',
         constituency: '',
         ratings: [],
         comments: [],
@@ -98,6 +99,7 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
         responsibility: '',
         lga: '',
         constituency: '',
+        party: '',
         ratings: [],
         comments: [],
       );

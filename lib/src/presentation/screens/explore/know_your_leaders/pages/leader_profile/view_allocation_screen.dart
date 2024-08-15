@@ -23,7 +23,7 @@ class _ViewAllocationScreenState extends State<ViewAllocationScreen> {
             const CustomTopNavBar(title: "Allocation"),
             SizedBox(height: 12.h),
             Text(
-                "Below are the breakdown of various allocated funds to specific projects",
+                "Allocations vary per State and of different value based on FAAC monthly disbursement. However, Senate and Rep members’s do not receive their constituency allocation in cash but its equivalent in project execution.",
                 style: TextStyle(
                   fontSize: 14.sp,
                 )),

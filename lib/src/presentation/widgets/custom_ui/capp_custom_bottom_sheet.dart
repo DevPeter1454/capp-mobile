@@ -230,16 +230,16 @@ class _CappCustomBottomSheetState extends State<CappCustomBottomSheet> {
                 Flexible(
                   child: ListView(
                     children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          widget.politicalPartyName!,
-                          style: const TextStyle(
-                              color: AppColors.descText,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20),
-                        ),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.topLeft,
+                      //   child: Text(
+                      //     widget.politicalPartyName!,
+                      //     style: const TextStyle(
+                      //         color: AppColors.descText,
+                      //         fontWeight: FontWeight.w500,
+                      //         fontSize: 20),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: context.heightPercentage(.014),
                       ),
@@ -252,7 +252,7 @@ class _CappCustomBottomSheetState extends State<CappCustomBottomSheet> {
                               image: NetworkImage(
                                 widget.politicalPartyLogo!,
                               ),
-                              fit: BoxFit.fill),
+                              fit: BoxFit.contain),
                         ),
                       ),
                       SizedBox(

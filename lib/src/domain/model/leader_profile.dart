@@ -11,6 +11,7 @@ class LeaderProfile {
   final List<dynamic> ratings;
   final List<Map<dynamic, dynamic>> comments;
   final String url;
+  final String party;
 
   LeaderProfile({
     required this.id,
@@ -24,21 +25,23 @@ class LeaderProfile {
     required this.ratings,
     required this.comments,
     required this.url,
+    required this.party,
   });
 
   factory LeaderProfile.fromJson(Map<String, dynamic> json) {
     return LeaderProfile(
-      id: json['_id'],
-      name: json['name'],
-      title: json['title'],
-      allocation: json['allocation'],
-      profile: json['profile'],
-      responsibility: json['responsibility'],
-      lga: json['lga'],
-      url:json["url"],
-      constituency: json['constituency'],
+      id: json['_id'] ?? "",
+      name: json['name'] ?? "",
+      title: json['title'] ?? "",
+      allocation: json['allocation'] ?? "",
+      profile: json['profile'] ?? "",
+      responsibility: json['responsibility'] ?? "",
+      lga: json['lga'] ?? "",
+      url: json["url"] ?? "",
+      constituency: json['constituency'] ?? "",
       ratings: List<dynamic>.from(json['ratings']),
       comments: List<Map<dynamic, dynamic>>.from(json['comments']),
+      party: json["party"] ?? ""
     );
   }
 
@@ -69,6 +72,7 @@ class LeaderProfile {
     List<dynamic>? ratings,
     List<Map<dynamic, dynamic>>? comments,
     String? url,
+    String? party,
   }) {
     return LeaderProfile(
       id: id ?? this.id,
@@ -81,7 +85,8 @@ class LeaderProfile {
       constituency: constituency ?? this.constituency,
       ratings: ratings ?? this.ratings,
       comments: comments ?? this.comments,
-      url:url ?? this.url,
+      url: url ?? this.url,
+      party: party ?? this.party,
     );
   }
   //explain what copywith is used for
@@ -94,8 +99,10 @@ class LeaderProfile {
         name: 'John Doe',
         title: 'Governor',
         allocation: 'N100,0000',
-        profile: "https://upload.wikimedia.org/wikipedia/commons/7/77/Bola_Tinubu_portrait.jpg",
-        url: "https://upload.wikimedia.org/wikipedia/commons/7/77/Bola_Tinubu_portrait.jpg",
+        profile:
+            "https://upload.wikimedia.org/wikipedia/commons/7/77/Bola_Tinubu_portrait.jpg",
+        url:
+            "https://upload.wikimedia.org/wikipedia/commons/7/77/Bola_Tinubu_portrait.jpg",
         responsibility: 'Governor of Lagos State',
         lga: 'Ikeja',
         constituency: 'Lagos Central',
@@ -106,6 +113,7 @@ class LeaderProfile {
           2,
           1
         ],
+        party: "APC",
         comments: [
           {
             "user": {

@@ -5,6 +5,7 @@ import 'package:capp/src/constants/route_constants.dart';
 import 'package:capp/src/data_source/di/injection_container.dart';
 import 'package:capp/src/domain/model/argument.dart';
 import 'package:capp/src/presentation/screens/explore/join_a_political_party/cubit/political_party_cubit.dart';
+import 'package:capp/src/presentation/screens/explore/know_your_mda/pages/options.dart';
 import 'package:capp/src/presentation/screens/signup/user_signup_detail_screen.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 import 'package:capp/src/presentation/widgets/widgets.dart';
@@ -34,17 +35,38 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
   final _ageController = TextEditingController();
   final _occupationController = TextEditingController();
   final _ninController = TextEditingController();
+  final _electoralController = TextEditingController();
+  final _pollingController = TextEditingController();
   List<String> genders = ['Male', 'Female'];
-  List<String> countryOfResidence = [
-    'Nigeria',
-  ];
-  List<String> states = ['Lagos', 'Oyo'];
+  List<String> countryOfResidence = countries;
+  // List<String> states = ['Lagos', 'Oyo'];
+
   List<String> lgas = ['Surulere', 'Lagos Mainland'];
   List<String> pollingUnit = ['Unit 1', 'Unit 2'];
   List<String> electoralWard = ['Ward 1', 'Ward 2'];
   List<CountryCode> countryCode = [
     CountryCode('+234', 'assets/images/ngn.png')
   ];
+  List options = statesAndLgas;
+  List states = statesAndLgas.map((e) => e["label"]).toList();
+  List lgasList = [];
+
+  void setLgaList(String state) {
+    lgasList.clear();
+
+    setState(() {
+      selectedLGA = "Select LGA";
+      // lgasList = options
+      //     .firstWhere((state) => state['value'] == state)['lgas']
+      //     .cast<String>();
+      lgasList = statesAndLgas
+          .where((e) => e["label"] == state)
+          .map((e) => e["lgas"])
+          .toList();
+      lgasList[0].insert(0, "Select LGA");
+    });
+    print("lgasList $lgasList");
+  }
 
   String? selectedState,
       selectedLGA,
@@ -359,7 +381,9 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                               showAsterisk: true,
                               inputFieldWidget: CappCustomDropDown(
                                 selectedItem: selectedState,
-                                dropDownList: states,
+                                dropDownList: statesAndLgas
+                                    .map((e) => e["label"])
+                                    .toList(),
                                 hasBorderLine: false,
                                 containerBgColor:
                                     AppColors.appGrey.withOpacity(.3),
@@ -369,6 +393,7 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                   setState(() {
                                     selectedState = value.toString();
                                   });
+                                  setLgaList(value.toString());
                                 },
                                 width: context.width,
                               ),
@@ -378,7 +403,9 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                               showAsterisk: true,
                               inputFieldWidget: CappCustomDropDown(
                                 selectedItem: selectedLGA,
-                                dropDownList: lgas,
+                                dropDownList: lgasList.isEmpty
+                                    ? ["Select LGA"]
+                                    : lgasList[0],
                                 hasBorderLine: false,
                                 containerBgColor:
                                     AppColors.appGrey.withOpacity(.3),
@@ -395,39 +422,38 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                             InputFieldColumnWidget(
                               inputFieldTitle: 'Electoral Ward',
                               showAsterisk: true,
-                              inputFieldWidget: CappCustomDropDown(
-                                selectedItem: selectedWard,
-                                dropDownList: electoralWard,
-                                hasBorderLine: false,
-                                containerBgColor:
-                                    AppColors.appGrey.withOpacity(.3),
-                                isValidated: selectedWard != null,
-                                hintText: 'Select Ward',
-                                onValueChanged: (value) {
-                                  setState(() {
-                                    selectedWard = value.toString();
-                                  });
+                              inputFieldWidget: CappCustomFormField(
+                                hintText: 'Enter your electoral ward',
+                                onChanged: (val) {
+                                  setState(() {});
                                 },
-                                width: context.width,
+                                keyboardType: TextInputType.text,
+                                fillColor: AppColors.appGrey.withOpacity(.3),
+                                isNotBorder: true,
+                                isValidated:
+                                    _electoralController.text.isNotEmpty,
+                                validator: (value) => value!.isNotEmpty
+                                    ? null
+                                    : 'Please enter required field',
+                                controller: _ninController,
                               ),
                             ),
                             InputFieldColumnWidget(
                               inputFieldTitle: 'Polling Unit',
                               showAsterisk: true,
-                              inputFieldWidget: CappCustomDropDown(
-                                selectedItem: selectedPollingUnit,
-                                dropDownList: pollingUnit,
-                                hasBorderLine: false,
-                                containerBgColor:
-                                    AppColors.appGrey.withOpacity(.3),
-                                isValidated: selectedPollingUnit != null,
-                                hintText: 'Select Polling Unit',
-                                onValueChanged: (value) {
-                                  setState(() {
-                                    selectedPollingUnit = value.toString();
-                                  });
+                              inputFieldWidget: CappCustomFormField(
+                                hintText: 'Enter your polling unit',
+                                onChanged: (val) {
+                                  setState(() {});
                                 },
-                                width: context.width,
+                                keyboardType: TextInputType.text,
+                                fillColor: AppColors.appGrey.withOpacity(.3),
+                                isNotBorder: true,
+                                isValidated: _pollingController.text.isNotEmpty,
+                                validator: (value) => value!.isNotEmpty
+                                    ? null
+                                    : 'Please enter required field',
+                                controller: _ninController,
                               ),
                             ),
                             InputFieldColumnWidget(
@@ -525,9 +551,9 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                         selectedCountryCode != null &&
                                         selectedCountryOfResidence != null &&
                                         selectedLGA != null &&
-                                        selectedPollingUnit != null &&
+                                        _pollingController.text.isNotEmpty &&
                                         selectedState != null &&
-                                        selectedWard != null,
+                                        _electoralController.text.isNotEmpty,
                                 color: AppColors.primary,
                                 child: const Text(
                                   'Join Party',
