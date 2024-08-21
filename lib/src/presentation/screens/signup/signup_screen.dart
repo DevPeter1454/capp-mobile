@@ -1,4 +1,6 @@
 import 'package:capp/src/constants/route_constants.dart';
+import 'package:capp/src/presentation/screens/privacy_policy/privacy_policy_screen.dart';
+import 'package:capp/src/presentation/screens/privacy_policy/terms_of_use.dart';
 import 'package:capp/src/presentation/screens/signup/user_signup_detail_screen.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:capp/src/utils/util.dart';
@@ -54,7 +56,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Text(
                             'Welcome to',
-                            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 20),
                           ),
                           SizedBox(
                             width: 5,
@@ -71,7 +74,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       const Text(
                         'Enter your Email and Password to start your registration',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(
                         height: 15,
@@ -85,8 +89,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             setState(() {});
                           },
                           keyboardType: TextInputType.emailAddress,
-                          inputFormatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
-                          validator: (value) => value!.isNotEmpty && value.isValidEmail ? null : 'Please enter valid email',
+                          inputFormatter: [
+                            FilteringTextInputFormatter.deny(
+                                RegExp(r"\s\b|\b\s"))
+                          ],
+                          validator: (value) =>
+                              value!.isNotEmpty && value.isValidEmail
+                                  ? null
+                                  : 'Please enter valid email',
                           controller: emailController,
                         ),
                       ),
@@ -101,7 +111,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onChanged: (val) {
                             setState(() {});
                           },
-                          inputFormatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
+                          inputFormatter: [
+                            FilteringTextInputFormatter.deny(
+                                RegExp(r"\s\b|\b\s"))
+                          ],
 
                           isTextObscure: _passwordVisible,
                           isValidated: passwordController.text.isValidPassword,
@@ -114,7 +127,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 5),
                                 child: Icon(
-                                  _passwordVisible ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                                  _passwordVisible
+                                      ? Icons.visibility_off_outlined
+                                      : Icons.visibility_outlined,
                                   size: 20,
                                 ),
                               )),
@@ -134,10 +149,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       Center(
                         child: CappCustomButton(
-                          isActive: emailController.text.isValidEmail && passwordController.text.isValidPassword,
+                          isActive: emailController.text.isValidEmail &&
+                              passwordController.text.isValidPassword,
                           onPress: () {
-                            Get.to(() =>
-                                UserSignUpDetailScreen(email: emailController.text.trim().toLowerCase(), password: passwordController.text.trim()));
+                            Get.to(() => UserSignUpDetailScreen(
+                                email:
+                                    emailController.text.trim().toLowerCase(),
+                                password: passwordController.text.trim()));
                           },
                           color: AppColors.primary,
                           isSolidColor: true,
@@ -152,8 +170,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: context.heightPercentage(.065),
+                      const SizedBox(
+                        height: 25,
                       ),
                       Center(
                         child: Padding(
@@ -174,7 +192,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ..onTap = () {
                                         Get.toNamed(RouteConstants.login);
                                       },
-                                    style: const TextStyle(color: AppColors.primary)),
+                                    style: const TextStyle(
+                                        color: AppColors.primary)),
                               ],
                             ),
                           ),
@@ -182,6 +201,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       const SizedBox(
                         height: 35,
+                      ),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {
+                            Get.to(() => const PrivacyPolicyScreen());
+                          },
+                          child: const Text(
+                            'Privacy Policy',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {
+                            Get.to(() => const TermsOfUse());
+                          },
+                          child: const Text(
+                            'Terms of Service',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
                       ),
                     ],
                   ),

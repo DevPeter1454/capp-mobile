@@ -8,15 +8,18 @@ class Mda {
   final String ministryLogo;
   final String ministryImage;
   final String ministryDescription;
-  Mda({
+  final List? complains;
+  Mda(
+  {
     required this.id,
     required this.ministryName,
     required this.ministerName,
     required this.ministryLogo,
     required this.ministryImage,
     required this.ministryDescription,
+    required this.complains ,
+    
   });
-
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -37,10 +40,12 @@ class Mda {
       ministryLogo: map['ministry_logo'] as String,
       ministryImage: map['ministry_image'] as String,
       ministryDescription: map['ministry_description'] as String,
+      complains: map['complains']?? [] ,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Mda.fromJson(String source) => Mda.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Mda.fromJson(String source) =>
+      Mda.fromMap(json.decode(source) as Map<String, dynamic>);
 }

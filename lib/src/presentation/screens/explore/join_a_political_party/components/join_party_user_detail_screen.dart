@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:capp/src/constants/route_constants.dart';
@@ -38,7 +37,7 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
   final _electoralController = TextEditingController();
   final _pollingController = TextEditingController();
   List<String> genders = ['Male', 'Female'];
-  List<String> countryOfResidence = countries;
+  List<String> countryOfResidence = ["Nigeria"];
   // List<String> states = ['Lagos', 'Oyo'];
 
   List<String> lgas = ['Surulere', 'Lagos Mainland'];
@@ -183,6 +182,8 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                   setState(() {});
                                 },
                                 keyboardType: TextInputType.text,
+                                fillColor: AppColors.appGrey.withOpacity(.3),
+                                isNotBorder: true,
                                 isValidated:
                                     _firstnameController.text.isNotEmpty,
                                 validator: (value) => value!.isNotEmpty
@@ -357,7 +358,7 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                               ),
                             ),
                             InputFieldColumnWidget(
-                              inputFieldTitle: 'Country Of Residence',
+                              inputFieldTitle: 'Country Of Origin',
                               showAsterisk: true,
                               inputFieldWidget: CappCustomDropDown(
                                 selectedItem: selectedCountryOfResidence,

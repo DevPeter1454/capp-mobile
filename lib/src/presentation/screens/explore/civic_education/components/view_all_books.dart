@@ -3,10 +3,8 @@ import 'package:capp/src/presentation/screens/explore/civic_education/pages/read
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:capp/src/domain/model/book_model.dart';
 import 'package:capp/src/domain/model/civic_education_model.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/components/civic_book_cardview.dart';
-import 'package:capp/src/presentation/screens/explore/civic_education/components/preview_book.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 
 class ViewAllBooksScreen extends StatelessWidget {

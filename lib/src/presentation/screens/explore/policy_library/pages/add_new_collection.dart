@@ -35,7 +35,6 @@ class _AddNewCollectionScreenState extends State<AddNewCollectionScreen> {
       return;
     }
     final response = await _addNewCollectionCubit.createPolicyCollection(name: name);
-    print(response);
   }
 
   @override
@@ -53,7 +52,6 @@ class _AddNewCollectionScreenState extends State<AddNewCollectionScreen> {
                 Get.snackbar("Error", "An error occurred while rating leader");
               }
             }, orElse: () {
-              print("error");
             });
           },
           builder: (context, state) {

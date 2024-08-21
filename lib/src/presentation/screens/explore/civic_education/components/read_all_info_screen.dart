@@ -1,4 +1,3 @@
-import 'package:capp/src/domain/model/quiz_model.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/quiz/quiz_screen.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/capp_custom_bottom_sheet.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';

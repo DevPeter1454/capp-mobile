@@ -23,7 +23,6 @@ class QuizRepositoryImpl implements QuizRepository {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
           }));
       final result = response.data["data"];
-      print("result $result");
 
       return QuizResponse.fromJson(response.data);
     } catch (e) {

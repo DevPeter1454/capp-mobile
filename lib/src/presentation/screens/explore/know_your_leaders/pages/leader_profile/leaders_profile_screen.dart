@@ -31,6 +31,10 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
 
   final _leaderProfileCubit = getIt.get<LeaderProfileCubit>();
 
+  // final TextEditingController searchController = TextEditingController();
+
+  // bool _isSearching = false;
+
   @override
   void initState() {
     super.initState();
@@ -167,14 +171,14 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "LGA",
+                                                  "State",
                                                   style: TextStyle(
                                                       fontSize: 14.sp,
                                                       color: const Color(
                                                           0XFF6C727F)),
                                                 ),
                                                 Text(
-                                                  leader.lga,
+                                                  leader.state,
                                                   style: TextStyle(
                                                       fontSize: 14.sp,
                                                       color: AppColors
@@ -187,29 +191,31 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                                             SizedBox(
                                               width: 44.w,
                                             ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Constituency",
-                                                  style: TextStyle(
-                                                      fontSize: 14.sp,
-                                                      color: const Color(
-                                                          0XFF6C727F)),
-                                                ),
-                                                Text(
-                                                  leader.constituency,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontSize: 12.sp,
-                                                      color: AppColors
-                                                          .blackTextColor,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                )
-                                              ],
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Constituency",
+                                                    style: TextStyle(
+                                                        fontSize: 14.sp,
+                                                        color: const Color(
+                                                            0XFF6C727F)),
+                                                  ),
+                                                  Text(
+                                                    leader.constituency,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                        color: AppColors
+                                                            .blackTextColor,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  )
+                                                ],
+                                              ),
                                             )
                                           ],
                                         ),

@@ -1,4 +1,5 @@
 import 'package:capp/src/data_source/di/injection_container.dart';
+import 'package:capp/src/domain/model/leader_profile.dart';
 import 'package:capp/src/presentation/screens/explore/know_your_leaders/cubit/know_your_leaders_cubit.dart';
 import 'package:capp/src/presentation/screens/explore/know_your_leaders/pages/leader_profile/leaders_profile_screen.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_list_card.dart';
@@ -23,14 +24,27 @@ class KnowYourLeader extends StatefulWidget {
 }
 
 class _KnowYourLeaderState extends State<KnowYourLeader> {
-  final _searchController = TextEditingController();
+  final searchController = TextEditingController();
   final ScrollController controller = ScrollController();
   final _knowYourLeaderCubit = getIt.get<KnowYourLeadersCubit>();
+  bool _isSearching = false;
 
+  List<LeaderProfile> _leaders = [];
   @override
   void initState() {
     super.initState();
     getAllLeaders();
+    //
+  }
+
+  void getLeaderBySearchQuery(String query, List<LeaderProfile> leaders) {
+    setState(() {
+      _leaders = leaders
+          .where((leader) =>
+              leader.name.toLowerCase().contains(query.toLowerCase()) ||
+              leader.title.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
   }
 
   Future<void> getAllLeaders() async {
@@ -50,6 +64,9 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
               },
               loaded: (leaders) {
                 print("got ${leaders.length}");
+                setState(() {
+                  _leaders = leaders;
+                });
               },
               error: (message) {
                 print("Error: $message");
@@ -124,7 +141,22 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                             CupertinoIcons.search,
                             color: Color(0XFF828282),
                           ),
+                          onChanged: (value) {
+                            if (value.isNotEmpty) {
+                              // searchController.text = value;
+                              setState(() {
+                                _isSearching = true;
+                              });
+                              getLeaderBySearchQuery(value, leaders);
+                            } else {
+                              setState(() {
+                                _isSearching = false;
+                              });
+                              // getAllLeaders();
+                            }
+                          },
                           borderColor: Colors.transparent,
+                          controller: searchController,
                           hintText: "Search by Leaders name...",
                           hintStyle: TextStyle(
                               fontSize: 14.sp, fontWeight: FontWeight.normal),
@@ -136,7 +168,8 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                           controller: controller,
                           shrinkWrap: true,
                           itemBuilder: (context, int index) {
-                            final item = leaders[index];
+                            final item =
+                                _isSearching ? _leaders[index] : leaders[index];
                             return GestureDetector(
                               onTap: () => Get.to(
                                   () => LeaderProfileScreen(
@@ -161,7 +194,8 @@ class _KnowYourLeaderState extends State<KnowYourLeader> {
                               thickness: 0.2,
                             );
                           },
-                          itemCount: leaders.length,
+                          itemCount:
+                              _isSearching ? _leaders.length : leaders.length,
                         ),
                         SizedBox(height: 40.h),
                       ],

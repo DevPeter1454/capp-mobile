@@ -1,4 +1,3 @@
-import 'package:capp/src/domain/model/userdata.dart';
 
 class ApiConstant {
   //------------  BASE_Url  ------------------------------//
@@ -33,6 +32,8 @@ class ApiConstant {
   static const String joinAPoliticalParty = "${baseUrl}api/v1/user/parties";
 
   static const String getMdas = "${baseUrl}api/v1/user/mda/list";
+  static const String getMdaById = "${baseUrl}api/v1/user/mda";
+  static const String lodgeAComplaint = "${baseUrl}api/v1/user/mda/complain";
 
   static const String getQuizList = "${baseUrl}api/v1/user/quiz/list";
   //------------  Transaction Pin  ------------------------------//

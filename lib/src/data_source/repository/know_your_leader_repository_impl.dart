@@ -54,7 +54,6 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
       final result = response.data["data"];
       return LeaderProfile.fromJson(result);
     } catch (e) {
-      print(e);
       return LeaderProfile(
         id: '',
         url: '',
@@ -66,6 +65,7 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
         lga: '',
         party: '',
         constituency: '',
+        state: '',
         ratings: [],
         comments: [],
       );
@@ -88,11 +88,11 @@ class KnowYourLeaderRepositoryImpl implements KnowYourLeaderRepository {
       final result = response.data["data"];
       return LeaderProfile.fromJson(result);
     } catch (e) {
-      print(e);
       return LeaderProfile(
         id: '',
         name: '',
         url: '',
+        state: "",
         title: '',
         allocation: '',
         profile: '',

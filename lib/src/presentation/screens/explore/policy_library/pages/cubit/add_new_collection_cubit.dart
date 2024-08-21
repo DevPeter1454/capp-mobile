@@ -22,7 +22,6 @@ class AddNewCollectionCubit extends Cubit<AddNewCollectionState> {
       emit(AddNewCollectionState.loaded(response));
       return response;
     } catch (e) {
-      print(e.toString());
       AddNewCollectionState.error(e.toString());
     }
   }

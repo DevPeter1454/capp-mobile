@@ -24,6 +24,7 @@ class RouteConstants {
   static const String previewBook = "/previewBook";
   static const String joinPartyUserSignUpScreen = "/joinPartySignUpScreen ";
   static const String donationScreen = "/donationScreen";
+  static const String lodgeAComplaintScreen = "/lodgeAComplaintScreen";
   //------unknown--------------------//
   static const String category = "/category";
   static const String sell = "/sell";

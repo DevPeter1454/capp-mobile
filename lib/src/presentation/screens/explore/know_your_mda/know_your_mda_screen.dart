@@ -1,5 +1,5 @@
 import 'package:capp/src/data_source/di/injection_container.dart';
-import 'package:capp/src/domain/model/political_party_model.dart';
+import 'package:capp/src/domain/model/mda.dart';
 import 'package:capp/src/presentation/screens/explore/know_your_mda/cubit/know_your_mda_cubit.dart';
 import 'package:capp/src/presentation/screens/explore/know_your_mda/pages/mda_details_screen.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_list_card.dart';
@@ -24,6 +24,9 @@ class KnowYourMDA extends StatefulWidget {
 class _KnowYourMDAState extends State<KnowYourMDA> {
   final _searchController = TextEditingController();
   final ScrollController controller = ScrollController();
+  bool _isSearching = false;
+
+  List<Mda> _mdas = [];
 
   final _knowYourMdaCubit = getIt.get<KnowYourMdaCubit>();
 
@@ -36,6 +39,16 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
   void initState() {
     super.initState();
     getMdasList();
+  }
+
+  void getMdaBySearchQuery(String query, List<Mda> mdas) {
+    setState(() {
+      _mdas = mdas
+          .where((mda) =>
+              mda.ministryName.toLowerCase().contains(query.toLowerCase()) ||
+              mda.ministerName.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
   }
 
   @override
@@ -60,7 +73,8 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
         builder: (context, state) {
           return state.maybeWhen(
               loading: () => const Center(
-                    child: SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
+                    child:
+                        SpinKitCubeGrid(color: AppColors.primary, size: 50.0),
                   ),
               loaded: (mdas) {
                 return SafeArea(
@@ -87,7 +101,9 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
                                 ),
                                 const Text(
                                   'Know your MDA\'s',
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
                                 )
                               ],
                             ),
@@ -110,11 +126,27 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: CappCustomFormField(
-                                    hintText: 'Search by Ministry, Department or agency',
-                                    onChanged: (val) {},
-                                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                    hintText:
+                                        'Search by Ministry, Department or agency',
+                                    onChanged: (value) {
+                                      if (value.isNotEmpty) {
+                                        // searchController.text = value;
+                                        setState(() {
+                                          _isSearching = true;
+                                        });
+                                        getMdaBySearchQuery(value, mdas);
+                                      } else {
+                                        setState(() {
+                                          _isSearching = false;
+                                        });
+                                        // getAllLeaders();
+                                      }
+                                    },
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 10),
                                     keyboardType: TextInputType.text,
-                                    fillColor: AppColors.appGrey.withOpacity(.3),
+                                    fillColor:
+                                        AppColors.appGrey.withOpacity(.3),
                                     radius: 8.r,
                                     prefixIcon: const Icon(
                                       CupertinoIcons.search,
@@ -136,10 +168,13 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
                                     shrinkWrap: true,
                                     controller: controller,
                                     itemBuilder: (context, int index) {
-                                      final mda = mdas[index];
+                                      final mda = _isSearching
+                                          ? _mdas[index]
+                                          : mdas[index];
                                       return GestureDetector(
                                         onTap: () {
-                                          Get.to(() => MdaDetailsScreen(mda: mda));
+                                          Get.to(
+                                              () => MdaDetailsScreen(mda: mda));
                                         },
                                         child: CustomListCard(
                                           title: mda.ministryName,
@@ -151,11 +186,15 @@ class _KnowYourMDAState extends State<KnowYourMDA> {
                                     },
                                     separatorBuilder: (context, int index) {
                                       return Divider(
-                                        color: Theme.of(context).hintColor.withOpacity(.6),
+                                        color: Theme.of(context)
+                                            .hintColor
+                                            .withOpacity(.6),
                                         thickness: 0.2,
                                       );
                                     },
-                                    itemCount: mdas.length,
+                                    itemCount: _isSearching
+                                        ? _mdas.length
+                                        : mdas.length,
                                   ),
                           ],
                         ),

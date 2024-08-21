@@ -26,7 +26,6 @@ class CivicEducationRepositoryImpl implements CivicEducationRepository {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
           }));
       final result = response.data["data"];
-      print("result $result");
 
       final List<CivicEducationBookModel> convertedList = [];
       //map through result and add each one to convertedList

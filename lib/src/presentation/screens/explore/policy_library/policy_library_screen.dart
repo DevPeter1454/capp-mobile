@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:capp/src/domain/model/civic_education_model.dart';
 import 'package:capp/src/presentation/screens/explore/policy_library/pages/view_collection_books.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/get_utils.dart';
 
 import 'package:capp/src/data_source/di/injection_container.dart';
 import 'package:capp/src/domain/model/collection_model.dart';
@@ -15,7 +15,6 @@ import 'package:capp/src/presentation/screens/explore/civic_education/components
 import 'package:capp/src/presentation/screens/explore/civic_education/pages/read_pdf_screen.dart';
 import 'package:capp/src/presentation/screens/explore/policy_library/cubit/policy_library_cubit.dart';
 import 'package:capp/src/presentation/screens/explore/policy_library/pages/add_new_collection.dart';
-import 'package:capp/src/presentation/widgets/custom_ui/capp_form_field.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 import 'package:capp/src/presentation/widgets/widgets.dart';
 import 'package:capp/src/theme/app_colors.dart';
@@ -48,6 +47,20 @@ class _PolicyLibraryScreenState extends State<PolicyLibraryScreen> {
 
   final ScrollController scrollController = ScrollController();
 
+  final TextEditingController searchController = TextEditingController();
+  bool _isSearching = false;
+
+  List<CivicEducationBookModel> _policyList = [];
+
+  void getPolicyByQuery(String query, List<CivicEducationBookModel> policies) {
+    _policyList = policies
+        .where((policy) =>
+            policy.author.toLowerCase().contains(query.toLowerCase()) ||
+            policy.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -57,7 +70,6 @@ class _PolicyLibraryScreenState extends State<PolicyLibraryScreen> {
   final _policyLibraryCubit = getIt.get<PolicyLibraryCubit>();
   Future<void> getPolicyListAndCollection() async {
     final response = await _policyLibraryCubit.getPolicyAndCollections();
-    print("response $response");
   }
 
   @override
@@ -71,15 +83,11 @@ class _PolicyLibraryScreenState extends State<PolicyLibraryScreen> {
               orElse: () {},
               loading: () {},
               collectionUpdated: (collection) {
-                print("collection updated $collection");
                 if (collection.id.isNotEmpty) {
                   _policyLibraryCubit.getPolicyAndCollections();
                 }
               },
-              loadedAll: (policyList, collectionList) {
-                print("policyList ${policyList.length}");
-                print("collectionList $collectionList");
-              },
+              loadedAll: (policyList, collectionList) {},
             );
           },
           builder: (context, state) {
@@ -137,6 +145,20 @@ class _PolicyLibraryScreenState extends State<PolicyLibraryScreen> {
                                   CupertinoIcons.search,
                                   color: Color(0XFF828282),
                                 ),
+                                controller: searchController,
+                                onChanged: (value) {
+                                  if (value.isNotEmpty) {
+                                    // searchController.text = value;
+                                    setState(() {
+                                      _isSearching = true;
+                                    });
+                                    getPolicyByQuery(value, policyList);
+                                  } else {
+                                    setState(() {
+                                      _isSearching = false;
+                                    });
+                                  }
+                                },
                                 borderColor: Colors.transparent,
                                 hintText: "Search by author, title, etc",
                                 hintStyle: TextStyle(
@@ -309,7 +331,9 @@ class _PolicyLibraryScreenState extends State<PolicyLibraryScreen> {
                                             controller: scrollController,
                                             // physics: const NeverScrollableScrollPhysics(),
                                             itemBuilder: (context, int index) {
-                                              var e = policyList[index];
+                                              var e = _isSearching
+                                                  ? _policyList[index]
+                                                  : policyList[index];
                                               return CivicBooksCardView(
                                                   onMoreClicked: () {
                                                     String selectedValue = '';
@@ -349,7 +373,9 @@ class _PolicyLibraryScreenState extends State<PolicyLibraryScreen> {
                                                           pdfUrl: e.url)),
                                                   category: e.category);
                                             },
-                                            itemCount: policyList.length,
+                                            itemCount: _isSearching
+                                                ? _policyList.length
+                                                : policyList.length,
                                             separatorBuilder:
                                                 (BuildContext context,
                                                     int index) {
@@ -412,7 +438,6 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
     if (mounted) Navigator.pop(context);
     final response = await widget.policyLibraryCubit
         .updatePolicyCollection(bookId: bookId, collectionId: collectionId);
-    print("responseee $response");
   }
 
   @override
@@ -477,7 +502,6 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
                     _selectedValue = value.id;
                     // collectionId = value.id
                   });
-                  print(_selectedValue);
                   widget.onSelected(value.id);
                 },
               );

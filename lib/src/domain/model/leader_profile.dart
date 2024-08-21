@@ -12,6 +12,7 @@ class LeaderProfile {
   final List<Map<dynamic, dynamic>> comments;
   final String url;
   final String party;
+  final String state;
 
   LeaderProfile({
     required this.id,
@@ -26,23 +27,24 @@ class LeaderProfile {
     required this.comments,
     required this.url,
     required this.party,
+    required this.state,
   });
 
   factory LeaderProfile.fromJson(Map<String, dynamic> json) {
     return LeaderProfile(
-      id: json['_id'] ?? "",
-      name: json['name'] ?? "",
-      title: json['title'] ?? "",
-      allocation: json['allocation'] ?? "",
-      profile: json['profile'] ?? "",
-      responsibility: json['responsibility'] ?? "",
-      lga: json['lga'] ?? "",
-      url: json["url"] ?? "",
-      constituency: json['constituency'] ?? "",
-      ratings: List<dynamic>.from(json['ratings']),
-      comments: List<Map<dynamic, dynamic>>.from(json['comments']),
-      party: json["party"] ?? ""
-    );
+        id: json['_id'] ?? "",
+        name: json['name'] ?? "",
+        title: json['title'] ?? "",
+        allocation: json['allocation'] ?? "",
+        profile: json['profile'] ?? "",
+        responsibility: json['responsibility'] ?? "",
+        lga: json['lga'] ?? "",
+        url: json["url"] ?? "",
+        constituency: json['constituency'] ?? "",
+        ratings: List<dynamic>.from(json['ratings']),
+        comments: List<Map<dynamic, dynamic>>.from(json['comments']),
+        state: json["state"] ?? "",
+        party: json["party"] ?? "");
   }
 
   Map<String, dynamic> toJson() {
@@ -73,6 +75,7 @@ class LeaderProfile {
     List<Map<dynamic, dynamic>>? comments,
     String? url,
     String? party,
+    String? state,
   }) {
     return LeaderProfile(
       id: id ?? this.id,
@@ -87,6 +90,7 @@ class LeaderProfile {
       comments: comments ?? this.comments,
       url: url ?? this.url,
       party: party ?? this.party,
+      state: state ?? this.state,
     );
   }
   //explain what copywith is used for
@@ -106,14 +110,9 @@ class LeaderProfile {
         responsibility: 'Governor of Lagos State',
         lga: 'Ikeja',
         constituency: 'Lagos Central',
-        ratings: [
-          5,
-          4,
-          3,
-          2,
-          1
-        ],
+        ratings: [5, 4, 3, 2, 1],
         party: "APC",
+        state: "Lagos",
         comments: [
           {
             "user": {

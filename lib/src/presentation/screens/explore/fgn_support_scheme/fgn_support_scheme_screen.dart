@@ -29,6 +29,8 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
   final ScrollController controller = ScrollController();
   final _supportSchemeCubit = getIt.get<SupportSchemeCubit>();
   List<FgnSupportSchemeModel> _supportSchemes = [];
+  final _searchController = TextEditingController();
+  bool _isSearching = false;
 
   @override
   void initState() {
@@ -39,10 +41,19 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
   Future<void> getSupportSchemes() async {
     final response = await _supportSchemeCubit.getSupportSchemes();
     print("response from screen $response");
-    setState(() {
-      _supportSchemes = response;
-    });
+
     // print("new schesmes $_supportSchemes");
+  }
+
+  void getSupportSchemeBySearchQuery(
+      String query, List<FgnSupportSchemeModel> supportSchemes) {
+    setState(() {
+      _supportSchemes = supportSchemes
+          .where((scheme) =>
+              scheme.title.toLowerCase().contains(query.toLowerCase()) ||
+              scheme.url.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
   }
 
   @override
@@ -122,6 +133,22 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
                                 color: Color(0XFF828282),
                               ),
                               borderColor: Colors.transparent,
+                              controller: _searchController,
+                              onChanged: (value) {
+                                if (value.isNotEmpty) {
+                                  // searchController.text = value;
+                                  setState(() {
+                                    _isSearching = true;
+                                  });
+                                  getSupportSchemeBySearchQuery(
+                                      value, supportSchemes);
+                                } else {
+                                  setState(() {
+                                    _isSearching = false;
+                                  });
+                                  // getAllLeaders();
+                                }
+                              },
                               hintText: "Search by name",
                               hintStyle: TextStyle(
                                   fontSize: 14.sp,
@@ -169,27 +196,27 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
                                 shrinkWrap: true,
                                 controller: controller,
                                 itemBuilder: (context, index) {
-                                  List<FgnSupportSchemeModel> supportSchemes =
-                                      _supportSchemes;
+                                  // List<FgnSupportSchemeModel> supportSchemes =
+                                  //     _supportSchemes;
+                                  final scheme = _isSearching
+                                      ? _supportSchemes[index]
+                                      : supportSchemes[index];
                                   return GestureDetector(
                                     onTap: () =>
                                         Get.to(() => SupportDetailsScreen(
-                                              id: supportSchemes[index].id,
-                                              title:
-                                                  supportSchemes[index].title,
-                                              body: supportSchemes[index].body,
+                                              id: scheme.id,
+                                              title: scheme.title,
+                                              body: scheme.body,
                                               url:
                                                   "https://res.cloudinary.com/peterojo/image/upload/v1722668589/Coat_of_arms_of_Nigeria_isabtv.png",
-                                              isFavorite: supportSchemes[index]
-                                                  .isFavorite,
-                                              acronym:
-                                                  supportSchemes[index].url,
+                                              isFavorite: scheme.isFavorite,
+                                              acronym: scheme.url,
                                             )),
                                     child: FgnSupportSchemeCard(
                                       logoUrl:
                                           "https://res.cloudinary.com/peterojo/image/upload/v1722668589/Coat_of_arms_of_Nigeria_isabtv.png",
-                                      title: supportSchemes[index].url,
-                                      acronym: supportSchemes[index].title,
+                                      title: scheme.url,
+                                      acronym: scheme.title,
                                     ),
                                   );
                                 },
@@ -201,7 +228,9 @@ class _FGNSupportSchemeState extends State<FGNSupportScheme> {
                                     thickness: 0.2,
                                   );
                                 },
-                                itemCount: _supportSchemes.length)
+                                itemCount: _isSearching
+                                    ? _supportSchemes.length
+                                    : supportSchemes.length)
                           ]),
                     ),
                   ),

@@ -1,5 +1,5 @@
 import 'package:capp/src/data_source/di/injection_container.dart';
-import 'package:capp/src/domain/model/political_party_model.dart';
+import 'package:capp/src/domain/model/new_political_party_model.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/components/read_all_info_screen.dart';
 import 'package:capp/src/presentation/screens/explore/join_a_political_party/components/donation_screen.dart';
 import 'package:capp/src/presentation/screens/explore/join_a_political_party/components/join_party_user_detail_screen.dart';
@@ -32,6 +32,10 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
 
   final _politicalPartyCubit = getIt.get<PoliticalPartyCubit>();
 
+  List<NewPoliticalPartyModel> _parties = [];
+
+  bool isSearching = false;
+
   String extractAcronym(String input) {
     if (input == "Accord") {
       return 'Accord';
@@ -51,6 +55,16 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
   Future<void> getPoliticalParties() async {
     final response = await _politicalPartyCubit.getPoliticalParties();
     print("response from screen $response");
+  }
+
+  void getPoliticalPartyByQuery(
+      String query, List<NewPoliticalPartyModel> parties) {
+    setState(() {
+      _parties = parties
+          .where(
+              (party) => party.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
   }
 
   @override
@@ -146,7 +160,19 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
                                               () => const SearchResultScreen())
                                           : 'Please field cannot be empty';
                                     },
-                                    onChanged: (val) {},
+                                    onChanged: (val) {
+                                      if (val.isNotEmpty) {
+                                        // searchController.text = value;
+                                        setState(() {
+                                          isSearching = true;
+                                        });
+                                        getPoliticalPartyByQuery(val, parties);
+                                      } else {
+                                        setState(() {
+                                          isSearching = false;
+                                        });
+                                      }
+                                    },
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 15, vertical: 10),
                                     keyboardType: TextInputType.text,
@@ -177,7 +203,9 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
                                     controller: _scrollController,
                                     // physics: const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, int index) {
-                                      final party = parties[index];
+                                      final party = isSearching
+                                          ? _parties[index]
+                                          : parties[index];
                                       return CustomListCard(
                                         title: party.name,
                                         isKnowMDA: false,
@@ -233,7 +261,9 @@ class _JoinPartyScreenState extends State<JoinPartyScreen> {
                                         thickness: 0.2,
                                       );
                                     },
-                                    itemCount: parties.length,
+                                    itemCount: isSearching
+                                        ? _parties.length
+                                        : parties.length,
                                   ),
                             SizedBox(
                               height: context.heightPercentage(.04),

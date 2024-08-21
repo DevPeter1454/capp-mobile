@@ -10,6 +10,7 @@ import 'package:capp/src/presentation/screens/explore/join_a_political_party/com
 import 'package:capp/src/presentation/screens/explore/join_a_political_party/join_a_party_screen.dart';
 import 'package:capp/src/presentation/screens/explore/know_your_leaders/know_your_leader_screen.dart';
 import 'package:capp/src/presentation/screens/explore/know_your_mda/know_your_mda_screen.dart';
+import 'package:capp/src/presentation/screens/explore/know_your_mda/pages/lodge_complaint/lodge_complaint_screen.dart';
 import 'package:capp/src/presentation/screens/explore/policy_library/policy_library_screen.dart';
 import 'package:capp/src/presentation/screens/forgotPassword/create_new_password_screen.dart';
 import 'package:capp/src/presentation/screens/forgotPassword/forgot_password_screen.dart';
@@ -47,7 +48,7 @@ class RouteGenerator {
     GetPage(name: RouteConstants.joinParty, page: () => const JoinPartyScreen()),
 
     GetPage(name: RouteConstants.civicEducation, page: () => const CivicEducationScreen()),
-
+    GetPage(name: RouteConstants.lodgeAComplaintScreen, page: ()=>LodgeComplaintScreen(mdaId: Get.arguments)),
     GetPage(
         name: RouteConstants.viewAllCivicBooks,
         page: () => ViewAllBooksScreen(

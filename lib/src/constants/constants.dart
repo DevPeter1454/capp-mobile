@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class AppConstants {
   static const String appName = "TrovExx";
   static const String appVersion = "1.0";

@@ -23,7 +23,6 @@ class PoliticalPartyRepositoryImpl implements PoliticalPartyRepository {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
           }));
       final result = response.data["data"];
-      print("result $result");
 
       final List<NewPoliticalPartyModel> convertedList = [];
       //map through result and add each one to convertedList
@@ -76,7 +75,6 @@ class PoliticalPartyRepositoryImpl implements PoliticalPartyRepository {
           }));
       
       final result = response.data["data"];
-      print("result $result");
       return NewPoliticalPartyModel.fromMap(result);
 
     }catch(e){
@@ -101,7 +99,6 @@ class PoliticalPartyRepositoryImpl implements PoliticalPartyRepository {
           }));
 
       final result = response.data["data"];
-      print("result $result");
       return NewPoliticalPartyModel.fromMap(result);
     } catch (e) {
       log(e.toString());

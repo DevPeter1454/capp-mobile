@@ -25,4 +25,17 @@ class KnowYourMdaCubit extends Cubit<KnowYourMdaState> {
       KnowYourMdaState.error(e.toString());
     }
   }
+
+  Future<dynamic> getMdaById(String id)async{
+    emit(const KnowYourMdaState.loading());
+    try {
+      Mda mda = await knowYourMdaRepository.getMdaById(id);
+      emit(KnowYourMdaState.mdaLoaded(mda));
+      return mda;
+    } on NetworkException catch (exception) {
+      emit(KnowYourMdaState.error(exception.message));
+    } catch (e) {
+      KnowYourMdaState.error(e.toString());
+    }
+  }
 }

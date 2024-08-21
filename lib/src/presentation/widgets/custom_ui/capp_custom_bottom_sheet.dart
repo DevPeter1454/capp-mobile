@@ -332,7 +332,7 @@ class _CappCustomBottomSheetState extends State<CappCustomBottomSheet> {
                         height: context.heightPercentage(.033),
                       ),
                       SizedBox(
-                        height: calculateMainAxisExtent(425),
+                        height: calculateMainAxisExtent(450),
                         child: ContinueReading(
                           content: widget.partyDetails ?? '',
                           maxline: calculateMaxLines,

@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -11,11 +13,9 @@ class ConnectivityService {
 
   Future<ConnectivityStatus> hasNetworkConnection() async {
     final connectivityResult = await _connectivity.checkConnectivity();
-    print('connectivityResult $connectivityResult');
     if(connectivityResult != ConnectivityResult.none){
       ConnectivityStatus status = await checkStatus();
 
-      print('connectivityResult2 $status');
       return status;
     }
     return ConnectivityStatus.Offline;

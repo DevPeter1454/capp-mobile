@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:capp/src/data_source/network/exceptions/network_exception.dart';
-import 'package:capp/src/data_source/repository/political_party_repository_impl.dart';
 import 'package:capp/src/domain/model/new_political_party_model.dart';
 import 'package:capp/src/domain/repository/political_party_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

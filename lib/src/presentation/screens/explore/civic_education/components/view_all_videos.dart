@@ -1,6 +1,5 @@
 import 'package:capp/src/domain/model/video_model.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/components/civic_video_card.dart';
-import 'package:capp/src/presentation/screens/explore/civic_education/components/watch_video.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

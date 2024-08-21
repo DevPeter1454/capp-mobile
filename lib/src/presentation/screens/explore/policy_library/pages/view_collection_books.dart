@@ -4,7 +4,6 @@ import 'package:capp/src/domain/model/collection_model.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/components/civic_book_cardview.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/pages/read_pdf_screen.dart';
 import 'package:capp/src/presentation/screens/explore/policy_library/cubit/policy_library_cubit.dart';
-import 'package:capp/src/presentation/screens/explore/policy_library/policy_library_screen.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +50,6 @@ class _ViewCollectionBooksState extends State<ViewCollectionBooks> {
   @override
   void initState() {
     super.initState();
-    print(widget.collection.books);
   }
 
   @override

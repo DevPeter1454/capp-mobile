@@ -102,7 +102,6 @@ abstract class Util {
     try {
       return formatDate(convertToLocale(strDate), [yyyy, '-', mm, '-', dd]);
     } catch (e) {
-      print(e);
       return '';
     }
     // hh:mm a
@@ -112,7 +111,6 @@ abstract class Util {
     try {
       return formatDate(convertToLocale(strDate), [dd, '/', mm, '/', yyyy]);
     } catch (e) {
-      print(e);
       return '';
     }
     // hh:mm a
@@ -169,7 +167,6 @@ abstract class Util {
 
       return currentTime.isAfter(createdAt) && currentTime.isBefore(dueAt);
     } catch (e) {
-      print(' $e');
       return false;
     }
   }

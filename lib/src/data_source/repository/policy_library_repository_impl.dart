@@ -105,10 +105,8 @@ class PolicyLibraryRepositoryImpl implements PolicyLibraryRepository {
           }));
 
       final result = response.data;
-      print("result $result");
       return CollectionModel.fromMap(result);
     } catch (e) {
-      print(e.toString);
       return CollectionModel(id: "", name: "", description: "", books: []);
     }
   }

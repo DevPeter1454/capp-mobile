@@ -17,16 +17,13 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<void> editUserInfo({required Map<String, dynamic> userData}) async {
     try {
-      print("here");
       final response = await dioClient.dioPatch("https://capp-api-7d8a6573f031.herokuapp.com/api/v1/user/auth/update_user", userData,
           options: Options(headers: {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
           }));
-      print('response is ${response.data}');
 
       // return UserData();
     } on DioException catch (e) {
-      print(e);
       throw NetworkException.fromDioError(e);
     }
   }

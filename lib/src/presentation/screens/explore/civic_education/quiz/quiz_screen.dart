@@ -1,6 +1,5 @@
 import 'package:capp/src/data_source/di/injection_container.dart';
 import 'package:capp/src/domain/model/new_quiz_model.dart';
-import 'package:capp/src/domain/model/quiz_model.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/quiz/cubit/quiz_cubit.dart';
 import 'package:capp/src/presentation/screens/explore/civic_education/result/result_screen.dart';
 import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
@@ -61,12 +60,10 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     setState(() {
       _quizQuestions = response;
     });
-    print("response from $response");
   }
 
   void _moveToNextQuestion() {
     if (_currentPage < _quizQuestions[7].questions.length - 1) {
-      print("heree");
       setState(() {
         _pageController.animateToPage(_currentPage + 1, duration: const Duration(milliseconds: 200), curve: Curves.bounceIn);
         selectedOption = 0;
@@ -99,7 +96,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
       listener: (context, state) {
         state.maybeWhen(
             loaded: (loaded) {
-              print("loaded $loaded");
             },
             orElse: () {});
       },
@@ -333,9 +329,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                                   Get.offAll(() => ResultScreen(score: score, totalQuestions: _quizQuestions[7].questions.length));
                                 }
                               : () {
-                                  print("here $_currentPage");
                                   userAnswers[_currentPage] = selectedOption;
-                                  print(userAnswers);
 
                                   setState(() {
                                     selectedOption = 0;

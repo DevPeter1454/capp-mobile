@@ -24,7 +24,7 @@ class _ContinueReadingState extends State<ContinueReading> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: SizedBox(
-        height: context.heightPercentage(.65),
+        height: context.heightPercentage(.80),
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             var availbleSpacing = constraints.maxHeight;
@@ -51,6 +51,7 @@ class _ContinueReadingState extends State<ContinueReading> {
                     textAlign: TextAlign.justify,
                     style: TextStyle(color: Colors.grey[600]),
                   ),
+                  const SizedBox(height: 16.0),
                   if (!_showFullText && isTextOverflowing)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,

@@ -18,7 +18,6 @@ class FgnSupportRepositoryImpl implements FgnSupportRepository {
     // Add a return statement at the end to ensure a non-null value is returned.
 
     try {
-      print("appiii");
       // Future.delayed(const Duration(seconds: 10));
       final response = await dioClient.dioGet(
           'https://capp-api-7d8a6573f031.herokuapp.com/api/v1/user/supports',
@@ -26,7 +25,6 @@ class FgnSupportRepositoryImpl implements FgnSupportRepository {
             'Authorization': 'Bearer ${sharedPreferencesService.authToken}',
           }));
       final result = response.data;
-      print("result $result");
       final List<FgnSupportSchemeModel> supportSchemes = [];
       for (var item in result["data"]) {
         supportSchemes.add(FgnSupportSchemeModel(
@@ -39,7 +37,6 @@ class FgnSupportRepositoryImpl implements FgnSupportRepository {
 
       return supportSchemes;
     } catch (e) {
-      print(e);
       return [];
     }
   }

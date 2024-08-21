@@ -21,6 +21,7 @@ mixin _$KnowYourMdaState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Mda> mdas) loaded,
+    required TResult Function(Mda mda) mdaLoaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$KnowYourMdaState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Mda> mdas)? loaded,
+    TResult? Function(Mda mda)? mdaLoaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$KnowYourMdaState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Mda> mdas)? loaded,
+    TResult Function(Mda mda)? mdaLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$KnowYourMdaState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MdaLoaded value) mdaLoaded,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$KnowYourMdaState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_MdaLoaded value)? mdaLoaded,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$KnowYourMdaState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MdaLoaded value)? mdaLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -127,6 +133,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Mda> mdas) loaded,
+    required TResult Function(Mda mda) mdaLoaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -138,6 +145,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Mda> mdas)? loaded,
+    TResult? Function(Mda mda)? mdaLoaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -149,6 +157,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Mda> mdas)? loaded,
+    TResult Function(Mda mda)? mdaLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -164,6 +173,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MdaLoaded value) mdaLoaded,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -175,6 +185,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_MdaLoaded value)? mdaLoaded,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -186,6 +197,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MdaLoaded value)? mdaLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -241,6 +253,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Mda> mdas) loaded,
+    required TResult Function(Mda mda) mdaLoaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -252,6 +265,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Mda> mdas)? loaded,
+    TResult? Function(Mda mda)? mdaLoaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -263,6 +277,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Mda> mdas)? loaded,
+    TResult Function(Mda mda)? mdaLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -278,6 +293,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MdaLoaded value) mdaLoaded,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -289,6 +305,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_MdaLoaded value)? mdaLoaded,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -300,6 +317,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MdaLoaded value)? mdaLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -387,6 +405,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Mda> mdas) loaded,
+    required TResult Function(Mda mda) mdaLoaded,
     required TResult Function(String message) error,
   }) {
     return loaded(mdas);
@@ -398,6 +417,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Mda> mdas)? loaded,
+    TResult? Function(Mda mda)? mdaLoaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(mdas);
@@ -409,6 +429,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Mda> mdas)? loaded,
+    TResult Function(Mda mda)? mdaLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -424,6 +445,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MdaLoaded value) mdaLoaded,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -435,6 +457,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_MdaLoaded value)? mdaLoaded,
     TResult? Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -446,6 +469,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MdaLoaded value)? mdaLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -462,6 +486,157 @@ abstract class _Loaded implements KnowYourMdaState {
   List<Mda> get mdas;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MdaLoadedImplCopyWith<$Res> {
+  factory _$$MdaLoadedImplCopyWith(
+          _$MdaLoadedImpl value, $Res Function(_$MdaLoadedImpl) then) =
+      __$$MdaLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Mda mda});
+}
+
+/// @nodoc
+class __$$MdaLoadedImplCopyWithImpl<$Res>
+    extends _$KnowYourMdaStateCopyWithImpl<$Res, _$MdaLoadedImpl>
+    implements _$$MdaLoadedImplCopyWith<$Res> {
+  __$$MdaLoadedImplCopyWithImpl(
+      _$MdaLoadedImpl _value, $Res Function(_$MdaLoadedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? mda = null,
+  }) {
+    return _then(_$MdaLoadedImpl(
+      null == mda
+          ? _value.mda
+          : mda // ignore: cast_nullable_to_non_nullable
+              as Mda,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MdaLoadedImpl implements _MdaLoaded {
+  const _$MdaLoadedImpl(this.mda);
+
+  @override
+  final Mda mda;
+
+  @override
+  String toString() {
+    return 'KnowYourMdaState.mdaLoaded(mda: $mda)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MdaLoadedImpl &&
+            (identical(other.mda, mda) || other.mda == mda));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, mda);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MdaLoadedImplCopyWith<_$MdaLoadedImpl> get copyWith =>
+      __$$MdaLoadedImplCopyWithImpl<_$MdaLoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Mda> mdas) loaded,
+    required TResult Function(Mda mda) mdaLoaded,
+    required TResult Function(String message) error,
+  }) {
+    return mdaLoaded(mda);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Mda> mdas)? loaded,
+    TResult? Function(Mda mda)? mdaLoaded,
+    TResult? Function(String message)? error,
+  }) {
+    return mdaLoaded?.call(mda);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Mda> mdas)? loaded,
+    TResult Function(Mda mda)? mdaLoaded,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (mdaLoaded != null) {
+      return mdaLoaded(mda);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MdaLoaded value) mdaLoaded,
+    required TResult Function(_Error value) error,
+  }) {
+    return mdaLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_MdaLoaded value)? mdaLoaded,
+    TResult? Function(_Error value)? error,
+  }) {
+    return mdaLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_MdaLoaded value)? mdaLoaded,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (mdaLoaded != null) {
+      return mdaLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MdaLoaded implements KnowYourMdaState {
+  const factory _MdaLoaded(final Mda mda) = _$MdaLoadedImpl;
+
+  Mda get mda;
+  @JsonKey(ignore: true)
+  _$$MdaLoadedImplCopyWith<_$MdaLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -532,6 +707,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Mda> mdas) loaded,
+    required TResult Function(Mda mda) mdaLoaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -543,6 +719,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Mda> mdas)? loaded,
+    TResult? Function(Mda mda)? mdaLoaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -554,6 +731,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Mda> mdas)? loaded,
+    TResult Function(Mda mda)? mdaLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -569,6 +747,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MdaLoaded value) mdaLoaded,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -580,6 +759,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_MdaLoaded value)? mdaLoaded,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -591,6 +771,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MdaLoaded value)? mdaLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

@@ -31,7 +31,12 @@ class _CappSuccessScreenState extends State<CappSuccessScreen> {
     } else if (widget.arguments.name == RouteConstants.donationScreen) {
       desc = 'You have successfully donated to this Party';
       btnName = 'Back';
-    } else {
+    } else if(widget.arguments.name == RouteConstants.lodgeAComplaintScreen){
+      desc = 'You have successfully lodged a complaint';
+      btnName = 'Back';
+    }
+    
+    else {
       desc = 'You have successfully completed sign up';
       btnName = 'login';
     }

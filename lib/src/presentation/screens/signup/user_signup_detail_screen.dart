@@ -1,6 +1,7 @@
 import 'package:capp/src/constants/route_constants.dart';
 import 'package:capp/src/data_source/di/injection_container.dart';
 import 'package:capp/src/domain/model/argument.dart';
+import 'package:capp/src/presentation/screens/explore/know_your_mda/pages/options.dart';
 import 'package:capp/src/presentation/screens/signup/cubit/sign_up_cubit.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:capp/src/utils/util.dart';
@@ -28,15 +29,33 @@ class _UserSignUpDetailScreenState extends State<UserSignUpDetailScreen> {
   final lastnameController = TextEditingController();
   final firstnameController = TextEditingController();
   final phoneController = TextEditingController();
-  List<String> states = ['Lagos', 'Oyo'];
+  // List<String> states = ['Lagos', 'Oyo'];
   List<String> lgas = ['Surulere', 'Lagos Mainland'];
   List<CountryCode> countryCode = [
     CountryCode('+234', 'assets/images/ngn.png')
   ];
   String? selectedState, selectedLGA;
   CountryCode? selectedCountryCode;
-
+  List options = statesAndLgas;
+  List states = statesAndLgas.map((e) => e["label"]).toList();
+  List lgasList = [];
   final _signUpCubit = getIt.get<SignUpCubit>();
+  void setLgaList(String state) {
+    lgasList.clear();
+
+    setState(() {
+      selectedLGA = "Select LGA";
+      // lgasList = options
+      //     .firstWhere((state) => state['value'] == state)['lgas']
+      //     .cast<String>();
+      lgasList = statesAndLgas
+          .where((e) => e["label"] == state)
+          .map((e) => e["lgas"])
+          .toList();
+      lgasList[0].insert(0, "Select LGA");
+    });
+    print("lgasList $lgasList");
+  }
 
   @override
   void initState() {
@@ -236,13 +255,16 @@ class _UserSignUpDetailScreenState extends State<UserSignUpDetailScreen> {
                               inputFieldTitle: 'State',
                               inputFieldWidget: CappCustomDropDown(
                                 selectedItem: selectedState,
-                                dropDownList: states,
+                                dropDownList: statesAndLgas
+                                    .map((e) => e["label"])
+                                    .toList(),
                                 isValidated: selectedState != null,
                                 hintText: 'Select State',
                                 onValueChanged: (value) {
                                   setState(() {
                                     selectedState = value.toString();
                                   });
+                                  setLgaList(value.toString());
                                 },
                                 width: context.width,
                               ),
@@ -254,7 +276,9 @@ class _UserSignUpDetailScreenState extends State<UserSignUpDetailScreen> {
                               inputFieldTitle: 'Local Government Area',
                               inputFieldWidget: CappCustomDropDown(
                                 selectedItem: selectedLGA,
-                                dropDownList: lgas,
+                                dropDownList: lgasList.isEmpty
+                                    ? ["Select LGA"]
+                                    : lgasList[0],
                                 isValidated: selectedLGA != null,
                                 hintText: 'Select Local Government Area',
                                 onValueChanged: (value) {
