@@ -4,6 +4,7 @@ import 'package:capp/src/presentation/widgets/custom_ui/custom_top_navbar.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ReadAllInfoScreen extends StatefulWidget {
   final String title, content;
@@ -49,17 +50,18 @@ class _ReadAllInfoScreenState extends State<ReadAllInfoScreen> {
                 spacing: 0.35,
                 primaryActionButton: 'assets/images/send_black.png',
                 secondaryActionButton: 'assets/images/headphone.png',
-                onClickedPrimaryActionButton: () {
-                  showModalBottomSheet(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(20)),
-                    ),
-                    builder: (context) {
-                      return const CappCustomBottomSheet();
-                    },
-                  );
+                onClickedPrimaryActionButton: () async {
+                  // showModalBottomSheet(
+                  //   context: context,
+                  //   shape: const RoundedRectangleBorder(
+                  //     borderRadius:
+                  //         BorderRadius.vertical(top: Radius.circular(20)),
+                  //   ),
+                  //   builder: (context) {
+                  //     return const CappCustomBottomSheet();
+                  //   },
+                  // );
+                  await Share.share(widget.content, subject: widget.title);
                 },
               ),
               // PageView for content

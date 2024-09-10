@@ -436,7 +436,7 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 validator: (value) => value!.isNotEmpty
                                     ? null
                                     : 'Please enter required field',
-                                controller: _ninController,
+                                controller: _electoralController,
                               ),
                             ),
                             InputFieldColumnWidget(
@@ -454,7 +454,7 @@ class _JoinPartyUserSignUpScreenState extends State<JoinPartyUserSignUpScreen> {
                                 validator: (value) => value!.isNotEmpty
                                     ? null
                                     : 'Please enter required field',
-                                controller: _ninController,
+                                controller: _pollingController,
                               ),
                             ),
                             InputFieldColumnWidget(

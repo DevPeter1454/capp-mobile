@@ -4,6 +4,7 @@ import 'package:capp/src/presentation/widgets/widgets.dart';
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SupportDetailsScreen extends StatefulWidget {
   final String id;
@@ -64,19 +65,20 @@ class _SupportDetailsScreenState extends State<SupportDetailsScreen> {
                       color: const Color(0XFF19202D))),
               SizedBox(height: 24.h),
               CappCustomButton(
-                  onPress: () {
+                  onPress: () async {
                     // Navigator.pop(context);
-                    showModalBottomSheet(
-                      context: context,
-                      useSafeArea: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(20)),
-                      ),
-                      builder: (context) {
-                        return const CappCustomBottomSheet();
-                      },
-                    );
+                    // showModalBottomSheet(
+                    //   context: context,
+                    //   useSafeArea: true,
+                    //   shape: const RoundedRectangleBorder(
+                    //     borderRadius:
+                    //         BorderRadius.vertical(top: Radius.circular(20)),
+                    //   ),
+                    //   builder: (context) {
+                    //     return const CappCustomBottomSheet();
+                    //   },
+                    // );
+                    await Share.share(widget.body, subject: widget.title);
                   },
                   color: AppColors.primary.withOpacity(0.10),
                   isSolidColor: true,

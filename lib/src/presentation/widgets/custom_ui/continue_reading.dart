@@ -1,6 +1,7 @@
 import 'package:capp/src/theme/app_colors.dart';
 import 'package:capp/src/utils/util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ContinueReading extends StatefulWidget {
   final String content;
@@ -22,7 +23,7 @@ class _ContinueReadingState extends State<ContinueReading> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.only(left: 8.0, right: 8, top: 0, bottom: 16),
       child: SizedBox(
         height: context.heightPercentage(.80),
         child: LayoutBuilder(

@@ -10,6 +10,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
@@ -178,6 +179,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
+                        Text(
+                            "NB: CAPP is a civic initiative and is not a representation of any government entity or agency.",
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.5),
+                                fontSize: 10.sp,
+                                fontWeight: FontWeight.w400)),
                         SizedBox(
                           height: context.heightPercentage(.25),
                         ),

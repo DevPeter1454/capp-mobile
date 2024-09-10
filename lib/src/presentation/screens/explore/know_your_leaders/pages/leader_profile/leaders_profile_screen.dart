@@ -399,23 +399,9 @@ class _LeaderProfileScreenState extends State<LeaderProfileScreen> {
                                             .textTheme
                                             .bodyMedium!
                                             .copyWith(
-                                                fontSize: 16.sp,
+                                                fontSize: 14.sp,
                                                 color: AppColors.blackTextColor,
                                                 fontWeight: FontWeight.w600)),
-                                    InkWell(
-                                      onTap: () => Get.to(
-                                          () => LeaderAllRatingScreen(
-                                              leaderProfile: leader),
-                                          transition: tr.Transition.fadeIn),
-                                      child: Text("See more",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                  fontSize: 12.sp,
-                                                  color: AppColors.primary,
-                                                  fontWeight: FontWeight.w600)),
-                                    ),
                                   ]),
                               SizedBox(height: 12.h),
                               leader.ratings.isEmpty

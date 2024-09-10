@@ -152,7 +152,8 @@ class _MdaDetailsScreenState extends State<MdaDetailsScreen> {
                             ),
                             SizedBox(height: 20.h),
                             SizedBox(
-                              height: calculateMainAxisExtent(450),
+                              height: calculateMainAxisExtent(
+                                  MediaQuery.of(context).size.height / 1.95),
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: ContinueReading(
@@ -166,7 +167,6 @@ class _MdaDetailsScreenState extends State<MdaDetailsScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 30.h),
                             Text(
                               "Minister",
                               style: TextStyle(
